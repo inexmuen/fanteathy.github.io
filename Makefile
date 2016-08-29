@@ -3,3 +3,6 @@ deploy:
 		hexo generate
 		hexo deploy
 
+server:
+		hexo s
+

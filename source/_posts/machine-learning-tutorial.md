@@ -185,11 +185,11 @@ scikit-learn作为一个丰富的Python机器学习库，实现了绝大多数�
 ```
 import matplotlib.pyplot as plt
 def runplt():
-	plt.figure()
-	plt.axis([0, 25, 0, 25])
-	plt.grid(True)
-	return plt
-   	
+    plt.figure()
+    plt.axis([0, 25, 0, 25])
+    plt.grid(True)
+    return plt
+    
 plt = runplt()
 X = [[6], [8], [10], [14], [18]]
 y = [[7], [9], [13], [17.5], [18]]

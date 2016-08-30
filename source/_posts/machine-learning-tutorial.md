@@ -8,7 +8,7 @@ tags: machine-learning
 
 ### 定义
 
-机器学习研究的是`计算机怎样模拟人类的学习行为，以获取新的知识或技能，并重新组织已有的知识结构使之不断改善自身`,就是`计算机从数据中学习出规律和模式，以应用在新数据上做预测的任务`。
+机器学习研究的是`计算机怎样模拟人类的学习行为，以获取新的知识或技能，并重新组织已有的知识结构使之不断改善自身`,就是`计算机从数据中自动分析获得规律，并利用规律对未知数据进行预测的算法`。
 
 ### 运用
 
@@ -32,9 +32,11 @@ tags: machine-learning
 - 用户群体划分
 - 用户画像
 
-## 机器学习分类
+## Learning Style
 
 ### Supervised Learning
+
+![supervised](machine-learning-tutorial/supervised.png)
 
 这类问题中，给定的训练样本中，每个样本的输入x都对应一个确定的结果y，我们需要训练出一个模型(数学上看是一个x→y的映射关系f)，在未知的样本x′给定后，我们能对结果y′做出预测。
 
@@ -44,13 +46,23 @@ tags: machine-learning
 
 ### Unsupervised Learning
 
+![unsupervised](machine-learning-tutorial/unsupervised.png)
+
 有另外一类问题，给我们的样本并没有给出『标签/标准答案』，就是一系列的样本。而我们需要做的事情是，在一些样本中抽取出通用的规则。这叫做『无监督学习』。包括`关联规则`和`聚类算法`在内的一系列机器学习算法都属于这个范畴。
 
-### 半监督学习
+### Semi-Supervised Learning
+
+![semi-supervised](machine-learning-tutorial/semi-supervised.png)
 
 这类问题给出的训练数据，有一部分有标签，有一部分没有标签。我们想学习出数据组织结构的同时，也能做相应的预测。此类问题相对应的机器学习算法有自训练(Self-Training)、直推学习(Transductive Learning)、生成式模型(Generative Model)等。
 
-## Algorithms
+### Reinforcement Learning
+
+![reinforcement](machine-learning-tutorial/reinforcement.jpg)
+
+在这种学习模式下，输入数据作为对模型的反馈，不像监督模型那样，输入数据仅仅是作为一个检查模型对错的方式，在强化学习下，输入数据直接反馈到模型，模型必须对此立刻作出调整。常见的应用场景包括动态系统以及机器人控制等。常见算法包括Q-Learning以及时间差学习（Temporal difference learning）。 
+
+## Algorithms(Grouped By Similarity)
 
 ### 回归算法(Regression Algorithms)
 
@@ -102,9 +114,9 @@ tags: machine-learning
 - Apriori algorithm
 - Eclat algorithm
 
-## work flow
+## Workflow
 
-### 抽象成数学问题
+### 业务需求抽象成数学问题
 
 明确我们可以获得什么样的数据，目标是一个分类还是回归或者是聚类的问题。需要在理解业务的问题上选择合适的算法模型
 
@@ -159,3 +171,4 @@ scikit-learn作为一个丰富的Python机器学习库，实现了绝大多数�
 ## Resources
 
 - [http://ml.memect.com/article/machine-learning-guide.html](http://ml.memect.com/article/machine-learning-guide.html)
+- [A Tour of Machine Learning Algorithms](http://machinelearningmastery.com/a-tour-of-machine-learning-algorithms/)

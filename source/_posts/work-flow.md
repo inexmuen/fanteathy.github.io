@@ -1,5 +1,5 @@
 ---
-title: work flow
+title: work-flow
 date: 2016-08-29 20:58:52
 tags:
 ---

@@ -2,6 +2,7 @@
 title: machine-learning-tutorial
 date: 2016-08-30 11:29:24
 tags: machine-learning
+categories: machine-learning
 ---
 
 ## Overview

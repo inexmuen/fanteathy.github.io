@@ -146,9 +146,18 @@ tags: machine-learning
 
 ![underfit](machine-learning-tutorial/underfit.png)
 
+欠拟合的原因：模型复杂度过低，不能很好的拟合所有的数据，训练误差大；
+
+避免欠拟合：增加模型复杂度，如采用高阶模型（预测）或者引入更多特征（分类）等。
+
 > 过拟合
 
 ![overfit](machine-learning-tutorial/overfit.png)
+
+过拟合的原因：模型复杂度过高，训练数据过少，训练误差小，测试误差大；
+
+避免过拟合：降低模型复杂度，如加上正则惩罚项，如L1，L2，增加训练数据等。
+
 
 > 合适的拟合
 

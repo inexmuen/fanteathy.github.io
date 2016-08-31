@@ -167,6 +167,11 @@ $(document).ready(function () {
   };
   sidebarToggleMotion.init();
 
+  if (CONFIG.sidebar === 'always') {
+     // 模拟点击一下侧边栏按钮
+     sidebarToggleMotion.clickHandler();
+  }
+
   NexT.motion.integrator = {
     queue: [],
     cursor: -1,

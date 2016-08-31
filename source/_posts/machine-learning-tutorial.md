@@ -142,6 +142,18 @@ tags: machine-learning
 - 误差分析 也是机器学习至关重要的步骤。通过观察误差样本，全面分析误差产生误差的原因：是参数的问题还是算法选择的问题，是特征的问题还是数据本身的问题。
 - 诊断后的模型需要进行调优，调优后的新模型需要重新进行诊断，这是一个反复迭代不断逼近的过程，需要不断地尝试， 进而达到最优状态。
 
+> 欠拟合
+
+![underfit](machine-learning-tutorial/underfit.png)
+
+> 过拟合
+
+![overfit](machine-learning-tutorial/overfit.png)
+
+> 合适的拟合
+
+![fit](machine-learning-tutorial/fit.png)
+
 ### 模型融合
 
 单个模型的结果不够理想，如果想得到更好的结果，需要把很多单个模型的结果融合在一起。可以想像成“再次的机器学习过程”。

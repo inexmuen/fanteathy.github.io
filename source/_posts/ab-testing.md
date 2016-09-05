@@ -74,9 +74,7 @@ A/B Test的关键在于"分流"。从上图中我们可以看到，分流可以�
 
 ## 使用方法
 
-```
-@split(func_name, element, rule, value, [*args, **kwargs]) 
-```
+`@split(func_name, element, rule, value, [*args, **kwargs])`
 
 - func_name: 分流函数名
 - element: 分流维度

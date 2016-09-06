@@ -1,5 +1,5 @@
 ---
-title: AB Test & 灰度发布
+title: AB Test
 date: 2016-09-05 18:00:00
 tags: middleware
 categories: middleware
@@ -50,6 +50,10 @@ A/B Test的关键在于"分流"。从上图中我们可以看到，分流可以�
 工作流程如下:
 
 请求 => 解析分流规则 => 分流
+
+### 规则管理模块
+
+用于对分流维度和规则进行管理和解析。
 
 #### 分流维度
 

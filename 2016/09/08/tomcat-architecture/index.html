@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="java," />
 
 
 
@@ -84,13 +84,16 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://fanteathy.github.io/categories/index.html">
+<meta name="description" content="Preface&amp;#x672C;&amp;#x6587;&amp;#x57FA;&amp;#x4E8E;how tomcat works&amp;#xFF0C;&amp;#x6574;&amp;#x7406;&amp;#x4E86;&amp;#x4E00;&amp;#x4E0B;Tomcat&amp;#x7684;&amp;#x57FA;&amp;#x672C;&amp;#x67B6;&amp;#x6784;&amp;#xFF0C;&amp;#x5176;&amp;#x5B9E;&amp;#x4E5F;&amp;#x6CA1;&amp;#x6709;&amp;#x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tomcat 架构">
+<meta property="og:url" content="http://fanteathy.github.io/2016/09/08/tomcat-architecture/index.html">
 <meta property="og:site_name" content="Fanteathy">
-<meta property="og:updated_time" content="2016-08-30T07:55:22.000Z">
+<meta property="og:description" content="Preface&amp;#x672C;&amp;#x6587;&amp;#x57FA;&amp;#x4E8E;how tomcat works&amp;#xFF0C;&amp;#x6574;&amp;#x7406;&amp;#x4E86;&amp;#x4E00;&amp;#x4E0B;Tomcat&amp;#x7684;&amp;#x57FA;&amp;#x672C;&amp;#x67B6;&amp;#x6784;&amp;#xFF0C;&amp;#x5176;&amp;#x5B9E;&amp;#x4E5F;&amp;#x6CA1;&amp;#x6709;&amp;#x">
+<meta property="og:updated_time" content="2016-09-08T14:19:57.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
+<meta name="twitter:title" content="Tomcat 架构">
+<meta name="twitter:description" content="Preface&amp;#x672C;&amp;#x6587;&amp;#x57FA;&amp;#x4E8E;how tomcat works&amp;#xFF0C;&amp;#x6574;&amp;#x7406;&amp;#x4E86;&amp;#x4E00;&amp;#x4E0B;Tomcat&amp;#x7684;&amp;#x57FA;&amp;#x672C;&amp;#x67B6;&amp;#x6784;&amp;#xFF0C;&amp;#x5176;&amp;#x5B9E;&amp;#x4E5F;&amp;#x6CA1;&amp;#x6709;&amp;#x">
 
 
 
@@ -111,15 +114,9 @@
 
 
 
-  <link rel="canonical" href="http://fanteathy.github.io/categories/"/>
+  <link rel="canonical" href="http://fanteathy.github.io/2016/09/08/tomcat-architecture/"/>
 
-  <title>
-  
-
-  
-    Category | Fanteathy
-  
-</title>
+  <title> Tomcat 架构 | Fanteathy </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -140,7 +137,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -240,16 +237,138 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
     
-      <div class="category-all-page">
-        <div class="category-all-title">
-            3 categories in total
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Tomcat 架构
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-08T22:00:00+08:00" content="2016-09-08">
+              2016-09-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
         </div>
-        <div class="category-all">
-          <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/machine-learning/">machine-learning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/middleware/">middleware</a><span class="category-list-count">1</span></li></ul>
-        </div>
-      </div>
+      </header>
     
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h2><p>&#x672C;&#x6587;&#x57FA;&#x4E8E;<code>how tomcat works</code>&#xFF0C;&#x6574;&#x7406;&#x4E86;&#x4E00;&#x4E0B;Tomcat&#x7684;&#x57FA;&#x672C;&#x67B6;&#x6784;&#xFF0C;&#x5176;&#x5B9E;&#x4E5F;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x590D;&#x6742;&#x7684;&#x4E1C;&#x897F;&#xFF0C;&#x65E0;&#x975E;&#x5C31;&#x662F;&#x89E3;&#x6790;http&#x8BF7;&#x6C42;&#xFF0C;&#x7136;&#x540E;&#x8C03;&#x7528;&#x76F8;&#x5E94;&#x7684;Servlet&#x3002;&#x53E6;&#x53C2;&#x8003;: <a href="http://www.cnblogs.com/lzb1096101803/p/4779387.html" target="_blank" rel="external">Tomcat &#x5256;&#x6790;</a></p>
+<h2 id="Basic-Architecture"><a href="#Basic-Architecture" class="headerlink" title="Basic Architecture"></a>Basic Architecture</h2><h2 id="Connector"><a href="#Connector" class="headerlink" title="Connector"></a>Connector</h2><h2 id="Container"><a href="#Container" class="headerlink" title="Container"></a>Container</h2><h2 id="Wrapper"><a href="#Wrapper" class="headerlink" title="Wrapper"></a>Wrapper</h2><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/05/ab-testing/" rel="next" title="AB Test">
+                <i class="fa fa-chevron-left"></i> AB Test
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -281,8 +400,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://avatars0.githubusercontent.com/u/2180875?v=3&s=460"
@@ -332,6 +460,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Preface"><span class="nav-number">1.</span> <span class="nav-text">Preface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-Architecture"><span class="nav-number">2.</span> <span class="nav-text">Basic Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Connector"><span class="nav-number">3.</span> <span class="nav-text">Connector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Container"><span class="nav-number">4.</span> <span class="nav-text">Container</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wrapper"><span class="nav-number">5.</span> <span class="nav-text">Wrapper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">6.</span> <span class="nav-text">Summary</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -428,6 +567,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

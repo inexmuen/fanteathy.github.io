@@ -70,7 +70,7 @@ EOS主流程和相关接口对应关系如下:
 None=>-5|create_order
 -5=>-3|process_post_pay_for_order
 -5=>-4|not_paid_order_auto_fail
--3=>-2/-5=>-2|process_post_pay_success,process_post_pay_success_with_total
+-3=>-2/-5=>-2|process_post_pay_success, process_post_pay_success_with_total
 -3=>-4|process_post_pay_fail
 -2=>0|signal_pending_make_order,signal_post_make_order
 0=>2|napos_process_order

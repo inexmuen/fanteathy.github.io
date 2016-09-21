@@ -79,14 +79,22 @@ A/B Test的关键在于"分流"。从上图中我们可以看到，分流可以�
 
 ## 使用方法
 
-`@split(func_name, element, rule, value, [*args, **kwargs])`
+`@split(func_name, func_get_element, rule, value, [*args, **kwargs])`
 
 - func_name: 分流函数名
-- element: 分流维度
+- func_get_element: 获取分流维度的函数
+	
+	分流维度可能包含以下方面:
+	
 	- city_id
 	- rst_id
 	- user_id
-	- order_id 
+	- order_id
+	- order_mode
+	- is_book
+	- ...
+	
+	此处定义函数表示`如何从原接口参数中计算出分流的维度` 
 - rule: 分流规则
 	- range
 	- percent

@@ -20,7 +20,7 @@ categories: arch
 性能测试和生产流程的差异如下:
 
 - 支付mock: 在调用支付的接口时，调用方使用特殊的merchant_id=101。测试团队mock支付调用的第三方服务，返回支付成功或者失败的结果。请求流程为 soa => payment => mock service(mock第三方支付服务)
-- 物流特殊处理: 
+- 物流特殊处理: 正常情况下，在订单确认之后，只要餐厅购买了配送服务，就会进入物流，不过物流加了一层控制，可以把这些订单过滤掉。目前平台有20k的餐厅，专门用来压测，这些压测订单的物流会忽略
 
 测试接口的调用，调用比率均通过分析对应服务集群的日志来确定。
 
@@ -85,6 +85,9 @@ None=>-5|create_order
 ### osc.chronos
 
 准时达服务，对应监控面板: [osc.chronos](https://t.elenet.me/dashboard/dashboard/db/osc-chronos-zhun-shi-da-jian-kong-kan-ban)
+
+主要的关注目标chronos的队列消息情况，osc.chronos会有最大700k的unack量，其他两个队列是监听blink和eos的消息，可以查看是否有堆积。 
+另外可以关注chronos的机器负载情况，是否有负载过高的情形
 
 ### osc.blink
 

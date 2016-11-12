@@ -84,26 +84,22 @@
 
 
 
-<meta name="description" content="&amp;#x8865;&amp;#x507F;&amp;#x578B;
-&amp;#x5F02;&amp;#x6B65;&amp;#x786E;&amp;#x4FDD;&amp;#x578B;
-&amp;#x6700;&amp;#x5927;&amp;#x52AA;&amp;#x529B;&amp;#x901A;&amp;#x77E5;&amp;#x578B;">
+<meta name="description" content="&amp;#x76EE;&amp;#x5F55;
+&amp;#x5982;&amp;#x4F55;&amp;#x8BBE;&amp;#x8BA1;&amp;#x4E00;&amp;#x95E8;&amp;#x8BED;&amp;#x8A00;&amp;#xFF08;&amp;#x4E00;&amp;#xFF09;&amp;#x2014;&amp;#x2014;&amp;#x4EC0;&amp;#x4E48;&amp;#x662F;&amp;#x5751;(a)
+&amp;#x5982;&amp;#x4F55;&amp;#x8BBE;&amp;#x8BA1;&amp;#x4E00;&amp;#x">
 <meta property="og:type" content="article">
-<meta property="og:title" content="微服务架构的分布式事务解决方案">
-<meta property="og:url" content="http://fanteathy.github.io/2016/10/25/distributed-transaction-in-soa/index.html">
+<meta property="og:title" content="如何设计一门语言">
+<meta property="og:url" content="http://fanteathy.github.io/2016/11/12/how_to_design_a_language/index.html">
 <meta property="og:site_name" content="Fanteathy">
-<meta property="og:description" content="&amp;#x8865;&amp;#x507F;&amp;#x578B;
-&amp;#x5F02;&amp;#x6B65;&amp;#x786E;&amp;#x4FDD;&amp;#x578B;
-&amp;#x6700;&amp;#x5927;&amp;#x52AA;&amp;#x529B;&amp;#x901A;&amp;#x77E5;&amp;#x578B;">
-<meta property="og:image" content="http://fanteathy.github.io/2016/10/25/distributed-transaction-in-soa/1_tcc.jpg">
-<meta property="og:image" content="http://fanteathy.github.io/2016/10/25/distributed-transaction-in-soa/2_mq.jpg">
-<meta property="og:image" content="http://fanteathy.github.io/2016/10/25/distributed-transaction-in-soa/3_notice.jpg">
-<meta property="og:updated_time" content="2016-10-25T07:03:14.000Z">
+<meta property="og:description" content="&amp;#x76EE;&amp;#x5F55;
+&amp;#x5982;&amp;#x4F55;&amp;#x8BBE;&amp;#x8BA1;&amp;#x4E00;&amp;#x95E8;&amp;#x8BED;&amp;#x8A00;&amp;#xFF08;&amp;#x4E00;&amp;#xFF09;&amp;#x2014;&amp;#x2014;&amp;#x4EC0;&amp;#x4E48;&amp;#x662F;&amp;#x5751;(a)
+&amp;#x5982;&amp;#x4F55;&amp;#x8BBE;&amp;#x8BA1;&amp;#x4E00;&amp;#x">
+<meta property="og:updated_time" content="2016-11-12T14:31:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="微服务架构的分布式事务解决方案">
-<meta name="twitter:description" content="&amp;#x8865;&amp;#x507F;&amp;#x578B;
-&amp;#x5F02;&amp;#x6B65;&amp;#x786E;&amp;#x4FDD;&amp;#x578B;
-&amp;#x6700;&amp;#x5927;&amp;#x52AA;&amp;#x529B;&amp;#x901A;&amp;#x77E5;&amp;#x578B;">
-<meta name="twitter:image" content="http://fanteathy.github.io/2016/10/25/distributed-transaction-in-soa/1_tcc.jpg">
+<meta name="twitter:title" content="如何设计一门语言">
+<meta name="twitter:description" content="&amp;#x76EE;&amp;#x5F55;
+&amp;#x5982;&amp;#x4F55;&amp;#x8BBE;&amp;#x8BA1;&amp;#x4E00;&amp;#x95E8;&amp;#x8BED;&amp;#x8A00;&amp;#xFF08;&amp;#x4E00;&amp;#xFF09;&amp;#x2014;&amp;#x2014;&amp;#x4EC0;&amp;#x4E48;&amp;#x662F;&amp;#x5751;(a)
+&amp;#x5982;&amp;#x4F55;&amp;#x8BBE;&amp;#x8BA1;&amp;#x4E00;&amp;#x">
 
 
 
@@ -124,9 +120,9 @@
 
 
 
-  <link rel="canonical" href="http://fanteathy.github.io/2016/10/25/distributed-transaction-in-soa/"/>
+  <link rel="canonical" href="http://fanteathy.github.io/2016/11/12/how_to_design_a_language/"/>
 
-  <title> 微服务架构的分布式事务解决方案 | Fanteathy </title>
+  <title> 如何设计一门语言 | Fanteathy </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -266,7 +262,7 @@
             
             
               
-                微服务架构的分布式事务解决方案
+                如何设计一门语言
               
             
           </h1>
@@ -278,8 +274,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-25T15:00:00+08:00" content="2016-10-25">
-              2016-10-25
+            <time itemprop="dateCreated" datetime="2016-11-12T22:30:00+08:00" content="2016-11-12">
+              2016-11-12
             </time>
           </span>
 
@@ -325,9 +321,20 @@
       
 
       
-        <h2 id="&#x8865;&#x507F;&#x578B;"><a href="#&#x8865;&#x507F;&#x578B;" class="headerlink" title="&#x8865;&#x507F;&#x578B;"></a>&#x8865;&#x507F;&#x578B;</h2><p><img src="/2016/10/25/distributed-transaction-in-soa/1_tcc.jpg" alt="tcc"></p>
-<h2 id="&#x5F02;&#x6B65;&#x786E;&#x4FDD;&#x578B;"><a href="#&#x5F02;&#x6B65;&#x786E;&#x4FDD;&#x578B;" class="headerlink" title="&#x5F02;&#x6B65;&#x786E;&#x4FDD;&#x578B;"></a>&#x5F02;&#x6B65;&#x786E;&#x4FDD;&#x578B;</h2><p><img src="/2016/10/25/distributed-transaction-in-soa/2_mq.jpg" alt="mq"></p>
-<h2 id="&#x6700;&#x5927;&#x52AA;&#x529B;&#x901A;&#x77E5;&#x578B;"><a href="#&#x6700;&#x5927;&#x52AA;&#x529B;&#x901A;&#x77E5;&#x578B;" class="headerlink" title="&#x6700;&#x5927;&#x52AA;&#x529B;&#x901A;&#x77E5;&#x578B;"></a>&#x6700;&#x5927;&#x52AA;&#x529B;&#x901A;&#x77E5;&#x578B;</h2><p><img src="/2016/10/25/distributed-transaction-in-soa/3_notice.jpg" alt="notice"></p>
+        <h2 id="&#x76EE;&#x5F55;"><a href="#&#x76EE;&#x5F55;" class="headerlink" title="&#x76EE;&#x5F55;"></a>&#x76EE;&#x5F55;</h2><ul>
+<li><a href="http://www.cppblog.com/vczh/archive/2013/04/27/199765.html" target="_blank" rel="external">&#x5982;&#x4F55;&#x8BBE;&#x8BA1;&#x4E00;&#x95E8;&#x8BED;&#x8A00;&#xFF08;&#x4E00;&#xFF09;&#x2014;&#x2014;&#x4EC0;&#x4E48;&#x662F;&#x5751;(a)</a></li>
+<li><a href="http://www.cppblog.com/vczh/archive/2013/04/28/199805.html" target="_blank" rel="external">&#x5982;&#x4F55;&#x8BBE;&#x8BA1;&#x4E00;&#x95E8;&#x8BED;&#x8A00;&#xFF08;&#x4E8C;&#xFF09;&#x2014;&#x2014;&#x4EC0;&#x4E48;&#x662F;&#x5751;(b)</a></li>
+<li><a href="http://www.cppblog.com/vczh/archive/2013/05/05/199974.html" target="_blank" rel="external">&#x5982;&#x4F55;&#x8BBE;&#x8BA1;&#x4E00;&#x95E8;&#x8BED;&#x8A00;&#xFF08;&#x4E09;&#xFF09;&#x2014;&#x2014;&#x4EC0;&#x4E48;&#x662F;&#x5751;(&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x548C;&#x5F02;&#x5E38;&#x5904;&#x7406;)</a></li>
+<li><a href="http://www.cppblog.com/vczh/archive/2013/05/12/200195.html" target="_blank" rel="external">&#x5982;&#x4F55;&#x8BBE;&#x8BA1;&#x4E00;&#x95E8;&#x8BED;&#x8A00;&#xFF08;&#x56DB;&#xFF09;&#x2014;&#x2014;&#x4EC0;&#x4E48;&#x662F;&#x5751;(&#x64CD;&#x4F5C;&#x6A21;&#x677F;)</a></li>
+<li><a href="http://www.cppblog.com/vczh/archive/2013/05/25/200580.html" target="_blank" rel="external">&#x5982;&#x4F55;&#x8BBE;&#x8BA1;&#x4E00;&#x95E8;&#x8BED;&#x8A00;&#xFF08;&#x4E94;&#xFF09;&#x2014;&#x2014;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x548C;&#x6D88;&#x606F;&#x53D1;&#x9001;</a></li>
+<li><a href="http://www.cppblog.com/vczh/archive/2013/06/10/200920.html" target="_blank" rel="external">&#x5982;&#x4F55;&#x8BBE;&#x8BA1;&#x4E00;&#x95E8;&#x8BED;&#x8A00;&#xFF08;&#x516D;&#xFF09;&#x2014;&#x2014;exception&#x548C;error code</a></li>
+<li><a href="http://www.cppblog.com/vczh/archive/2013/07/05/201541.html" target="_blank" rel="external">&#x5982;&#x4F55;&#x8BBE;&#x8BA1;&#x4E00;&#x95E8;&#x8BED;&#x8A00;&#xFF08;&#x4E03;&#xFF09;&#x2014;&#x2014;&#x95ED;&#x5305;&#x3001;lambda&#x548C;interface</a></li>
+<li><a href="http://www.cppblog.com/vczh/archive/2013/07/27/202154.html" target="_blank" rel="external">&#x5982;&#x4F55;&#x8BBE;&#x8BA1;&#x4E00;&#x95E8;&#x8BED;&#x8A00;&#xFF08;&#x516B;&#xFF09;&#x2014;&#x2014;&#x5F02;&#x6B65;&#x7F16;&#x7A0B;&#x548C;CPS&#x53D8;&#x6362;</a></li>
+<li><a href="http://www.cppblog.com/vczh/archive/2013/08/17/202605.html" target="_blank" rel="external">&#x5982;&#x4F55;&#x8BBE;&#x8BA1;&#x4E00;&#x95E8;&#x8BED;&#x8A00;&#xFF08;&#x4E5D;&#xFF09;&#x2014;&#x2014;&#x7C7B;&#x578B;</a></li>
+<li><a href="http://www.cppblog.com/vczh/archive/2013/09/16/203249.html" target="_blank" rel="external">&#x5982;&#x4F55;&#x8BBE;&#x8BA1;&#x4E00;&#x95E8;&#x8BED;&#x8A00;&#xFF08;&#x5341;&#xFF09;&#x2014;&#x2014;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x4E0E;&#x9886;&#x57DF;&#x7279;&#x5B9A;&#x8BED;&#x8A00;&#xFF08;DSL&#xFF09;</a></li>
+<li><a href="http://www.cppblog.com/vczh/archive/2013/10/19/203819.html" target="_blank" rel="external">&#x5982;&#x4F55;&#x8BBE;&#x8BA1;&#x4E00;&#x95E8;&#x8BED;&#x8A00;&#xFF08;&#x5341;&#x4E00;&#xFF09;&#x2014;&#x2014;&#x5220;&#x51CF;&#x8BED;&#x8A00;&#x7684;&#x529F;&#x80FD;</a></li>
+<li><a href="http://www.cppblog.com/vczh/archive/2013/11/10/204189.html" target="_blank" rel="external">&#x5982;&#x4F55;&#x8BBE;&#x8BA1;&#x4E00;&#x95E8;&#x8BED;&#x8A00;&#xFF08;&#x5341;&#x4E8C;&#xFF09;&#x2014;&#x2014;&#x8BBE;&#x8BA1;&#x53EF;&#x6269;&#x5C55;&#x7684;&#x7C7B;&#x578B;</a></li>
+</ul>
 
       
     </div>
@@ -359,17 +366,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/08/tomcat-architecture/" rel="next" title="Tomcat 架构">
-                <i class="fa fa-chevron-left"></i> Tomcat 架构
+              <a href="/2016/10/25/distributed-transaction-in-soa/" rel="next" title="微服务架构的分布式事务解决方案">
+                <i class="fa fa-chevron-left"></i> 微服务架构的分布式事务解决方案
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/12/how_to_design_a_language/" rel="prev" title="如何设计一门语言">
-                如何设计一门语言 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -483,7 +486,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#补偿型"><span class="nav-number">1.</span> <span class="nav-text">补偿型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步确保型"><span class="nav-number">2.</span> <span class="nav-text">异步确保型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最大努力通知型"><span class="nav-number">3.</span> <span class="nav-text">最大努力通知型</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li></ol></div>
             
           </div>
         </section>

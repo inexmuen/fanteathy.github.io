@@ -3,18 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tomcat 架构 | Fanteathy</title>
+  <title>Catégorie: devops | Fanteathy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Preface&amp;#x672C;&amp;#x6587;&amp;#x57FA;&amp;#x4E8E;how tomcat works&amp;#xFF0C;&amp;#x6574;&amp;#x7406;&amp;#x4E86;&amp;#x4E00;&amp;#x4E0B;Tomcat&amp;#x7684;&amp;#x57FA;&amp;#x672C;&amp;#x67B6;&amp;#x6784;&amp;#xFF0C;&amp;#x5176;&amp;#x5B9E;&amp;#x4E5F;&amp;#x6CA1;&amp;#x6709;&amp;#x">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Tomcat 架构">
-<meta property="og:url" content="http://fanteathy.github.io/2016/09/08/tomcat-architecture/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Fanteathy">
+<meta property="og:url" content="http://fanteathy.github.io/categories/devops/index.html">
 <meta property="og:site_name" content="Fanteathy">
-<meta property="og:description" content="Preface&amp;#x672C;&amp;#x6587;&amp;#x57FA;&amp;#x4E8E;how tomcat works&amp;#xFF0C;&amp;#x6574;&amp;#x7406;&amp;#x4E86;&amp;#x4E00;&amp;#x4E0B;Tomcat&amp;#x7684;&amp;#x57FA;&amp;#x672C;&amp;#x67B6;&amp;#x6784;&amp;#xFF0C;&amp;#x5176;&amp;#x5B9E;&amp;#x4E5F;&amp;#x6CA1;&amp;#x6709;&amp;#x">
-<meta property="og:updated_time" content="2016-09-08T14:19:57.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tomcat 架构">
-<meta name="twitter:description" content="Preface&amp;#x672C;&amp;#x6587;&amp;#x57FA;&amp;#x4E8E;how tomcat works&amp;#xFF0C;&amp;#x6574;&amp;#x7406;&amp;#x4E86;&amp;#x4E00;&amp;#x4E0B;Tomcat&amp;#x7684;&amp;#x57FA;&amp;#x672C;&amp;#x67B6;&amp;#x6784;&amp;#xFF0C;&amp;#x5176;&amp;#x5B9E;&amp;#x4E5F;&amp;#x6CA1;&amp;#x6709;&amp;#x">
+<meta name="twitter:title" content="Fanteathy">
   
     <link rel="alternate" href="/atom.xml" title="Fanteathy" type="application/atom+xml">
   
@@ -63,67 +59,39 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-tomcat-architecture" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/08/tomcat-architecture/" class="article-date">
-  <time datetime="2016-09-08T14:00:00.000Z" itemprop="datePublished">2016-09-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      Tomcat 架构
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2016/11/21/ops/" class="archive-article-date">
+  <time datetime="2016-11-21T13:00:00.000Z" itemprop="datePublished">Nov 21</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/11/21/ops/">运维之下</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h2><p>&#x672C;&#x6587;&#x57FA;&#x4E8E;<code>how tomcat works</code>&#xFF0C;&#x6574;&#x7406;&#x4E86;&#x4E00;&#x4E0B;Tomcat&#x7684;&#x57FA;&#x672C;&#x67B6;&#x6784;&#xFF0C;&#x5176;&#x5B9E;&#x4E5F;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x590D;&#x6742;&#x7684;&#x4E1C;&#x897F;&#xFF0C;&#x65E0;&#x975E;&#x5C31;&#x662F;&#x89E3;&#x6790;http&#x8BF7;&#x6C42;&#xFF0C;&#x7136;&#x540E;&#x8C03;&#x7528;&#x76F8;&#x5E94;&#x7684;Servlet&#x3002;&#x53E6;&#x53C2;&#x8003;: <a href="http://www.cnblogs.com/lzb1096101803/p/4779387.html" target="_blank" rel="external">Tomcat &#x5256;&#x6790;</a></p>
-<h2 id="Basic-Architecture"><a href="#Basic-Architecture" class="headerlink" title="Basic Architecture"></a>Basic Architecture</h2><h2 id="Connector"><a href="#Connector" class="headerlink" title="Connector"></a>Connector</h2><h2 id="Container"><a href="#Container" class="headerlink" title="Container"></a>Container</h2><h2 id="Wrapper"><a href="#Wrapper" class="headerlink" title="Wrapper"></a>Wrapper</h2><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://fanteathy.github.io/2016/09/08/tomcat-architecture/" data-id="civs2pnq2000f551ot0c5m97g" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2016/10/25/distributed-transaction-in-soa/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
-        
-          微服务架构的分布式事务解决方案
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/09/05/ab-testing/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">AB Test</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
 </section>
         

@@ -31,6 +31,7 @@ categories: arch
 2. 提交后后台校验token，同时删除token，生成新的token返回 
 
 token特点： 
+
 要申请，一次有效性，可以限流 
 
 注意：redis要用删除操作来判断token，删除成功代表token校验通过，如果用select+delete来校验token，存在并发问题，不建议使用 

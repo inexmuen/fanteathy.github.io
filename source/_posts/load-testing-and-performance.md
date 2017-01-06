@@ -5,6 +5,8 @@ tags: arch
 categories: arch
 ---
 
+Best Ref: ***[性能调优攻略](http://coolshell.cn/articles/7490.html)***
+
 ## 基本知识
 
 ### 性能测试
@@ -144,7 +146,7 @@ EOS对应的集群分布为:
 性能分析的一般步骤为根据调用链路逐级住下，流程为: 接口 => 中间件 => 基础服务 => 操作系统
 
 - 接口性能分析时需要关注代码逻辑和接口依赖
-	- 代码的性能分析可以参考
+	- 代码的性能分析可以参考: ***[性能调优攻略](http://coolshell.cn/articles/7490.html)***，以下为Python的代码性能优化参考
 		- Python profile
 			- [Python 性能分析入门指南](https://segmentfault.com/a/1190000000616798)
 			- [Python Profile 工具性能分析](http://chenxiaoyu.org/2013/08/28/python-profile.html)

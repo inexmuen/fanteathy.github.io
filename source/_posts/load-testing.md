@@ -49,31 +49,9 @@ categories: arch
 
 监控需要结合eos主流程来分析问题，EOS主流程如下:
 
-![eos_flow](load-testing/eos_flow.png)
+***涉密不予提供***
 
-EOS各状态码和对应含义如下:
-
-订单状态|含义
-----|----
--5|订单未支付
--3|订单支付中(旧支付)
--4|订单支付失败
--2|订单支付成功
--6|风控无效
-0|订单待接单
-2|商家接单
-
-EOS主流程和相关接口对应关系如下:
-
-订单状态转变|接口
-----|----
-None=>-5|create_order
--5=>-3|process_post_pay_for_order
--5=>-4|not_paid_order_auto_fail
--3=>-2/-5=>-2|process_post_pay_success, process_post_pay_success_with_total
--3=>-4|process_post_pay_fail
--2=>0|signal_pending_make_order, signal_post_make_order
-0=>2|napos_process_order
+同时需要了解EOS状态机各节点的含义和流转逻辑。
 
 
 ### osc.bacchus
@@ -165,7 +143,15 @@ EOS对应的集群分布为:
 
 性能分析的一般步骤为根据调用链路逐级住下，流程为: 接口 => 中间件 => 基础服务 => 操作系统
 
-- 接口性能分析时需要关注代码逻辑和接口依赖，接口依赖包括其他SOA服务依赖，基础服务依赖等，可以通过etrace观察调用链路分析瓶颈点
+- 接口性能分析时需要关注代码逻辑和接口依赖
+	- 代码的性能分析可以参考
+		- Python profile
+			- [Python 性能分析入门指南](https://segmentfault.com/a/1190000000616798)
+			- [Python Profile 工具性能分析](http://chenxiaoyu.org/2013/08/28/python-profile.html)
+		- Python 火焰图
+			- [白话火焰图](http://huoding.com/2016/08/18/531) 
+			- [开源项目之调试python应用生成性能cpu火焰图](http://xiaorui.cc/2015/10/22/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E4%B9%8B%E8%B0%83%E8%AF%95python%E5%BA%94%E7%94%A8%E7%94%9F%E6%88%90%E6%80%A7%E8%83%BDcpu%E7%81%AB%E7%84%B0%E5%9B%BE/)    
+	- 接口依赖包括其他SOA服务依赖，基础服务依赖等，可以通过etrace观察调用链路分析瓶颈点
 - 中间件 和 基础服务 的性能主要通过对应的指标监控，观察对应的`cpu`,`memory`,`Network`,`IO`,`TCP`等
 - 操作系统级别的性能分析可以参考[Linux Performance](http://www.brendangregg.com/linuxperf.html)
 

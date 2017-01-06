@@ -155,6 +155,6 @@ EOS对应的集群分布为:
 - 中间件 和 基础服务 的性能主要通过对应的指标监控，观察对应的`cpu`,`memory`,`Network`,`IO`,`TCP`等
 - 操作系统级别的性能分析可以参考[Linux Performance](http://www.brendangregg.com/linuxperf.html)
 
-![linux_observability_tools](load-testing/linux_observability_tools.png)
+![linux_observability_tools](load-testing-and-performance/linux_observability_tools.png)
 
 

@@ -66,6 +66,12 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: next
 
+# duoshuo_config
+duoshuo_shortname: fanteathy
+
+# baidu analytics
+baidu_analytics: 4a5f97b0ff5f7149cd40cf481a7f9ae4
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:

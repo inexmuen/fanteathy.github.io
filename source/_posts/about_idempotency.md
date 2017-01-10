@@ -51,9 +51,19 @@ update table_xxx set total=total-#hongbao# where id=#id# and total-#hongbao# > 0
 
 如果是分布式系统，构建全局唯一索引比较困难，例如唯一性的字段没法确定，这时候可以引入分布式锁，通过第三方的系统(redis或zookeeper)，在业务系统插入数据或者更新数据，获取分布式锁，然后做操作，之后释放锁。
 
+分布式锁的java实现: [https://github.com/redisson/redisson](https://github.com/redisson/redisson)
+
 #### 7. 状态机幂等
 
-状态在不同的情况下会发生变更，一般情况下存在有限状态机，这时候，如果状态机已经处于下一个状态，这时候来了一个上一个状态的变更，理论上是不能够变更的，这样的话，保证了有限状态机的幂等。
+状态在不同的情况下会发生变更，一般情况下存在有限状态机(fsm)，这时候，如果状态机已经处于下一个状态，这时候来了一个上一个状态的变更，理论上是不能够变更的，这样的话，保证了有限状态机的幂等。
+
+伪代码如下:
+
+```
+// 如果状态已经发生变更，直接return
+if fsm.status = expected_status:
+	return
+```
 
 ### ***不推荐的方案***
 

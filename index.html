@@ -103,7 +103,9 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">update table_xxx set total=total-#hongbao# where id=#id# and total-#hongbao# &gt; 0</div></pre></td></tr></table></figure>
 <h4 id="6-&#x5206;&#x5E03;&#x5F0F;&#x9501;"><a href="#6-&#x5206;&#x5E03;&#x5F0F;&#x9501;" class="headerlink" title="6. &#x5206;&#x5E03;&#x5F0F;&#x9501;"></a>6. &#x5206;&#x5E03;&#x5F0F;&#x9501;</h4><p>&#x5982;&#x679C;&#x662F;&#x5206;&#x5E03;&#x5F0F;&#x7CFB;&#x7EDF;&#xFF0C;&#x6784;&#x5EFA;&#x5168;&#x5C40;&#x552F;&#x4E00;&#x7D22;&#x5F15;&#x6BD4;&#x8F83;&#x56F0;&#x96BE;&#xFF0C;&#x4F8B;&#x5982;&#x552F;&#x4E00;&#x6027;&#x7684;&#x5B57;&#x6BB5;&#x6CA1;&#x6CD5;&#x786E;&#x5B9A;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x53EF;&#x4EE5;&#x5F15;&#x5165;&#x5206;&#x5E03;&#x5F0F;&#x9501;&#xFF0C;&#x901A;&#x8FC7;&#x7B2C;&#x4E09;&#x65B9;&#x7684;&#x7CFB;&#x7EDF;(redis&#x6216;zookeeper)&#xFF0C;&#x5728;&#x4E1A;&#x52A1;&#x7CFB;&#x7EDF;&#x63D2;&#x5165;&#x6570;&#x636E;&#x6216;&#x8005;&#x66F4;&#x65B0;&#x6570;&#x636E;&#xFF0C;&#x83B7;&#x53D6;&#x5206;&#x5E03;&#x5F0F;&#x9501;&#xFF0C;&#x7136;&#x540E;&#x505A;&#x64CD;&#x4F5C;&#xFF0C;&#x4E4B;&#x540E;&#x91CA;&#x653E;&#x9501;&#x3002;</p>
-<p>&#x5206;&#x5E03;&#x5F0F;&#x9501;&#x7684;java&#x5B9E;&#x73B0;: <a href="https://github.com/redisson/redisson" target="_blank" rel="external">https://github.com/redisson/redisson</a></p>
+<p>&#x5206;&#x5E03;&#x5F0F;&#x9501;&#x7684;java&#x5B9E;&#x73B0;&#x53CA;&#x4F7F;&#x7528;: </p>
+<p><a href="https://github.com/redisson/redisson" target="_blank" rel="external">https://github.com/redisson/redisson</a></p>
+<p><a href="https://my.oschina.net/wangnian/blog/668830" target="_blank" rel="external">https://my.oschina.net/wangnian/blog/668830</a></p>
 <h4 id="7-&#x72B6;&#x6001;&#x673A;&#x5E42;&#x7B49;"><a href="#7-&#x72B6;&#x6001;&#x673A;&#x5E42;&#x7B49;" class="headerlink" title="7. &#x72B6;&#x6001;&#x673A;&#x5E42;&#x7B49;"></a>7. &#x72B6;&#x6001;&#x673A;&#x5E42;&#x7B49;</h4><p>&#x72B6;&#x6001;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x4F1A;&#x53D1;&#x751F;&#x53D8;&#x66F4;&#xFF0C;&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4E0B;&#x5B58;&#x5728;&#x6709;&#x9650;&#x72B6;&#x6001;&#x673A;(fsm)&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#xFF0C;&#x5982;&#x679C;&#x72B6;&#x6001;&#x673A;&#x5DF2;&#x7ECF;&#x5904;&#x4E8E;&#x4E0B;&#x4E00;&#x4E2A;&#x72B6;&#x6001;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x6765;&#x4E86;&#x4E00;&#x4E2A;&#x4E0A;&#x4E00;&#x4E2A;&#x72B6;&#x6001;&#x7684;&#x53D8;&#x66F4;&#xFF0C;&#x7406;&#x8BBA;&#x4E0A;&#x662F;&#x4E0D;&#x80FD;&#x591F;&#x53D8;&#x66F4;&#x7684;&#xFF0C;&#x8FD9;&#x6837;&#x7684;&#x8BDD;&#xFF0C;&#x4FDD;&#x8BC1;&#x4E86;&#x6709;&#x9650;&#x72B6;&#x6001;&#x673A;&#x7684;&#x5E42;&#x7B49;&#x3002;</p>
 <p>&#x4F2A;&#x4EE3;&#x7801;&#x5982;&#x4E0B;:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// &#x5982;&#x679C;&#x72B6;&#x6001;&#x5DF2;&#x7ECF;&#x53D1;&#x751F;&#x53D8;&#x66F4;&#xFF0C;&#x76F4;&#x63A5;return</div><div class="line">if fsm.status = expected_status:</div><div class="line">	return</div></pre></td></tr></table></figure>
@@ -134,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://fanteathy.github.io/2017/01/10/about_idempotency/" data-id="cixr5cqj20000n81oogwl9w8s" class="article-share-link">Share</a>
+      <a data-url="http://fanteathy.github.io/2017/01/10/about_idempotency/" data-id="cixra5s6x0002ul1oxxuuhscl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arch/">arch</a></li></ul>
@@ -200,7 +202,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://fanteathy.github.io/2017/01/05/python-is-not-java/" data-id="cixr5cqk5000un81o5rdrv6nl" class="article-share-link">Share</a>
+      <a data-url="http://fanteathy.github.io/2017/01/05/python-is-not-java/" data-id="cixra5s7u000sul1omrwd2l2g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
@@ -426,7 +428,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://fanteathy.github.io/2016/12/30/java_develop_deploy_base_on_pylon/" data-id="cixr5cqjv000gn81ocymzaw1o" class="article-share-link">Share</a>
+      <a data-url="http://fanteathy.github.io/2016/12/30/java_develop_deploy_base_on_pylon/" data-id="cixra5s7n000jul1o63p0ljyh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
@@ -505,7 +507,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://fanteathy.github.io/2016/11/28/idempotency/" data-id="cixr5cqjp000an81o23jj4xy3" class="article-share-link">Share</a>
+      <a data-url="http://fanteathy.github.io/2016/11/28/idempotency/" data-id="cixra5s790008ul1oqsna93e1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arch/">arch</a></li></ul>
@@ -559,7 +561,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://fanteathy.github.io/2016/11/21/ops/" data-id="cixr5cqjy000ln81on7zdvmmk" class="article-share-link">Share</a>
+      <a data-url="http://fanteathy.github.io/2016/11/21/ops/" data-id="cixra5s7p000mul1o3rbq3wvv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/devops/">devops</a></li></ul>
@@ -869,7 +871,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://fanteathy.github.io/2016/11/14/interview/" data-id="cixr5cqjs000dn81opkzknkx1" class="article-share-link">Share</a>
+      <a data-url="http://fanteathy.github.io/2016/11/14/interview/" data-id="cixra5s7j000ful1okt1n9gzw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/management/">management</a></li></ul>
@@ -925,7 +927,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://fanteathy.github.io/2016/11/12/how_to_design_a_language/" data-id="cixr5cqjm0008n81oaosgihni" class="article-share-link">Share</a>
+      <a data-url="http://fanteathy.github.io/2016/11/12/how_to_design_a_language/" data-id="cixra5s7b000aul1oidm8jhss" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arch/">arch</a></li></ul>
@@ -970,7 +972,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://fanteathy.github.io/2016/10/25/distributed-transaction-in-soa/" data-id="cixr5cqjf0006n81oxuvrmqqg" class="article-share-link">Share</a>
+      <a data-url="http://fanteathy.github.io/2016/10/25/distributed-transaction-in-soa/" data-id="cixra5s740006ul1oddt3dfzj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arch/">arch</a></li></ul>
@@ -1110,7 +1112,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://fanteathy.github.io/2016/09/21/load-testing-and-performance/" data-id="cixr5cqk3000tn81oydicfemy" class="article-share-link">Share</a>
+      <a data-url="http://fanteathy.github.io/2016/09/21/load-testing-and-performance/" data-id="cixra5s7f000dul1olt2v8pyl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arch/">arch</a></li></ul>
@@ -1153,7 +1155,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://fanteathy.github.io/2016/09/08/tomcat-architecture/" data-id="cixr5cqk8000zn81ob9ibjlq4" class="article-share-link">Share</a>
+      <a data-url="http://fanteathy.github.io/2016/09/08/tomcat-architecture/" data-id="cixra5s7w000xul1oqidsdxpw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>

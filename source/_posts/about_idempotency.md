@@ -51,6 +51,8 @@ update table_xxx set total=total-#hongbao# where id=#id# and total-#hongbao# > 0
 
 如果是分布式系统，构建全局唯一索引比较困难，例如唯一性的字段没法确定，这时候可以引入分布式锁，通过第三方的系统(redis或zookeeper)，在业务系统插入数据或者更新数据，获取分布式锁，然后做操作，之后释放锁。
 
+或者在执行接口的逻辑前，先在mysql表中插入接口的特征值(此字段设置unique)，用mysql保证对应的业务逻辑只执行一次。
+
 分布式锁的java实现及使用: 
 
 [https://github.com/redisson/redisson](https://github.com/redisson/redisson)

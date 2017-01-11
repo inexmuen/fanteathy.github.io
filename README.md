@@ -15,3 +15,7 @@ After this, you'll find a new post in `./source/posts` OR you can create `post_t
 ### Deploy
 
 `make deploy`
+
+### Theme - Next
+
+next主题的使用参考: [next文档](http://theme-next.iissnan.com/)

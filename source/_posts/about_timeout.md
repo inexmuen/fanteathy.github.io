@@ -109,7 +109,7 @@ table结构如下:
 对应RPC请求接口逻辑如下:
 
 ```
-    @Transactional(timeout = 5)
+    @Transactional(timeout = 10)
     public int updateTestStatus(Long id) throws JobServiceException {
         Long startTime = System.currentTimeMillis();
         int updateRes = 0;
@@ -192,19 +192,15 @@ public class JobServiceTest extends TestBase {
 }
 ```
 
-### 结果
+### 结果及结论
 
-- 发现最后打印出来的log为: 
+使用postman模拟client调用对应接口，设`select for update`为事务1，接口调用为事务2。
+
+- `0 - 10s` 内，提交事务1(运行`commit`手动提交), 则事务2可以获取innodb锁往下执行，最后事务2也正确提交
+- `10 - 50s` 内，提交事务1，则事务2`roll back`，同时立刻返回结果给client，表示`@Transactional(timeout = ?)`可以设置在多长时间后，应用逻辑中mysql事务失败，事务2会rollback，同时返回结果给client（快速失败）
+- `>50s` 后，由于`innodb_lock_wait_timeout`的存在，事务1和事务2都会roll back，且打印以下log
 
 ```
 2017-01-16 14:04:23.810 INFO me.ele.fin.job.service.JobService[main]: [unknown 1.1 unknown^^2337080905338436383|1484546598112] ## update result: 0 
 2017-01-16 14:04:23.810 INFO me.ele.fin.job.service.JobService[main]: [unknown 1.1 unknown^^2337080905338436383|1484546598112] ## Duration milliseconds: 51288 
 ```
-
-- 同时字段status的值并没有变更，事务rollback
-
-- 使用postman模拟client调用对应接口时需要50S才有返回结果(表示spring的事务超时设置不能控制结果尽快返回[不能快速失败])
-
-### 结论
-
-- `@Transactional(timeout = ?)`表示超时多长时间后，应用逻辑中mysql事务失败，事务会rollback，但是对应的sql已经发出，依然会争抢行锁。并且`@Transactional(timeout = ?)`不能控制在timeout时间后结果返回client，需要等到`innodb_lock_wait_timeout`设置的时间后，client才能得到返回结果

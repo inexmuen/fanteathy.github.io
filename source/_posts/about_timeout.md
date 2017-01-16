@@ -131,6 +131,29 @@ private Object callCommand(Task task, BreakerMetrics metric) throws Throwable {
 
 ```
 
+Java的超时设置可以参考:
+
+[Java: Set timeout for threads in a ThreadPool](http://stackoverflow.com/questions/14236654/java-set-timeout-for-threads-in-a-threadpool)
+
+对应代码如下:
+
+```
+Future<?> future = null;
+
+for (List<String> l : partition) {
+    Runnable worker = new WorkerThread(l);
+    future = executor.submit(worker);
+}
+
+try {
+    System.out.println("Started..");
+    System.out.println(future.get(3, TimeUnit.SECONDS));
+    System.out.println("Finished!");
+} catch (TimeoutException e) {
+    System.out.println("Terminated!");
+}
+```
+
 ## 最佳实践
 
 为了让client尽快得到响应，也为了尽量减少服务响应延迟时的服务资源消耗，需要设置`client timeout(客户端timeout)`, `server timeout(服务端timeout)`以及`service timeout(基础服务如mysql等timeout)`。同时需要根据实际情况设置一条请求链路上对应client,server和service的timeout。

@@ -156,14 +156,16 @@ public class JobServiceTest extends TestBase {
 
 ### 结果
 
-发现最后打印出来的log为: 
+- 发现最后打印出来的log为: 
 
 ```
 2017-01-16 14:04:23.810 INFO me.ele.fin.job.service.JobService[main]: [unknown 1.1 unknown^^2337080905338436383|1484546598112] ## update result: 0 
 2017-01-16 14:04:23.810 INFO me.ele.fin.job.service.JobService[main]: [unknown 1.1 unknown^^2337080905338436383|1484546598112] ## Duration milliseconds: 51288 
 ```
 
-同时字段status的值并没有变更
+- 同时字段status的值并没有变更，事务rollback
+
+- 使用postman模拟client调用对应接口时需要50S才有返回结果(表示spring的事务超时设置不能控制结果尽快返回[不能快速失败])
 
 ### 结论
 

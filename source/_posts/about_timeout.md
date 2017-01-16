@@ -158,7 +158,14 @@ try {
 
 为了让client尽快得到响应，也为了尽量减少服务响应延迟时的服务资源消耗，需要设置`client timeout(客户端timeout)`, `server timeout(服务端timeout)`以及`service timeout(基础服务如mysql等timeout)`。同时需要根据实际情况设置一条请求链路上对应client,server和service的timeout。
 
-`ToDo`
+一般需要考虑以下情况:
+
+- 设置client timeout保证client尽快得到响应，同时方便重试
+- 设置server timeout保证及时释放服务器资源，保证不被client拖垮
+- 设置一些基础服务的timeout，可以有效保护对应资源，避免整个系统资源耗尽出现拒绝对外提供服务这种情况
+- timeout值的考虑
+	- 一条链路上游至下游如果只是一次Request/Response的话，那么对应的timeout值应该逐渐减少，如RPC请求的Client和Server端（保证请求的时间范围覆盖了响应的时间范围）
+	- 如果有多次交互的话，无需要考虑。如server请求DB，Server先发送commit到DB，若Server超时后再发rollback给DB。则DB的timeout无需要比Server短，只需要考虑DB自身的性能即可
 
 ## mysql timeout实验
 

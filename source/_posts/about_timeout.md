@@ -50,7 +50,9 @@ if __name__ == "__main__":
 
 ### zeus_core中的超时
 
-#### 1. api_hard_timeout为接口的真实超时设置，为server的超时设置
+#### 1. api_hard_timeout为接口的真实超时设置，为server的超时设置。是gevent执行对应协程时的Timeout，为server应用逻辑的timeout
+
+***设置***:
 
 ```
 service = Service(
@@ -61,9 +63,20 @@ service = Service(
     ...
 ```
 
-#### 2. timeout为软超时，目前只是打个warning,发个signal
+***实现***:
 
-#### 3. 调用其他服务时候的超时，为client的超时设置
+```
+with gevent.Timeout(hard_timeout):
+    try:
+        result = func(dispatcher, *args)
+        ...
+```
+
+#### 2. timeout为软超时，目前只是打个warning,发个signal(无实际价值)
+
+#### 3. 调用其他服务时候的超时，为client的超时设置。是网络请求时的timeout
+
+***设置***:
 
 ```
 'payment': {
@@ -80,6 +93,17 @@ service = Service(
 ```
 
 表示`EOS`调用`payment`服务时的eos超时时间
+
+***实现***:(参考zeus_client使用http client中的代码实现)
+
+```
+from thriftpy.transport import TSocket, TBufferedTransport
+from . import Client, THTTPJsonProtocol
+
+socket = TSocket(host, port)
+socket.set_timeout(timeout)
+...
+```
 
 ## 最佳实践
 

@@ -105,6 +105,32 @@ socket.set_timeout(timeout)
 ...
 ```
 
+### Pylon对应的超时
+
+```
+private Object callCommand(Task task, BreakerMetrics metric) throws Throwable {
+        Future<?> result = null;
+        try {
+            result = service.submit(task);
+            long timeout = task.getTimeoutInMillis();
+            Object ret = result.get(timeout > 0 ? timeout : property.getTimeout(), TimeUnit.MILLISECONDS);
+            metric.increment(BreakerStatus.SUCCESS);
+            if (metric.inTestPhase()) {
+                metric.singleTestPass(true);
+            }
+            return ret;
+        } catch (InterruptedException | TimeoutException e) {
+            metric.increment(BreakerStatus.TIMEOUT);
+            if (result != null) {
+                result.cancel(true);
+            }
+            task.cancel();
+            task.setStatus(CallStatus.timeout);
+            throw new RequestTimeoutException(String.format("Service(%s) occurs a request execution timeout!", property.getService()));
+...
+
+```
+
 ## 最佳实践
 
 为了让client尽快得到响应，也为了尽量减少服务响应延迟时的服务资源消耗，需要设置`client timeout(客户端timeout)`, `server timeout(服务端timeout)`以及`service timeout(基础服务如mysql等timeout)`。同时需要根据实际情况设置一条请求链路上对应client,server和service的timeout。

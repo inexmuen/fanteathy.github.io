@@ -9,6 +9,11 @@ categories: arch
 
 `Timeout`，是一种常见的容错模式。常见的有设置网络连接超时时间，一次RPC的响应超时时间等。在分布式服务调用的场景中，它主要解决了当依赖服务出现建立网络连接或响应延迟，不用无限等待的问题，调用方可以根据事先设计的超时时间中断调用，及时释放关键资源，如Web容器的连接数，数据库连接数等，避免整个系统资源耗尽出现拒绝对外提供服务这种情况。
 
+意义: 
+
+- 当网络出现短暂的抖动，或者下游服务调用超时时，合理的超时时间可以避免连接池快速被占满，可有效延长服务的可用时长
+- 可以结合降级，熔断等SOA治理的手段使用
+
 ## 原理
 
 ### 阻塞IO的timeout
@@ -42,6 +47,39 @@ if __name__ == "__main__":
     g = gevent.spawn(test)
     g.join()
 ```
+
+### zeus_core中的超时
+
+#### 1. api_hard_timeout为接口的真实超时设置，为server的超时设置
+
+```
+service = Service(
+    name=NAME,
+    slug=NAME[NAME.find('.')+1:],
+    timeout=3 * 1000,
+    api_hard_timeout=SERVICE_API_HARD_TIMEOUT,
+    ...
+```
+
+#### 2. timeout为软超时，目前只是打个warning,发个signal
+
+#### 3. 调用其他服务时候的超时，为client的超时设置
+
+```
+'payment': {
+            'pool': 'huskar',
+            'name': 'me.ele.payment.service',
+            'client': 'http',
+            'timeout': config.get('config:soa_client_timeout:payment', 1),
+            'cluster': config.get('config:cluster:payment', "stable"),
+            'iface': 'me.ele.payment.api.service.PaymentService',
+            'thrift_file': path.join(
+                current_path, 'thrift_files/payment/PaymentService.thrift'),
+        }
+
+```
+
+表示`EOS`调用`payment`服务时的eos超时时间
 
 ## 最佳实践
 

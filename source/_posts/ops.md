@@ -1,6 +1,7 @@
 ---
 title: 运维之下
 date: 2016-11-21 21:00:00
+author: Fanteathy
 tags: devops
 categories: devops
 ---

@@ -1,6 +1,7 @@
 ---
 title: 如何设计一门语言
 date: 2016-11-12 22:30:00
+author: Fanteathy
 tags: arch
 categories: arch
 ---

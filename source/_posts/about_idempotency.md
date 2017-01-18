@@ -1,6 +1,7 @@
 ---
 title: 关于幂等
 date: 2017-01-10 15:00:00
+author: Fanteathy
 tags: arch
 categories: arch
 ---

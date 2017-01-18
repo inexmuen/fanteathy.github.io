@@ -1,6 +1,7 @@
 ---
 title: Python Is Not Java
 date: 2017-01-05 23:50:00
+author: Fanteathy
 tags: python
 categories: python
 ---

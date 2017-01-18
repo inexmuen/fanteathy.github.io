@@ -1,6 +1,7 @@
 ---
 title: 关于timeout
 date: 2017-01-16 15:00:00
+author: Fanteathy
 tags: arch
 categories: arch
 ---

@@ -1,6 +1,7 @@
 ---
 title: 微服务架构的分布式事务解决方案
 date: 2016-10-25 15:00:00
+author: Fanteathy
 tags: arch
 categories: arch
 ---

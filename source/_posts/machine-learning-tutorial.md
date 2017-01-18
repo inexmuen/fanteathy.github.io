@@ -1,6 +1,7 @@
 ---
 title: machine-learning-tutorial
 date: 2016-08-30 11:29:24
+author: Fanteathy
 tags: machine-learning
 categories: machine-learning
 ---

@@ -1,6 +1,7 @@
 ---
 title: 幂等的实现
 date: 2016-11-28 20:00:00
+author: Fanteathy
 tags: arch
 categories: arch
 ---

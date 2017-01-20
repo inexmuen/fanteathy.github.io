@@ -1,6 +1,6 @@
 ---
 title: 分布式系统中的全局唯一ID
-date: 2017-01-18 18:00:00
+date: 2017-01-20 17:00:00
 author: Fanteathy
 tags: arch
 categories: arch
@@ -102,7 +102,7 @@ def get_global_id():
         return order_id
         
 def fetch_id_list_from_db():
-    db.select_for_update() // db获取悲观锁
+    db.select_for_update() // db获取悲观锁，注意此时表只有一行，所以需要通过ID获取行锁，忌使用表锁
     order_ids = db.select(1000) // 一次取1000个order id
     db.sequence.update(1000) // db sequence 字段增加1000
     db.commit()

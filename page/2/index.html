@@ -806,6 +806,188 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://fanteathy.github.io/2016/09/29/mq_back_up/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="fanteathy">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2180875?v=3&u=669f9a2b4e195cb7d1336a0dc4fa4efccaeba38c&s=400">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Fanteathy">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Fanteathy" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/29/mq_back_up/" itemprop="url">
+                  消息补偿
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-29T20:00:00+08:00">
+                2016-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arch/" itemprop="url" rel="index">
+                    <span itemprop="name">arch</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/09/29/mq_back_up/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/29/mq_back_up/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/29/mq_back_up/" class="leancloud_visitors" data-flag-title="消息补偿">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Design-For-Failure"><a href="#Design-For-Failure" class="headerlink" title="Design For Failure"></a>Design For Failure</h2><p><code>Design For Failure</code>&#x7684;&#x6838;&#x5FC3;&#x601D;&#x60F3;&#x5728;&#x4E8E;: <strong><em>&#x5BB9;&#x5FCD;&#x9519;&#x8BEF;&#xFF0C;&#x5FEB;&#x901F;&#x6062;&#x590D;&#xFF0C;&#x5C06;failure&#x5F53;&#x505A;&#x666E;&#x901A;&#x4E8B;&#x4EF6;&#x5904;&#x7406;</em></strong>&#x3002;</p>
+<p>&#x5F53;&#x5E94;&#x7528;&#x6784;&#x5EFA;&#x5728;&#x4E91;&#x670D;&#x52A1;(cloud)&#x4E0A;&#xFF0C;&#x8FD9;&#x4E2A;&#x6982;&#x5FF5;&#x66F4;&#x591A;&#x88AB;&#x63D0;&#x53CA;(<a href="http://www.slideshare.net/ashayc/design-for-failure-is-key-to-success-in-the-cloud" target="_blank" rel="external">Design For Failure Is Key To Success In The Cloud</a>)&#x3002;&#x56E0;&#x4E3A;&#x76F8;&#x6BD4;&#x666E;&#x901A;&#x7EBF;&#x4E0A;&#x73AF;&#x5883;&#xFF0C;&#x4E91;&#x8BBE;&#x65BD;&#x7684;&#x590D;&#x6742;&#x5EA6;&#x66F4;&#x5927;&#xFF0C;&#x540C;&#x65F6;&#x4E5F;&#x5BFC;&#x81F4;&#x4E86;&#x7A33;&#x5B9A;&#x6027;&#x4EE5;&#x53CA;&#x5065;&#x58EE;&#x6027;&#x7684;&#x590D;&#x6742;&#xFF0C;&#x56E0;&#x6B64;<code>Failure</code>&#x5728;&#x4E91;&#x73AF;&#x5883;&#x9700;&#x8981;&#x88AB;&#x5F53;&#x505A;&#x666E;&#x901A;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x3002;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;&#x53EF;&#x53C2;&#x8003;<a href="http://techblog.netflix.com/2011/07/netflix-simian-army.html" target="_blank" rel="external">The Netflix Simian Army</a></p>
+<p>&#x540C;&#x65F6;&#x5BF9;&#x4E8E;&#x6B63;&#x5E38;&#x73AF;&#x5883;&#xFF0C;<code>Design For Failure</code>&#x7684;&#x8BBE;&#x8BA1;&#x601D;&#x60F3;&#x5728;&#x4FDD;&#x8BC1;&#x670D;&#x52A1;&#x7684;&#x5065;&#x58EE;&#x6027;&#xFF0C;&#x53EF;&#x7528;&#x6027;&#x4E0A;&#x4E5F;&#x5927;&#x6709;&#x88E8;&#x76CA;&#x3002;</p>
+<p>&#x997F;&#x4E86;&#x4E48;&#x8BA2;&#x5355;&#x7CFB;&#x7EDF;&#x5728;<code>Design For Failure</code>&#x601D;&#x60F3;&#x4E0A;&#x7684;&#x5B9E;&#x8DF5;&#x4E3B;&#x8981;&#x6709;&#x4EE5;&#x4E0B;&#x56DB;&#x4E2A;&#x5185;&#x5BB9;&#x3002;&#x7B2C;&#x4E00;&#x662F;<code>&#x6D88;&#x606F;&#x5E7F;&#x64AD;&#x8865;&#x507F;</code>&#xFF0C;&#x7B2C;&#x4E8C;&#x662F;<code>&#x4E3B;&#x6D41;&#x7A0B;&#x8865;&#x507F;</code>&#xFF0C;&#x7B2C;&#x4E09;&#x662F;<code>&#x707E;&#x5907;</code>&#xFF0C;&#x7B2C;&#x56DB;&#x662F;<code>&#x968F;&#x673A;&#x6545;&#x969C;&#x6D4B;&#x8BD5;&#x7CFB;&#x7EDF;</code>&#x3002;</p>
+<hr>
+<p>&#x672C;&#x6587;&#x8BE6;&#x7EC6;&#x4ECB;&#x7ECD;&#x4E00;&#x4E0B;<code>&#x6D88;&#x606F;&#x5E7F;&#x64AD;&#x8865;&#x507F;</code></p>
+<h2 id="&#x8865;&#x507F;&#x65B9;&#x6848;"><a href="#&#x8865;&#x507F;&#x65B9;&#x6848;" class="headerlink" title="&#x8865;&#x507F;&#x65B9;&#x6848;"></a>&#x8865;&#x507F;&#x65B9;&#x6848;</h2><p>&#x8865;&#x507F;&#x65B9;&#x6848;&#x53EF;&#x4EE5;&#x8003;&#x8651;:</p>
+<ul>
+<li>&#x4E0D;&#x540C;&#x4ECB;&#x8D28;&#x7684;&#x8865;&#x507F;&#xFF0C;&#x5982;mq/redis&#x4E92;&#x76F8;&#x8865;&#x507F;</li>
+<li>&#x4E0D;&#x540C;&#x4EA4;&#x4E92;&#x65B9;&#x5F0F;&#x7684;&#x8865;&#x507F;&#xFF0C;&#x5982;push/pull&#x7ED3;&#x5408;&#x7684;&#x8865;&#x507F;</li>
+<li>&#x5931;&#x8D25;&#x64CD;&#x4F5C;&#x7684;Retry&#x8865;&#x507F;</li>
+<li>&#x8BB0;&#x5F55;&#x64CD;&#x4F5C;&#x72B6;&#x6001;&#xFF0C;&#x8F6E;&#x8BE2;&#x5931;&#x8D25;&#x72B6;&#x6001;&#x8865;&#x507F;</li>
+</ul>
+<p>&#x4E3A;&#x4E86;&#x4FDD;&#x8BC1;&#x6D88;&#x606F;&#x7684;&#x9AD8;&#x53EF;&#x7528;&#xFF0C;&#x5C06;&#x53D1;&#x9001;&#x7684;&#x6D88;&#x606F;&#x540C;&#x65F6;&#x5B58;&#x50A8;&#x5230;&#x53E6;&#x5916;&#x4E00;&#x79CD;&#x4ECB;&#x8D28;&#x3002;&#x51FA;&#x4E8E;&#x6027;&#x80FD;&#x548C;&#x541E;&#x5410;&#x91CF;&#x4E0A;&#x7684;&#x8003;&#x8651;&#xFF0C;&#x6B64;&#x5904;&#x8003;&#x8651;&#x9009;&#x62E9;&#x4F7F;&#x7528;redis&#x3002;rabbitmq&#x53D1;&#x9001;&#x6D88;&#x606F;&#x65F6;&#xFF0C;&#x540C;&#x65F6;&#x4FDD;&#x5B58;&#x5BF9;&#x5E94;routing_key&#x7684;&#x8BA2;&#x5355;&#x53F7;&#x5230;redis&#x5BF9;&#x5E94;&#x7684;zset&#x4E2D;&#xFF0C;&#x5E76;&#x63D0;&#x4F9B;&#x63A5;&#x53E3;&#x5728;rabbitmq&#x5F02;&#x5E38;&#x65F6;&#x67E5;&#x8BE2;&#x4E00;&#x5B9A;&#x65F6;&#x95F4;&#x6BB5;&#x5185;&#x5BF9;&#x5E94;routing_key&#x7684;&#x8BA2;&#x5355;&#x53F7;</p>
+<p><img src="/2016/09/29/mq_back_up/mq_bakc_up/mq_back_up.png" alt="mq_back_up.png"></p>
+<h2 id="&#x5B58;&#x50A8;&#x65B9;&#x6848;"><a href="#&#x5B58;&#x50A8;&#x65B9;&#x6848;" class="headerlink" title="&#x5B58;&#x50A8;&#x65B9;&#x6848;"></a>&#x5B58;&#x50A8;&#x65B9;&#x6848;</h2><p>&#x7531;&#x4E8E;&#x53D1;&#x9001;&#x7684;&#x6D88;&#x606F;&#x5747;&#x6709;&#x4E00;&#x4E2A;routing_key(&#x8BA2;&#x5355;&#x72B6;&#x6001;&#x8F6C;&#x53D8;&#x65F6;&#x53D1;&#x9001;&#x5BF9;&#x5E94;routing_key&#x7684;&#x8BA2;&#x5355;)&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x5B58;&#x50A8;&#x65F6;&#x5E94;&#x8BE5;&#x5C06;&#x6D88;&#x606F;&#x4EE5;routing_key&#x5206;&#x7C7B;&#x5B58;&#x653E;&#x3002;&#x8003;&#x8651;&#x5C06;order_id&#x5B58;&#x50A8;&#x5728;&#x4EE5;routing_key&#x4E3A;key&#x7684;zset&#x4E2D;&#xFF0C;&#x540C;&#x65F6;&#x4EE5;&#x521B;&#x5EFA;&#x65F6;&#x95F4;&#x7684;&#x65F6;&#x95F4;&#x6233;&#x4F5C;&#x4E3A;zset&#x7684;score&#xFF0C;&#x65B9;&#x4FBF;&#x83B7;&#x53D6;&#x6307;&#x5B9A;&#x65F6;&#x95F4;&#x5185;&#x7684;&#x8BA2;&#x5355;&#x53F7;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">zadd(routing_key, int(time.time()), order_id)</div></pre></td></tr></table></figure>
+<h2 id="&#x5BB9;&#x91CF;&#x8BA1;&#x7B97;"><a href="#&#x5BB9;&#x91CF;&#x8BA1;&#x7B97;" class="headerlink" title="&#x5BB9;&#x91CF;&#x8BA1;&#x7B97;"></a>&#x5BB9;&#x91CF;&#x8BA1;&#x7B97;</h2><p>&#x7531;&#x4E8E;&#x6BCF;&#x4E2A;&#x8BA2;&#x5355;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x53D1;&#x51FA;&#x7684;&#x6D88;&#x606F;&#x5E73;&#x5747;&#x7EA6;&#x4E3A;5&#x6761;&#xFF0C;&#x5982;&#x8BA2;&#x5355;&#x7684;&#x5CF0;&#x503C;TPS&#x4E3A;1000&#xFF0C;&#x8BA2;&#x5355;&#x53F7;&#x4E3A;18&#x4F4D;&#xFF0C;&#x9700;&#x8981;&#x63D0;&#x4F9B;&#x67E5;&#x8BE2;&#x534A;&#x4E2A;&#x5C0F;&#x65F6;&#x4E4B;&#x5185;&#x7684;&#x6D88;&#x606F;&#xFF0C;&#x6839;&#x636E;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x53EF;&#x77E5;&#x9700;&#x8981;&#x81F3;&#x5C11;&#x5B58;&#x50A8;1&#x5C0F;&#x65F6;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x5219;&#x9700;&#x8981;&#x7684;&#x5185;&#x5B58;&#x4E3A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">3600 * 1000 * 18 * 5 / 1024 / 1024 = 309M</div></pre></td></tr></table></figure>
+<h2 id="&#x67E5;&#x8BE2;&#x63A5;&#x53E3;"><a href="#&#x67E5;&#x8BE2;&#x63A5;&#x53E3;" class="headerlink" title="&#x67E5;&#x8BE2;&#x63A5;&#x53E3;"></a>&#x67E5;&#x8BE2;&#x63A5;&#x53E3;</h2><p>&#x540C;&#x65F6;&#x9700;&#x8981;&#x63D0;&#x4F9B;&#x67E5;&#x8BE2;&#x63A5;&#x53E3;&#x67E5;&#x8BE2;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x5185;&#x5BF9;&#x5E94;routing_key&#x7684;&#x8BA2;&#x5355;&#x53F7;&#xFF0C;&#x5BF9;&#x5E94;&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x5982;&#x4E0B;:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">map&lt;string, list&lt;i64&gt;&gt; get_mq_order_ids(1: list&lt;string&gt; routing_keys,</div><div class="line">                                        2: Timestamp from_datetime,</div><div class="line">                                        3: Timestamp to_datetime)</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://fanteathy.github.io/2016/09/21/load-testing-and-performance/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1642,7 +1824,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

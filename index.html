@@ -1821,6 +1821,353 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://fanteathy.github.io/2016/12/15/my_vim/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="fanteathy">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2180875?v=3&u=669f9a2b4e195cb7d1336a0dc4fa4efccaeba38c&s=400">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Fanteathy">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Fanteathy" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/15/my_vim/" itemprop="url">
+                  我的vim
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-15T22:00:00+08:00">
+                2016-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tool/" itemprop="url" rel="index">
+                    <span itemprop="name">tool</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/12/15/my_vim/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/15/my_vim/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/15/my_vim/" class="leancloud_visitors" data-flag-title="我的vim">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="&#x5173;&#x4E8E;vim"><a href="#&#x5173;&#x4E8E;vim" class="headerlink" title="&#x5173;&#x4E8E;vim"></a>&#x5173;&#x4E8E;vim</h2><p>&#x5E38;&#x8A00;&#x9053;: &#x5DE5;&#x6B32;&#x5584;&#x5176;&#x4E8B;&#xFF0C;&#x5FC5;&#x5148;&#x5229;&#x5176;&#x5668;&#x3002;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x7A0B;&#x5E8F;&#x5458;&#xFF0C;&#x4E00;&#x4E2A;&#x5E38;&#x7528;&#x7684;&#x5DE5;&#x5177;&#x5C31;&#x662F;<code>&#x7F16;&#x8F91;&#x5668;</code>&#x3002;&#x76F8;&#x6BD4;IDE&#xFF0C;vim&#x5177;&#x6709;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;&#x7279;&#x6027;:</p>
+<ul>
+<li>&#x8DE8;&#x5E73;&#x53F0;&#x53CA;&#x7EDF;&#x4E00;&#x73AF;&#x5883;<ul>
+<li>&#x65E0;&#x8BBA;&#x662F;&#x5728;windows&#x8FD8;&#x662F;&#x5728;*nix&#xFF0C;vim&#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x5B8C;&#x7F8E;&#x7684;&#x8DE8;&#x5E73;&#x53F0;&#x6587;&#x672C;&#x7F16;&#x8F91;&#x5668;&#x3002;</li>
+</ul>
+</li>
+<li>&#x5B9A;&#x5236;&#x5316;&#x53CA;&#x53EF;&#x6269;&#x5C55;<ul>
+<li>vim&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;vimrc&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x6765;&#x914D;&#x7F6E;vim&#xFF0C;&#x5E76;&#x4E14;&#x81EA;&#x5DF1;&#x53EF;&#x4EE5;&#x5B9A;&#x5236;&#x4E00;&#x4E9B;&#x63D2;&#x4EF6;&#x6765;&#x5B9E;&#x73B0;&#x5404;&#x79CD;&#x529F;&#x80FD; </li>
+</ul>
+</li>
+<li>&#x9AD8;&#x6548;&#x547D;&#x4EE4;&#x884C;<ul>
+<li>&#x4F7F;&#x7528;vim&#x7F16;&#x8F91;&#x6587;&#x672C;&#xFF0C;&#x53EA;&#x9700;&#x5728;&#x952E;&#x76D8;&#x4E0A;&#x64CD;&#x4F5C;&#x5C31;&#x53EF;&#x4EE5;&#xFF0C;&#x6839;&#x672C;&#x65E0;&#x9700;&#x7528;&#x5230;&#x9F20;&#x6807;&#x3002;</li>
+</ul>
+</li>
+</ul>
+<p>&#x7B14;&#x8005;&#x6700;&#x7EC8;&#x914D;&#x7F6E;&#x7684;vim&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;:</p>
+<p><img src="/2016/12/15/my_vim/screenshot.png" alt="screenshot.png"></p>
+<p>&#x5BF9;&#x5E94;&#x7684;repo&#x4E3A;: <a href="https://github.com/fanteathy/my_vim" target="_blank" rel="external">https://github.com/fanteathy/my_vim</a></p>
+<h2 id="&#x914D;&#x7F6E;"><a href="#&#x914D;&#x7F6E;" class="headerlink" title="&#x914D;&#x7F6E;"></a>&#x914D;&#x7F6E;</h2><p>&#x5982;&#x679C;&#x4F60;&#x9700;&#x8981;&#x914D;&#x7F6E;vim&#xFF0C;&#x53EA;&#x9700;&#x5728;Home&#x76EE;&#x5F55;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;<code>~/.vimrc</code>&#x6587;&#x4EF6;&#x5373;&#x53EF;&#x4EE5;&#x914D;&#x7F6E;vim&#x4E86;&#x3002;&#x4EE5;&#x4E0B;&#x662F;&#x7B14;&#x8005;&#x7684;<code>.vimrc</code>&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x3002;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&quot;&#x81EA;&#x5DF1;&#x5B9A;&#x4E49;vimrc&#x5E38;&#x89C1;&#x8BBE;&#x7F6E;&#x548C;&#x4E00;&#x4E9B;&#x952E;&#x4F4D;&#x7684;&#x8BBE;&#x7F6E;</div><div class="line"></div><div class="line">&quot;---------------- &#x52A0;&#x8F7D;&#x63D2;&#x4EF6;&#x7BA1;&#x7406;&#x6587;&#x4EF6; --------------------</div><div class="line">if filereadable(expand(&quot;~/.vimrc.bundles&quot;))</div><div class="line">    source ~/.vimrc.bundles</div><div class="line">endif</div><div class="line"></div><div class="line">&quot; &#x5728;&#x63D2;&#x5165;&#x6A21;&#x5F0F;&#x4E0B;MAC&#x4E0B;&#x7684;delete&#x4E0D;&#x80FD;&#x5220;&#x9664;&#x95EE;&#x9898;</div><div class="line">set backspace=2</div><div class="line">set colorcolumn=80</div><div class="line"></div><div class="line">&quot;--------------- leader&#x8BBE;&#x5B9A; -------------</div><div class="line">let mapleader = &apos;,&apos;</div><div class="line">let g:mapleader = &apos;,&apos;</div><div class="line"></div><div class="line">&quot;------------------------------- &#x57FA;&#x672C;&#x8BBE;&#x7F6E; -----------------------------------</div><div class="line"></div><div class="line">&quot;&#x5F00;&#x542F;&#x8BED;&#x6CD5;&#x9AD8;&#x4EAE;</div><div class="line">&quot;syntax enable &#x8BE5;&#x547D;&#x4EE4;&#x53EA;&#x5728;&#x5F53;&#x524D;&#x6587;&#x4EF6;&#x6709;&#x6548;</div><div class="line">syntax on &quot; &#x6240;&#x6709;&#x7F13;&#x51B2;&#x533A;&#x6587;&#x4EF6;&#x90FD;&#x6709;&#x6548;</div><div class="line"></div><div class="line">&quot;-------------- &#x6587;&#x4EF6;&#x68C0;&#x6D4B; ----------------------</div><div class="line">filetype on</div><div class="line">filetype indent on</div><div class="line">filetype plugin on</div><div class="line">filetype plugin indent on</div><div class="line"></div><div class="line">colorscheme blackbeauty         &quot; &#x914D;&#x8272;&#x4E3B;&#x9898;</div><div class="line"></div><div class="line">set autoread                 &quot; &#x6587;&#x4EF6;&#x4FEE;&#x6539;&#x4E4B;&#x540E;&#x81EA;&#x52A8;&#x8F7D;&#x5165;&#x3002;</div><div class="line">set shortmess=atI            &quot; &#x542F;&#x52A8;&#x7684;&#x65F6;&#x5019;&#x4E0D;&#x663E;&#x793A;&#x90A3;&#x4E2A;&#x63F4;&#x52A9;&#x7D22;&#x9A6C;&#x91CC;&#x513F;&#x7AE5;&#x7684;&#x63D0;&#x793A;</div><div class="line"></div><div class="line">set laststatus=2</div><div class="line">&quot;set confirm                  &quot; &#x53D6;&#x6D88;&#x5149;&#x6807;&#x95EA;&#x70C1;</div><div class="line">set noswapfile               &quot; &#x5173;&#x95ED;&#x4EA4;&#x6362;&#x6587;&#x4EF6;</div><div class="line"></div><div class="line">set wildignore=*.swp,*.bak,*.pyc,*.class,.svn</div><div class="line"></div><div class="line">set cursorcolumn             &quot; &#x7A81;&#x51FA;&#x663E;&#x793A;&#x5F53;&#x524D;&#x5217;</div><div class="line">set cursorline               &quot; &#x7A81;&#x51FA;&#x663E;&#x793A;&#x5F53;&#x524D;&#x884C;</div><div class="line"></div><div class="line">set title </div><div class="line">set novisualbell</div><div class="line">set noerrorbells</div><div class="line"></div><div class="line">set magic</div><div class="line"></div><div class="line">set ruler                    &quot; &#x663E;&#x793A;&#x5F53;&#x524D;&#x884C;&#x53F7;&#x548C;&#x5217;&#x53F7;</div><div class="line">set number                   &quot; &#x663E;&#x793A;&#x884C;&#x53F7;</div><div class="line">set nowrap                   &quot; &#x53D6;&#x6D88;&#x6362;&#x884C;</div><div class="line"></div><div class="line">set showcmd                  &quot; &#x5728;&#x72B6;&#x6001;&#x680F;&#x663E;&#x793A;&#x6B63;&#x5728;&#x8F93;&#x5165;&#x7684;&#x547D;&#x4EE4;</div><div class="line">set showmode                 &quot; &#x663E;&#x793A;vim&#x6A21;&#x5F0F;</div><div class="line"></div><div class="line">set showmatch                &quot; &#x62EC;&#x53F7;&#x5339;&#x914D;&#xFF0C;&#x9AD8;&#x4EAE;</div><div class="line">set matchtime=1         </div><div class="line"></div><div class="line">set hlsearch                 &quot; &#x9AD8;&#x4EAE;&#x641C;&#x7D22;&#x7684;&#x6587;&#x672C;</div><div class="line">set incsearch                &quot; &#x5373;&#x65F6;&#x641C;&#x7D22;</div><div class="line">set ignorecase               &quot; &#x641C;&#x7D22;&#x5FFD;&#x7565;&#x5927;&#x5C0F;&#x5199;</div><div class="line">set smartcase                &quot; &#x6709;&#x4E00;&#x4E2A;&#x6216;&#x4EE5;&#x4E0A;&#x5927;&#x5199;&#x5B57;&#x6BCD;&#x65F6;&#x4ECD;&#x5927;&#x5C0F;&#x654F;&#x611F;</div><div class="line"></div><div class="line">set foldenable               &quot; &#x4EE3;&#x7801;&#x6298;&#x53E0;</div><div class="line">set foldmethod=indent</div><div class="line">set foldlevel=99             </div><div class="line"></div><div class="line">&quot; autosave</div><div class="line">&quot;let g:auto_save = 1  &quot; enable AutoSave on Vim startup</div><div class="line">&quot;let g:auto_save_no_updatetime = 1  &quot; do not change the &apos;updatetime&apos; option</div><div class="line">&quot;let g:auto_save_in_insert_mode = 0  &quot; do not save while in insert mode</div><div class="line">&quot;let g:auto_save_silent = 1  &quot; do not display the auto-save notification</div><div class="line">&quot;let g:auto_save_events = [&quot;InsertLeave&quot;, &quot;TextChanged&quot;]</div><div class="line">&quot;let g:auto_save_keep_marks = 0</div><div class="line"></div><div class="line">&quot; &#x4EE3;&#x7801;&#x6298;&#x53E0;&#x81EA;&#x5B9A;&#x4E49;&#x5FEB;&#x6377;&#x952E;</div><div class="line">let g:FoldMethod = 0</div><div class="line">map &lt;leader&gt;zz :call ToggleFold()&lt;cr&gt;</div><div class="line">fun! ToggleFold()</div><div class="line">    if g:FoldMethod == 0</div><div class="line">        exe &quot;normal! zM&quot;</div><div class="line">        let g:FoldMethod = 1</div><div class="line">    else</div><div class="line">        exe &quot;normal! zR&quot;</div><div class="line">        let g:FoldMethod = 0</div><div class="line">    endif</div><div class="line">endfun</div><div class="line"></div><div class="line">set smartindent              &quot; &#x667A;&#x80FD;&#x7F29;&#x8FDB;</div><div class="line">set autoindent               &quot; &#x81EA;&#x52A8;&#x7F29;&#x8FDB;</div><div class="line"></div><div class="line">&quot;------------------------------- tab &#x76F8;&#x5173;&#x8BBE;&#x7F6E; ---------------------</div><div class="line">set tabstop=4                &quot; &#x8BBE;&#x7F6E;tab&#x7684;&#x5BBD;&#x5EA6;</div><div class="line">set shiftwidth=4             &quot; &#x6BCF;&#x4E00;&#x6B21;&#x7F29;&#x8FDB;&#x5BF9;&#x5E94;&#x7684;&#x7A7A;&#x683C;&#x6570;</div><div class="line">set softtabstop=4            &quot; &#x6309;&#x9000;&#x683C;&#x952E;&#x662F;&#x53EF;&#x4EE5;&#x4E00;&#x6B21;&#x5220;&#x9664;4&#x4E2A;&#x7A7A;&#x683C;</div><div class="line">set smarttab                 </div><div class="line">set expandtab                &quot; &#x5C06;tab&#x81EA;&#x52A8;&#x8F6C;&#x5316;&#x4E3A;&#x7A7A;&#x683C;</div><div class="line">set shiftround               &quot; &#x7F29;&#x8FDB;&#x65F6;&#xFF0C;&#x53D6;&#x6574;</div><div class="line"></div><div class="line">&quot;------------------------------- &#x6587;&#x4EF6;&#x7F16;&#x7801; -------------------------</div><div class="line">set encoding=utf-8</div><div class="line">set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbkgb2312,cp936 &quot; &#x81EA;&#x52A8;&#x5224;&#x65AD;&#x7F16;&#x7801;</div><div class="line">set helplang=cn</div><div class="line">set ffs=unix,mac,dos</div><div class="line"></div><div class="line">set formatoptions+=B          &quot; &#x5408;&#x5E76;&#x4E24;&#x884C;&#x4E2D;&#x6587;&#x65F6;&#xFF0C;&#x4E0D;&#x5728;&#x4E2D;&#x95F4;&#x52A0;&#x7A7A;&#x683C;</div><div class="line">set termencoding=utf-8        &quot; &#x7EC8;&#x7AEF;&#x7F16;&#x7801;</div><div class="line"></div><div class="line">&quot;------------------------------- &#x5176;&#x4ED6;&#x8BBE;&#x7F6E; -------------------------</div><div class="line">set completeopt=longest,menu  &quot; &#x8BA9;vim&#x7684;&#x8865;&#x5168;&#x83DC;&#x5355;&#x548C;ide&#x4E00;&#x81F4;</div><div class="line">set wildmenu</div><div class="line">set wildignore=*.0,*~,*.pyc,*.class</div><div class="line"></div><div class="line">autocmd! bufwritepost .vimrc source % &quot; vimrc &#x6587;&#x4EF6;&#x4FEE;&#x6539;&#x540E;&#x81EA;&#x52A8;&#x52A0;&#x8F7D;</div><div class="line"></div><div class="line">&quot;------------------------------- &#x81EA;&#x5B9A;&#x4E49;&#x5FEB;&#x6377;&#x952E;&#x8BBE;&#x7F6E; -----------------</div><div class="line"></div><div class="line">&quot; &#x5173;&#x95ED;&#x65B9;&#x5411;&#x952E;&#xFF0C;&#x4F7F;&#x7528;hjkl</div><div class="line">map &lt;Left&gt; &lt;Nop&gt;             </div><div class="line">map &lt;Right&gt; &lt;Nop&gt;</div><div class="line">map &lt;Up&gt; &lt;Nop&gt;</div><div class="line">map &lt;Down&gt; &lt;Nop&gt; </div><div class="line"></div><div class="line">&quot; &#x884C;&#x9996; &#x548C; &#x884C;&#x5C3E; map</div><div class="line">noremap H ^</div><div class="line">noremap L $</div><div class="line"></div><div class="line">&quot; &#x5207;&#x6362;&#x5230;&#x547D;&#x4EE4;&#x6A21;&#x5F0F;map </div><div class="line">noremap ; :</div><div class="line"></div><div class="line">&quot; &#x63D2;&#x5165;&#x6A21;&#x5F0F;&#x4E0B; kj &#x6620;&#x5C04;&#x5230; Esc</div><div class="line">inoremap kj &lt;Esc&gt;       </div><div class="line"></div><div class="line">nnoremap &lt;leader&gt;q :q!&lt;CR&gt;</div><div class="line">nnoremap &lt;leader&gt;w :wq&lt;CR&gt;</div><div class="line"></div><div class="line">&quot; &#x5206;&#x5C4F;&#x5207;&#x6362;</div><div class="line">noremap w&lt;up&gt; &lt;c-w&gt;&lt;up&gt;</div><div class="line">noremap wk &lt;c-w&gt;&lt;up&gt;</div><div class="line">noremap w&lt;left&gt; &lt;c-w&gt;&lt;left&gt;</div><div class="line">noremap wh &lt;c-w&gt;&lt;left&gt;</div><div class="line">noremap w&lt;right&gt; &lt;c-w&gt;&lt;right&gt;</div><div class="line">noremap wl &lt;c-w&gt;&lt;right&gt;</div><div class="line">noremap w&lt;down&gt; &lt;c-w&gt;&lt;down&gt;</div><div class="line">noremap wj &lt;c-w&gt;&lt;down&gt;</div><div class="line"></div><div class="line">&quot; python &#x6587;&#x4EF6;&#x7684;&#x4E00;&#x822C;&#x8BBE;&#x7F6E;</div><div class="line">autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai</div><div class="line"></div><div class="line">&quot; php&#x81EA;&#x52A8;&#x5B8C;&#x6210;</div><div class="line">autocmd FileType php set omnifunc=phpcomplete#CompletePHP</div><div class="line">&quot; &#x5F53;&#x6587;&#x4EF6;&#x7C7B;&#x578B;&#x4E3A;php&#x65F6;&#xFF0C;&#x5C06;&#x7CFB;&#x7EDF;&#x81EA;&#x52A8;&#x8865;&#x5168;&#x7684;&#x5FEB;&#x6377;&#x952E;&#x66F4;&#x6539;&#x4E3A; ,a</div><div class="line">autocmd FileType php inoremap &lt;leader&gt;a &lt;C-x&gt;&lt;C-o&gt;</div><div class="line"></div><div class="line">&quot; &#x53EA;&#x6709;&#x5728;&#x662F;PHP&#x6587;&#x4EF6;&#x65F6;&#xFF0C;&#x624D;&#x542F;&#x7528;PHP&#x8865;&#x5168;</div><div class="line">au FileType php call AddPHPFuncList()</div><div class="line">function! AddPHPFuncList()</div><div class="line">    set dictionary-=~/.vim/funclist.txt dictionary+=~/.vim/funclist.txt</div><div class="line">    set complete-=k complete+=k</div><div class="line">endfunction</div><div class="line"></div><div class="line">&quot; phpqa</div><div class="line">let g:phpqa_php_cmd=&apos;php&apos;</div><div class="line">let g:phpqa_codesniffer_args = &quot;--standard=PSR2&quot; &quot; Set the codesniffer args</div><div class="line">let g:phpqa_codesniffer_cmd=&apos;phpcs&apos; &quot; PHP Code Sniffer binary (default = \&quot;phpcs\&quot;)</div><div class="line">let g:phpqa_messdetector_cmd=&apos;phpmd&apos; &quot; PHP Mess Detector binary (default = \&quot;phpmd\&quot;)</div><div class="line">let g:phpqa_messdetector_autorun = 0 &quot; Don&apos;t run messdetector on save (default = 1)</div><div class="line">let g:phpqa_codesniffer_autorun = 0 &quot; Don&apos;t run codesniffer on save (default = 1)</div><div class="line">let g:phpqa_codecoverage_autorun = 1 &quot; Show code coverage on load (default = 0)</div><div class="line">&quot; Clover code coverage XML file</div><div class="line">&quot; let g:phpqa_codecoverage_file = \&quot;/path/to/clover.xml\&quot;</div><div class="line">&quot; &quot; Show markers for lines that ARE covered by tests (default = 1)</div><div class="line">let g:phpqa_codecoverage_showcovered = 0</div><div class="line"> </div><div class="line">&quot; Stop the location list opening automatically</div><div class="line">let g:phpqa_open_loc = 0</div><div class="line"></div><div class="line"></div><div class="line">&quot; &#x5B9A;&#x4E49;&#x51FD;&#x6570;AutoSetFileHead&#xFF0C;&#x81EA;&#x52A8;&#x63D2;&#x5165;&#x6587;&#x4EF6;&#x5934;</div><div class="line">autocmd BufNewFile *.sh,*.py exec &quot;:call AutoSetFileHead()&quot;</div><div class="line">function! AutoSetFileHead()</div><div class="line">&quot;&#x5982;&#x679C;&#x6587;&#x4EF6;&#x7C7B;&#x578B;&#x4E3A;.sh&#x6587;&#x4EF6;</div><div class="line">if &amp;filetype == &apos;sh&apos;</div><div class="line">    call setline(1, &quot;\#!/bin/bash&quot;)</div><div class="line">endif</div><div class="line"></div><div class="line">&quot;&#x5982;&#x679C;&#x6587;&#x4EF6;&#x7C7B;&#x578B;&#x4E3A;python</div><div class="line">if &amp;filetype == &apos;python&apos;</div><div class="line">    call setline(1, &quot;\#!/usr/bin/env python&quot;)</div><div class="line">    call append(1, &quot;\# -*- coding: utf-8 -*- &quot;)</div><div class="line">endif</div><div class="line">    normal G</div><div class="line">    normal o</div><div class="line">    normal o</div><div class="line">endfunc</div><div class="line"></div><div class="line">&quot;set some keyword to highlight</div><div class="line">if has(&quot;autocmd&quot;)</div><div class="line">    &quot;Highlight TODO, FIXME, NOTE, etc.</div><div class="line">    if v:version &gt; 701</div><div class="line">        autocmd Syntax * call matchadd(&apos;Todo&apos;, &apos;\W\zs\(TODO\|FIXME\|CHANGED\|DONE\|XXX\|BUG\|HACK\)&apos;)</div><div class="line">        autocmd Syntax * call matchadd(&apos;Debug&apos;, &apos;\W\zs\(NOTE\|INFO\|IDEA\|NOTICE\)&apos;)</div><div class="line">    endif</div><div class="line">endif</div><div class="line"></div><div class="line">&quot; ----------------------- &#x63D2;&#x4EF6;&#x8BBE;&#x7F6E; ------------------------------</div><div class="line"></div><div class="line">&quot; *********************** NERDTree &#x63D2;&#x4EF6;&#x8BBE;&#x7F6E; *********************</div><div class="line">&quot; vim&#x542F;&#x52A8;&#x65F6;&#x89E6;&#x53D1;</div><div class="line">&quot; autocmd vimenter * NERDTree</div><div class="line">map &lt;leader&gt;n :NERDTreeToggle&lt;CR&gt;</div><div class="line">autocmd bufenter * if (winnr(&quot;$&quot;) == 1 &amp;&amp; exists(&quot;b:NERDTreeType&quot;) &amp;&amp; b:NERDTreeType == &quot;primary&quot;) | q | endif</div><div class="line">let NERDTreeShowLineNumbers=1</div><div class="line">let NERDTreeIgnore=[&apos;\.pyc$&apos;, &apos;\~$&apos;]</div><div class="line">&quot; &#x5206;&#x5C4F;&#x6253;&#x5F00;&#x6587;&#x4EF6;</div><div class="line">let g:NERDTreeMapOpenVSplit = &apos;v&apos; </div><div class="line">let g:NERDTreeMapOpenSplit = &apos;s&apos;   </div><div class="line"></div><div class="line">&quot; *********************** tagbar &#x63D2;&#x4EF6;&#x8BBE;&#x7F6E; ***********************</div><div class="line">map &lt;leader&gt;g :TagbarToggle&lt;CR&gt;</div><div class="line">let g:tagbar_auto_focus=1</div><div class="line"></div><div class="line">&quot; *********************** taglist &#x63D2;&#x4EF6;&#x8BBE;&#x7F6E; **********************</div><div class="line">let Tlist_Ctags_Cmd=&quot;/usr/local/bin/ctags&quot;</div><div class="line">let Tlist_Show_One_File=1</div><div class="line">let Tlist_Exit_OnlyWindow=1</div><div class="line">let Tlist_Auto_Open=0</div><div class="line">let Tlist_Auto_Highlight_Tag=1</div><div class="line">let Tlist_Use_Right_Window=1</div><div class="line">let Tlist_WinWidth=35</div><div class="line"></div><div class="line">&quot; *********************** &#x5FEB;&#x901F;&#x8DF3;&#x8F6C; ******************************</div><div class="line">let g:EasyMotion_smartcase=1</div><div class="line">map &lt;leader&gt;&lt;leader&gt;h &lt;Plug&gt;(easymotion-linebackward)</div><div class="line">map &lt;leader&gt;&lt;leader&gt;j &lt;Plug&gt;(easymotion-j)</div><div class="line">map &lt;leader&gt;&lt;leader&gt;k &lt;Plug&gt;(easymotion-k)</div><div class="line">map &lt;leader&gt;&lt;leader&gt;l &lt;Plug&gt;(easymotion-lineforward)</div><div class="line">map &lt;leader&gt;&lt;leader&gt;. &lt;Plug&gt;(easymotion-repeat)</div><div class="line"></div><div class="line">&quot; *********************** &#x8BED;&#x6CD5;&#x68C0;&#x67E5; ******************************</div><div class="line">let g:syntastic_error_symbol=&apos;&gt;&gt;&apos;</div><div class="line">let g:syntastic_warning_symbol=&apos;&gt;&apos;</div><div class="line">let g:syntastic_check_on_open=1</div><div class="line">let g:syntastic_check_on_wq=0</div><div class="line">let g:syntastic_enable_highlighting=1</div><div class="line">let g:syntastic_python_checkers=[&apos;pyflakes&apos;, &apos;pep8&apos;]</div><div class="line">let g:syntastic_python_pep8_args=&apos;--ignore=E501,E225&apos;</div><div class="line"></div><div class="line">let g:syntastic_always_populate_loc_list=0</div><div class="line">let g:syntastic_auto_loc_list=0</div><div class="line">let g:syntastic_loc_list_height=3</div><div class="line"></div><div class="line">function! ToggleErrors()</div><div class="line">    let old_last_winnr = winnr(&apos;$&apos;)</div><div class="line">    lclose</div><div class="line">    if old_last_winnr == winnr(&apos;$&apos;)</div><div class="line">        &quot;Nothing was closed, open syntastic error location panel</div><div class="line">        Errors</div><div class="line">    endif</div><div class="line">endfunction</div><div class="line"></div><div class="line">nnoremap &lt;leader&gt;s :call ToggleErrors()&lt;cr&gt;</div><div class="line"></div><div class="line">&quot; *********************** autopep8&#x8BED;&#x6CD5;&#x68C0;&#x67E5; ******************************</div><div class="line">let g:autopep8_max_line_length=79</div><div class="line"></div><div class="line"></div><div class="line">&quot; *********************** &#x81EA;&#x52A8;&#x8865;&#x5168;&#x5F15;&#x53F7;&#x7B49;&#x63D2;&#x4EF6;&#x8BBE;&#x7F6E; ****************</div><div class="line">au FileType python let b:delimitMate_nesting_quotes = [&apos;&quot;&apos;]</div><div class="line"></div><div class="line">&quot; ********************** &#x5168;&#x5C40;&#x641C;&#x7D22; ***********************</div><div class="line">let g:ag_prg = &quot;ag --nogroup --nocolor --column&quot;</div><div class="line"></div><div class="line"></div><div class="line">&quot; python &#x76F8;&#x5173;&#x8BED;&#x6CD5;&#x68C0;&#x67E5;</div><div class="line">let g:pyflakes_use_quickfix = 0</div><div class="line">let python_highlight_all = 1</div><div class="line"></div><div class="line">&quot; *********************** markdown &#x63D2;&#x4EF6;&#x8BBE;&#x7F6E; *********************</div><div class="line">let g:vim_markdown_folding_disable = 1</div><div class="line"></div><div class="line">&quot; &#x591A;&#x5149;&#x6807;&#x9009;&#x4E2D;&#x7F16;&#x8F91;&#x8BBE;&#x7F6E;</div><div class="line">&quot; let g:multi_cursor_use_default_mapping = 0</div><div class="line">&quot; let g:multi_cursor_next_key=&apos;&lt;C-m&gt;&apos;</div><div class="line">&quot; let g:multi_cursor_prev_key=&apos;&lt;C-p&gt;&apos;</div><div class="line">&quot; let g:multi_cursor_skip_key=&apos;&lt;C-x&gt;&apos;</div><div class="line">&quot; let g:multi_cursor_quit_key=&apos;&lt;Esc&gt;&apos;</div><div class="line"></div><div class="line">&quot; *********************** &#x5FEB;&#x901F;&#x6CE8;&#x91CA; ******************************</div><div class="line">let g:NERDSpaceDelims = 1</div><div class="line"></div><div class="line">&quot; *********************** &#x6587;&#x4EF6;&#x641C;&#x7D22;&#x63D2;&#x4EF6; **************************</div><div class="line">let g:ctrlp_map = &apos;&lt;leader&gt;p&apos;</div><div class="line">let g:ctrlp_cmd = &apos;CtrlP&apos;</div><div class="line">map &lt;leader&gt;f : CtrlPMRU&lt;CR&gt;</div><div class="line">let g:ctrlp_custom_ignore = {</div><div class="line">    \ &apos;dir&apos;: &apos;\v[\/]\.(git|hg|svn|rvm)$&apos;,</div><div class="line">    \ &apos;file&apos;: &apos;\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$&apos;,</div><div class="line">    \}</div><div class="line"></div><div class="line">let g:ctrlp_working_path_mode=0</div><div class="line">let g:ctrlp_match_window_bottom=1</div><div class="line">let g:ctrlp_max_height=15</div><div class="line">let g:ctrlp_match_window_reversed=0</div><div class="line">let g:ctrlp_mruf_max=500</div><div class="line">let g:ctrlp_follow_symlinks=1</div><div class="line"></div><div class="line">&quot; ctrlp&#x76F8;&#x5173;&#x63D2;&#x4EF6; &#x51FD;&#x6570;&#x641C;&#x7D22;</div><div class="line">nnoremap &lt;Leader&gt;fu: CtrlPFunky&lt;Cr&gt;</div><div class="line">nnoremap &lt;Leader&gt;fU:execute &apos;CtrlpFunky &apos; . expand(&apos;&lt;cword&gt;&apos;)&lt;Cr&gt;</div><div class="line">let g:ctrlp_funky_syntax_highlight = 1</div><div class="line">let g:ctrlp_extensions = [&apos;funky&apos;]</div><div class="line"></div><div class="line">&quot; *********************** pyflakes_vim &#x63D2;&#x4EF6;&#x8BBE;&#x7F6E; *****************</div><div class="line">let g:pyflakes_user_quickfix=0</div><div class="line"></div><div class="line">&quot; *********************** python-syntax *************************</div><div class="line">let python_highlight_all=1</div><div class="line"></div><div class="line">&quot; *********************** vim-markdown **************************</div><div class="line">let g:vim_mardown_folding_disabled=1</div><div class="line"></div><div class="line">&quot; *********************** &#x81EA;&#x52A8;&#x8865;&#x5168;&#x63D2;&#x4EF6; **************************</div><div class="line">let g:ycm_key_list_select_completion=[&apos;&lt;Down&gt;&apos;]</div><div class="line">let g:ycm_key_lsit_previous_completion=[&apos;&lt;Up&gt;&apos;]</div><div class="line">let g:ycm_complete_in_comments = 1  &quot;&#x5728;&#x6CE8;&#x91CA;&#x8F93;&#x5165;&#x4E2D;&#x4E5F;&#x80FD;&#x8865;&#x5168;</div><div class="line">let g:ycm_complete_in_strings = 1   &quot;&#x5728;&#x5B57;&#x7B26;&#x4E32;&#x8F93;&#x5165;&#x4E2D;&#x4E5F;&#x80FD;&#x8865;&#x5168;</div><div class="line">let g:ycm_use_ultisnips_completer = 1 &quot;&#x63D0;&#x793A;UltiSnips</div><div class="line">let g:ycm_collect_identifiers_from_comments_and_strings = 1   &quot;&#x6CE8;&#x91CA;&#x548C;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x7684;&#x6587;&#x5B57;&#x4E5F;&#x4F1A;&#x88AB;&#x6536;&#x5165;&#x8865;&#x5168;</div><div class="line">let g:ycm_collect_identifiers_from_tags_files = 1</div><div class="line"></div><div class="line">&quot; ********************** &#x5BF9;&#x9F50;&#x7EBF;&#x8BBE;&#x7F6E; ****************************</div><div class="line">let g:indent_guides_enable_on_vim_startup = 0</div><div class="line">let g:indent_guides_auto_colors = 0</div><div class="line">let g:indent_guides_guide_size = 1 </div><div class="line">set ts=4 sw=4 et</div><div class="line">let g:indent_guides_start_level = 2</div><div class="line">autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3</div><div class="line">autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4</div><div class="line">hi IndentGuidesOdd guibg=red ctermbg=3</div><div class="line"></div><div class="line">hi IndentGuidesEven guibg=green ctermbg=4</div><div class="line"></div><div class="line">&quot; &#x8DF3;&#x8F6C;&#x5230;&#x5B9A;&#x4E49;&#x5904;, &#x5206;&#x5C4F;&#x6253;&#x5F00;</div><div class="line">let g:ycm_goto_buffer_command = &apos;vertical-split&apos;</div><div class="line">nnoremap &lt;leader&gt;jd :YcmCompleter GoToDefinitionElseDeclaration&lt;CR&gt;</div><div class="line">nnoremap &lt;leader&gt;gd :YcmCompleter GoToDeclaration&lt;CR&gt;</div><div class="line">&quot; &#x5F15;&#x5165;&#xFF0C;&#x53EF;&#x4EE5;&#x8865;&#x5168;&#x7CFB;&#x7EDF;&#xFF0C;&#x4EE5;&#x53CA;python&#x7684;&#x7B2C;&#x4E09;&#x65B9;&#x5305; &#x9488;&#x5BF9;&#x65B0;&#x8001;&#x7248;&#x672C;YCM&#x505A;&#x4E86;&#x517C;&#x5BB9;</div><div class="line">&quot; old version</div><div class="line">if !empty(glob(&quot;~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py&quot;))</div><div class="line">    let g:ycm_global_ycm_extra_conf =&quot;~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py&quot;</div><div class="line">endif</div><div class="line">&quot; new version</div><div class="line">if !empty(glob(&quot;~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py&quot;))</div><div class="line">    let g:ycm_global_ycm_extra_conf = &quot;~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py&quot;</div><div class="line">endif</div><div class="line"></div><div class="line">&quot; &#x76F4;&#x63A5;&#x89E6;&#x53D1;&#x81EA;&#x52A8;&#x8865;&#x5168; insert&#x6A21;&#x5F0F;&#x4E0B;</div><div class="line">&quot; let g:ycm_key_invoke_completion = &apos;&lt;C-Space&gt;&apos;</div><div class="line">let g:ycm_key_list_select_completion=[&apos;&lt;tab&gt;&apos;, &apos;&lt;Down&gt;&apos;]</div><div class="line">&quot; &#x9ED1;&#x540D;&#x5355;,&#x4E0D;&#x542F;&#x7528;</div><div class="line">let g:ycm_filetype_blacklist = {</div><div class="line">            \ &apos;tagbar&apos; : 1,</div><div class="line">            \ &apos;gitcommit&apos; : 1,</div><div class="line">            \}</div><div class="line"></div><div class="line">&quot; last_edit_marker.vim&#x8BBE;&#x7F6E;</div><div class="line">nmap &lt;C-y&gt; g&apos;Z</div><div class="line"></div><div class="line">augroup LastEditMarker</div><div class="line">    autocmd!</div><div class="line">    autocmd InsertLeave * normal mZ</div><div class="line">augroup END</div><div class="line"></div><div class="line">&quot; vim&#xFF0C;&#x4E3B;&#x673A;&#x590D;&#x5236;&#x5171;&#x4EAB;</div><div class="line">vmap &lt;C-c&gt; &quot;+y</div><div class="line">vmap &lt;C-x&gt; &quot;+c    </div><div class="line">vmap &lt;C-v&gt; c&lt;ESC&gt;&quot;+p    </div><div class="line">imap &lt;C-v&gt; &lt;C-r&gt;&lt;C-o&gt;+    </div><div class="line">nmap &lt;C-v&gt; &quot;+p</div><div class="line"></div><div class="line">&quot; powerline&#x8BBE;&#x7F6E;</div><div class="line">set guifont=PowerlineSymbols\ for\ Powerline</div><div class="line">set nocompatible</div><div class="line">set laststatus=2</div><div class="line">set t_Co=256</div><div class="line">let g:Powerline_symbols = &apos;fancy&apos;</div><div class="line">let Powerline_symbols=&apos;compatible&apos;    </div><div class="line"></div><div class="line">&quot; gitgutter&#x8BBE;&#x7F6E;</div><div class="line">let g:gitgutter_map_keys = 0</div><div class="line">let g:gitgutter_enabled = 0</div><div class="line">let g:gitgutter_highlight_lines = 1</div><div class="line">nnoremap &lt;leader&gt;gs :GitGutterToggle&lt;CR&gt;</div></pre></td></tr></table></figure>
+<h2 id="&#x63D2;&#x4EF6;"><a href="#&#x63D2;&#x4EF6;" class="headerlink" title="&#x63D2;&#x4EF6;"></a>&#x63D2;&#x4EF6;</h2><p>&#x4F7F;&#x7528;<code>vumdle</code>&#x7BA1;&#x7406;vim&#x7684;&#x63D2;&#x4EF6;&#xFF0C;&#x4F7F;&#x7528;&#x8FC7;&#x7A0B;&#x5982;&#x4E0B;:</p>
+<ul>
+<li>&#x5728;Home&#x76EE;&#x5F55;&#x521B;&#x5EFA;<code>~/.vim</code>&#x76EE;&#x5F55;&#x548C;<code>.vimrc</code>&#x6587;&#x4EF6;&#xFF0C;&#x53EF;&#x4F7F;&#x7528;&#x4E0A;&#x9762;&#x7684;<code>.vimrc</code>&#x6587;&#x4EF6;</li>
+</ul>
+<ul>
+<li>&#x5B89;&#x88C5;vundle</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle</div></pre></td></tr></table></figure>
+<ul>
+<li>&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;<code>~/.vimrc.bundles</code>&#x6587;&#x4EF6;&#x6765;&#x4FDD;&#x5B58;&#x6240;&#x6709;&#x63D2;&#x4EF6;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x5728;<code>~/.vimrc</code>&#x6587;&#x4EF6;&#x52A0;&#x5165;&#x4EE5;&#x4E0B;&#x4EE3;&#x7801;&#x7247;&#x6BB5;</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if filereadable(expand(&quot;~/.vimrc.bundles&quot;))</div><div class="line">source ~/.vimrc.bundles</div><div class="line">endif</div></pre></td></tr></table></figure>
+<p>&#x4EE5;&#x4E0B;&#x662F;&#x7B14;&#x8005;&#x7684;<code>.vimrc.bundles</code>&#x6587;&#x4EF6;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line">set nocompatible</div><div class="line">filetype off</div><div class="line"></div><div class="line">set rtp+=~/.vim/bundle/Vundle.vim</div><div class="line">call vundle#begin()</div><div class="line"></div><div class="line">&quot;------------- &#x63D2;&#x4EF6;&#x5217;&#x8868; ---------------------------</div><div class="line">&quot;&#x63D2;&#x4EF6;&#x8BBE;&#x7F6E;&#x548C;vim&#x57FA;&#x672C;&#x8BBE;&#x7F6E;&#x5355;&#x72EC;&#x653E;&#x7F6E;</div><div class="line"></div><div class="line">Plugin &apos;gmarik/Vundle.vim&apos;</div><div class="line">Plugin &apos;itchyny/lightline.vim&apos;</div><div class="line">Plugin &apos;scrooloose/nerdtree&apos;</div><div class="line">Plugin &apos;ctrlpvim/ctrlp.vim&apos;</div><div class="line">Plugin &apos;tacahiroy/ctrlp-funky&apos;</div><div class="line">Plugin &apos;majutsushi/tagbar&apos;</div><div class="line">Plugin &apos;taglist.vim&apos;</div><div class="line">Plugin &apos;basepi/vim-conque&apos;</div><div class="line"></div><div class="line">Plugin &apos;Valloric/YouCompleteMe&apos;</div><div class="line">Plugin &apos;Raimondi/delimitMate&apos;</div><div class="line">Plugin &apos;scrooloose/syntastic&apos;</div><div class="line">Plugin &apos;jiangmiao/auto-pairs&apos;</div><div class="line">Plugin &apos;tpope/vim-commentary&apos;</div><div class="line">Plugin &apos;sjl/gundo.vim&apos;</div><div class="line">Plugin &apos;Lokaltog/vim-easymotion&apos;</div><div class="line">Plugin &apos;tpope/vim-fugitive&apos;</div><div class="line"></div><div class="line">&quot; python</div><div class="line">Plugin &apos;kevinw/pyflakes-vim&apos;</div><div class="line">Plugin &apos;hdima/python-syntax&apos;</div><div class="line">Plugin &apos;pep8&apos;</div><div class="line">Plugin &apos;tell-k/vim-autopep8&apos;</div><div class="line">Plugin &apos;python.vim--Vasiliev&apos;</div><div class="line">Plugin &apos;hynek/vim-python-pep8-indent&apos;</div><div class="line"></div><div class="line">&quot; php</div><div class="line">Plugin &apos;shawncplus/phpcomplete.vim&apos;</div><div class="line">Plugin &apos;joonty/vim-phpqa&apos;</div><div class="line"></div><div class="line">&quot; golang</div><div class="line">Plugin &apos;fatih/vim-go&apos;</div><div class="line">Plugin &apos;dgryski/vim-godef&apos;</div><div class="line">Plugin &apos;nsf/gocode&apos;, {&apos;rtp&apos;: &apos;vim/&apos;}</div><div class="line"></div><div class="line">&quot; markdown</div><div class="line">Plugin &apos;plasticboy/vim-markdown&apos;</div><div class="line"></div><div class="line">&quot; &#x591A;&#x5149;&#x6807;</div><div class="line">Plugin &apos;terryma/vim-multiple-cursors&apos;</div><div class="line"></div><div class="line">&quot; &#x5FEB;&#x901F;&#x6CE8;&#x91CA;</div><div class="line">Plugin &apos;scrooloose/nerdcommenter&apos;</div><div class="line"></div><div class="line">&quot; &#x5BF9;&#x9F50;&#x7EBF;</div><div class="line">Plugin &apos;nathanaelkane/vim-indent-guides&apos;</div><div class="line"></div><div class="line">&quot; &#x5168;&#x5C40;&#x641C;&#x7D22;</div><div class="line">Plugin &apos;rking/ag.vim&apos;</div><div class="line"></div><div class="line">&quot; &#x8DF3;&#x8F6C;&#x5230;&#x4E0A;&#x6B21;&#x4FEE;&#x6539;&#x7684;&#x5730;&#x65B9;</div><div class="line">Plugin &apos;vim-scripts/last_edit_marker.vim&apos;</div><div class="line"></div><div class="line">&quot; powerline</div><div class="line">Plugin &apos;powerline/powerline&apos;</div><div class="line"></div><div class="line">&quot; gitgutter</div><div class="line">Plugin &apos;airblade/vim-gitgutter&apos;</div><div class="line"></div><div class="line">&quot; gitv</div><div class="line">Plugin &apos;vim-scripts/gitv&apos;</div><div class="line"></div><div class="line">call vundle#end()</div><div class="line">filetype plugin indent on</div></pre></td></tr></table></figure>
+<p>&#x6253;&#x5F00;vim&#xFF0C;&#x8FD0;&#x884C;<code>:PluginInstall</code>&#x6216;&#x5728;shell&#x4E2D;&#x76F4;&#x63A5;&#x8FD0;&#x884C;<code>vim +PluginInstall +qall</code>&#x5373;&#x53EF;&#x5B89;&#x88C5;&#x63D2;&#x4EF6;</p>
+<h2 id="&#x5FEB;&#x6377;&#x952E;"><a href="#&#x5FEB;&#x6377;&#x952E;" class="headerlink" title="&#x5FEB;&#x6377;&#x952E;"></a>&#x5FEB;&#x6377;&#x952E;</h2><p>&#x7B14;&#x8005;&#x8BBE;&#x7F6E;&#x7684;vim&#x5FEB;&#x6377;&#x952E;&#x5982;&#x4E0B;:</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>&#x4F5C;&#x7528;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>,g</td>
+<td>tagbar</td>
+</tr>
+<tr>
+<td>,n</td>
+<td>nerdtree</td>
+</tr>
+<tr>
+<td>w[hjkl]</td>
+<td>&#x5206;&#x5C4F;&#x5207;&#x6362;</td>
+</tr>
+<tr>
+<td>gt</td>
+<td>&#x5207;&#x6362;tab</td>
+</tr>
+<tr>
+<td>(&#x6587;&#x4EF6;&#x540D;&#x4E0A;&#x9762;)(v/Enter)</td>
+<td>&#x5728;(&#x65B0;&#x7684;/&#x5F53;&#x524D;)&#x5206;&#x5C4F;&#x4E2D;&#x6253;&#x5F00;&#x6587;&#x4EF6;</td>
+</tr>
+<tr>
+<td>,q</td>
+<td>&#x5173;&#x95ED;&#x5BF9;&#x5E94;&#x5206;&#x5C4F;&#xFF0C;&#x9000;&#x51FA;&#x4E0D;&#x4FDD;&#x5B58;</td>
+</tr>
+<tr>
+<td>,w</td>
+<td>&#x5173;&#x95ED;&#x5E76;&#x4FDD;&#x5B58;</td>
+</tr>
+<tr>
+<td>kj</td>
+<td>insert to normal</td>
+</tr>
+<tr>
+<td>,cc</td>
+<td>&#x6CE8;&#x91CA;</td>
+</tr>
+<tr>
+<td>,cu</td>
+<td>&#x53D6;&#x6D88;&#x6CE8;&#x91CA;</td>
+</tr>
+<tr>
+<td>:vs</td>
+<td>&#x7EB5;&#x5411;&#x5207;&#x5C4F;</td>
+</tr>
+<tr>
+<td>:sp</td>
+<td>&#x6A2A;&#x5411;&#x5207;&#x5C4F;</td>
+</tr>
+<tr>
+<td>,s</td>
+<td>&#x8BED;&#x6CD5;&#x9519;&#x8BEF;&#x4FE1;&#x606F;</td>
+</tr>
+<tr>
+<td>;/SHIFT+;</td>
+<td>nornal&#x5207;&#x6362;&#x5230;&#x547D;&#x4EE4;&#x884C;&#x6A21;&#x5F0F;</td>
+</tr>
+<tr>
+<td>H/SHIFT+&#x53F3;&#x7BAD;&#x5934;</td>
+<td>&#x884C;&#x9996;</td>
+</tr>
+<tr>
+<td>L/SHIFT+&#x5DE6;&#x7BAD;&#x5934;</td>
+<td>&#x884C;&#x5C3E;    </td>
+</tr>
+<tr>
+<td>,p</td>
+<td>&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x641C;&#x7D22;&#x680F;</td>
+</tr>
+<tr>
+<td>,jd</td>
+<td>&#x8DF3;&#x8F6C;&#x5230;&#x53D8;&#x91CF;&#x5B9A;&#x4E49;&#x5904;</td>
+</tr>
+<tr>
+<td>F8</td>
+<td>&#x6309;PEP8&#x6807;&#x51C6;&#x683C;&#x5F0F;&#x5316;&#x6587;&#x4EF6;</td>
+</tr>
+<tr>
+<td>:Ag create_order &#x2013;python</td>
+<td>&#x5168;&#x5C40;&#x641C;&#x7D22;&#x201D;create_order&#x201D;</td>
+</tr>
+<tr>
+<td>&#x2018;.</td>
+<td>&#x79FB;&#x52A8;&#x5149;&#x6807;&#x5230;&#x4E0A;&#x4E00;&#x6B21;&#x7684;&#x4FEE;&#x6539;&#x884C;</td>
+</tr>
+<tr>
+<td>`.</td>
+<td>&#x79FB;&#x52A8;&#x5149;&#x6807;&#x5230;&#x4E0A;&#x4E00;&#x6B21;&#x7684;&#x4FEE;&#x6539;&#x70B9;</td>
+</tr>
+<tr>
+<td>``</td>
+<td>last jump</td>
+</tr>
+<tr>
+<td>CTRL+O</td>
+<td>go back</td>
+</tr>
+<tr>
+<td>CTRL+I</td>
+<td>go forwards</td>
+</tr>
+<tr>
+<td>control+y/g&#x2019;Z</td>
+<td>&#x53EF;&#x8DE8;&#x6587;&#x4EF6;&#x8DF3;&#x8F6C;&#x5230;&#x4E0A;&#x6B21;&#x4FEE;&#x6539;&#x4F4D;&#x7F6E;(last_edit_maker&#x63D0;&#x4F9B;&#x529F;&#x80FD;)</td>
+</tr>
+<tr>
+<td>:new/e/vs/sp/tabe filename</td>
+<td>&#x65B0;&#x5EFA;/&#x5F53;&#x524D;tab/&#x7EB5;&#x5411;/&#x6A2A;&#x5411;/&#x65B0;tab &#x6253;&#x5F00; filename</td>
+</tr>
+<tr>
+<td>CTRL+c &amp; COMMAND+v</td>
+<td>vim&#x590D;&#x5236;&#xFF0C;&#x4E3B;&#x673A;&#x7C98;&#x8D34;</td>
+</tr>
+<tr>
+<td>COMMAND+c &amp; CTRL+v</td>
+<td>&#x4E3B;&#x673A;&#x590D;&#x5236;&#xFF0C;vim&#x7C98;&#x8D34;</td>
+</tr>
+<tr>
+<td>,a</td>
+<td>insert&#x6A21;&#x5F0F;&#x4E0B;php&#x6587;&#x4EF6;autocomplete&#xFF0C;&#x7531;phpcomplete&#x7684;<c-x><c-o> inoremap&#x800C;&#x6765;</c-o></c-x></td>
+</tr>
+<tr>
+<td>,gs</td>
+<td>&#x663E;&#x793A;&#x6587;&#x4EF6;&#x7684;git&#x66F4;&#x6539;,&#x7C7B;&#x4F3C;&#x4E8E;git diff&#x547D;&#x4EE4;&#x7684;&#x663E;&#x793A;&#x6548;&#x679C;</td>
+</tr>
+<tr>
+<td>:Gitv</td>
+<td>&#x663E;&#x793A;&#x9879;&#x76EE;&#x7248;&#x672C;&#x5E93;&#x7684;&#x66F4;&#x6539;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E;tig&#x7684;&#x6548;&#x679C;</td>
+</tr>
+<tr>
+<td>:Gblame</td>
+<td>&#x5728;git&#x9879;&#x76EE;&#x4E2D;&#x67E5;&#x770B;&#x6BCF;&#x884C;&#x6700;&#x540E;&#x7684;&#x66F4;&#x6539;&#x60C5;&#x51B5;</td>
+</tr>
+<tr>
+<td>:Phpcs</td>
+<td>run code sniffer(&#x4EE3;&#x7801;&#x89C4;&#x8303;&#x68C0;&#x67E5;, &#x8981;&#x6C42;&#x592A;&#x4E25;&#x683C;&#xFF0C;&#x63A8;&#x8350;&#x4E0D;&#x7528;)</td>
+</tr>
+<tr>
+<td>:Phpmd</td>
+<td>run mess detector (will ask for a rule XML file if not set&#xFF0C;&#x63A8;&#x8350;&#x4E0D;&#x7528;)</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://fanteathy.github.io/2016/11/28/idempotency/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2183,435 +2530,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://fanteathy.github.io/2016/11/14/interview/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="fanteathy">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2180875?v=3&u=669f9a2b4e195cb7d1336a0dc4fa4efccaeba38c&s=400">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Fanteathy">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Fanteathy" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/14/interview/" itemprop="url">
-                  技术人员招聘指南
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-14T20:20:00+08:00">
-                2016-11-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/management/" itemprop="url" rel="index">
-                    <span itemprop="name">management</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/11/14/interview/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/14/interview/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/11/14/interview/" class="leancloud_visitors" data-flag-title="技术人员招聘指南">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>&#x672C;&#x6587;&#x4E3B;&#x8981;&#x4E3A;&#x5E73;&#x53F0;&#x4EA4;&#x6613;&#x652F;&#x6491;&#x7814;&#x53D1;&#x90E8;&#x6280;&#x672F;&#x4EBA;&#x5458;&#x7684;&#x62DB;&#x8058;&#x63D0;&#x4F9B;&#x4E00;&#x4E9B;&#x5EFA;&#x8BAE;&#x53CA;&#x6307;&#x5357;&#xFF0C;&#x4E3B;&#x8981;&#x5305;&#x62EC;&#x9762;&#x8BD5;&#x7684;&#x6D41;&#x7A0B;&#xFF0C;&#x5185;&#x5BB9;&#x53CA;&#x9762;&#x8BD5;&#x8BC4;&#x5B9A;&#x51C6;&#x5219;&#x3002;</p>
-<h2 id="&#x4E00;&#x4E9B;&#x539F;&#x5219;"><a href="#&#x4E00;&#x4E9B;&#x539F;&#x5219;" class="headerlink" title="&#x4E00;&#x4E9B;&#x539F;&#x5219;"></a>&#x4E00;&#x4E9B;&#x539F;&#x5219;</h2><ul>
-<li>&#x627E;&#x51FA;&#x5E94;&#x8058;&#x8005;&#x95EA;&#x4EAE;&#x7684;&#x5730;&#x65B9;<ul>
-<li>&#x6280;&#x672F;&#x4E0A;&#x7684;&#x4EAE;&#x70B9;&#x7B49;</li>
-</ul>
-</li>
-<li><code>&#x5982;&#x4F55;&#x83B7;&#x5F97;&#x77E5;&#x8BC6;</code> &#x6BD4; <code>&#x77E5;&#x9053;&#x4EC0;&#x4E48;</code> &#x91CD;&#x8981;<ul>
-<li>&#x5B66;&#x4E60;&#x80FD;&#x529B;&#x5F88;&#x91CD;&#x8981;</li>
-</ul>
-</li>
-<li><code>&#x57FA;&#x7840;&#x77E5;&#x8BC6;</code> &#x6BD4; <code>&#x64CD;&#x4F5C;&#x6280;&#x80FD;</code> &#x66F4;&#x91CD;&#x8981;<ul>
-<li>&#x624E;&#x5B9E;&#x7684;&#x7406;&#x8BBA;&#x6BD4;&#x7ECF;&#x9A8C;&#x6027;&#x7684;&#x4E1C;&#x897F;&#x66F4;&#x91CD;&#x8981;&#xFF0C;&#x4E5D;&#x5C42;&#x4E4B;&#x53F0;&#xFF0C;&#x8D77;&#x4E8E;&#x7D2F;&#x571F; </li>
-</ul>
-</li>
-<li>&#x4ECE;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x95EE;&#x9898;&#x5F00;&#x59CB;&#xFF0C;&#x4ECE;&#x5E7F;&#x5EA6;&#x548C;&#x6DF1;&#x5EA6;&#x4E0A;&#x4E0D;&#x65AD;&#x5730;&#x8DDF;&#x8FDB;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;<ul>
-<li>&#x9700;&#x8981;&#x77E5;&#x9053;&#x5E94;&#x8058;&#x8005;&#x7684;&#x80FD;&#x529B;&#x8FB9;&#x754C;&#x5728;&#x54EA;&#x91CC;</li>
-</ul>
-</li>
-<li><code>&#x601D;&#x8DEF;&#x548C;&#x65B9;&#x6CD5;</code> &#x6BD4; <code>&#x7B54;&#x6848;</code> &#x66F4;&#x91CD;&#x8981;</li>
-</ul>
-<h2 id="&#x7B80;&#x5386;&#x7B5B;&#x9009;"><a href="#&#x7B80;&#x5386;&#x7B5B;&#x9009;" class="headerlink" title="&#x7B80;&#x5386;&#x7B5B;&#x9009;"></a>&#x7B80;&#x5386;&#x7B5B;&#x9009;</h2><p>&#x9700;&#x8981;&#x4ECE;&#x7B80;&#x5386;&#x7684;&#x5185;&#x5BB9;&#x4E0A;&#x5224;&#x65AD;&#x5E94;&#x8058;&#x8005;&#x7684;<code>&#x6280;&#x672F;&#x6280;&#x80FD;</code>,<code>&#x9879;&#x76EE;&#x7ECF;&#x5386;</code>&#xFF0C;<code>&#x5DE5;&#x4F5C;&#x7ECF;&#x5386;</code>&#x662F;&#x5426;&#x548C;&#x90E8;&#x95E8;&#x7684;&#x9700;&#x6C42;&#x76F8;&#x7B26;&#x3002;</p>
-<p>&#x5177;&#x6709;&#x4EE5;&#x4E0B;&#x7279;&#x70B9;&#x7684;&#x4EBA;&#x53EF;&#x80FD;&#x4F1A;&#x6BD4;&#x8F83;&#x7B26;&#x5408;&#x6211;&#x4EEC;&#x7684;&#x8981;&#x6C42;:</p>
-<ul>
-<li>&#x6709;&#x5927;&#x578B;/&#x4E00;&#x7EBF;&#x4E92;&#x8054;&#x7F51;&#x516C;&#x53F8;&#x5DE5;&#x4F5C;&#x7ECF;&#x9A8C;&#x7684;&#x4EBA;</li>
-<li>&#x6709;&#x7535;&#x5546;/O2O&#x516C;&#x53F8;&#x5DE5;&#x4F5C;&#x7ECF;&#x9A8C;&#x7684;&#x4EBA;</li>
-<li>&#x6280;&#x672F;&#x6808;&#x548C;&#x6211;&#x4EEC;&#x6BD4;&#x8F83;&#x5339;&#x914D;&#xFF0C;&#x6216;&#x8005;&#x80FD;&#x5F25;&#x8865;&#x90E8;&#x95E8;&#x6280;&#x672F;&#x77ED;&#x677F;&#x7684;&#x4EBA;</li>
-</ul>
-<h2 id="&#x7535;&#x8BDD;&#x9762;&#x8BD5;"><a href="#&#x7535;&#x8BDD;&#x9762;&#x8BD5;" class="headerlink" title="&#x7535;&#x8BDD;&#x9762;&#x8BD5;"></a>&#x7535;&#x8BDD;&#x9762;&#x8BD5;</h2><p>&#x5BF9;&#x4E8E;&#x7B80;&#x5386;&#x6BD4;&#x8F83;&#x7B26;&#x5408;&#x6211;&#x4EEC;&#x9700;&#x6C42;&#xFF0C;&#x4F46;&#x662F;&#x6CA1;&#x6709;&#x6761;&#x4EF6;&#x8FDB;&#x884C;&#x5F53;&#x9762;&#x9762;&#x8BD5;&#x7684;&#x4EBA;&#xFF0C;&#x53EF;&#x4EE5;&#x8003;&#x8651;&#x5148;&#x8FDB;&#x884C;&#x4E00;&#x8F6E;&#x7535;&#x8BDD;&#x9762;&#x8BD5;&#x3002;&#x7535;&#x8BDD;&#x9762;&#x8BD5;&#x7684;&#x4E3B;&#x8981;&#x76EE;&#x7684;&#x5728;&#x4E8E;<code>&#x5BF9;&#x5E94;&#x8058;&#x8005;&#x6709;&#x4E00;&#x4E2A;&#x7EFC;&#x5408;&#x7684;&#x4E86;&#x89E3;&#xFF0C;&#x800C;&#x4E0D;&#x5E94;&#x6263;&#x7EC6;&#x8282;</code>&#x3002;&#x53EF;&#x4EE5;: </p>
-<ul>
-<li>&#x5BF9;&#x5E94;&#x8058;&#x8005;&#x7B80;&#x5386;&#x4E2D;&#x63CF;&#x8FF0;&#x7684;&#x5185;&#x5BB9;&#x8FDB;&#x884C;&#x4E00;&#x4E9B;&#x786E;&#x8BA4;</li>
-<li>&#x5BF9;&#x5E94;&#x8058;&#x8005;&#x7B80;&#x5386;&#x4E2D;&#x672A;&#x63D0;&#x53CA;&#x7684;&#x6280;&#x672F;&#x70B9;&#x8FDB;&#x884C;&#x4E00;&#x4E9B;&#x8BE2;&#x95EE;&#x4EE5;&#x52A0;&#x5F3A;&#x5BF9;&#x5E94;&#x8058;&#x8005;&#x6280;&#x672F;&#x80FD;&#x529B;&#x7684;&#x4E86;&#x89E3;</li>
-<li>&#x5BF9;&#x5E94;&#x8058;&#x8005;&#x7EFC;&#x5408;&#x7D20;&#x8D28;&#x8FDB;&#x884C;&#x4E00;&#x4E9B;&#x5224;&#x5B9A;</li>
-</ul>
-<p>&#x7535;&#x8BDD;&#x9762;&#x8BD5;&#x63A8;&#x8350;&#x4E0D;&#x8981;&#x8D85;&#x8FC7;&#x4E24;&#x8F6E;&#xFF0C;&#x5E76;&#x4E14;&#x9700;&#x8981;&#x5728;&#x7535;&#x8BDD;&#x9762;&#x8BD5;&#x540E;&#x786E;&#x8BA4;&#x662F;&#x5426;&#x9700;&#x8981;&#x7EA6;&#x5E94;&#x8058;&#x8005;&#x8FDB;&#x884C;&#x5F53;&#x9762;&#x9762;&#x8BD5;&#x3002;</p>
-<h2 id="&#x9762;&#x8BD5;&#x5185;&#x5BB9;"><a href="#&#x9762;&#x8BD5;&#x5185;&#x5BB9;" class="headerlink" title="&#x9762;&#x8BD5;&#x5185;&#x5BB9;"></a>&#x9762;&#x8BD5;&#x5185;&#x5BB9;</h2><p>&#x4EE5;&#x4E0B;&#x662F;&#x5F53;&#x9762;&#x9762;&#x8BD5;&#x65F6;&#x7684;&#x4E00;&#x4E9B;&#x5185;&#x5BB9;&#x548C;&#x4E00;&#x4E9B;&#x53C2;&#x8003;&#x95EE;&#x9898;&#xFF0C;&#x4E00;&#x9762;&#x548C;&#x4E8C;&#x9762;&#x53EF;&#x4EE5;&#x5206;&#x522B;&#x4ECE;&#x4E2D;&#x62BD;&#x53D6;&#x4E00;&#x4E9B;&#x95EE;&#x9898;&#x8BE2;&#x95EE;&#x3002;<br>&#x9898;&#x76EE;&#x540E;&#x9762;&#x6709;&#x6807;&#x6CE8;&#x9898;&#x76EE;&#x7684;&#x96BE;&#x5EA6;&#xFF0C;&#x5206;&#x522B;&#x5BF9;&#x5E94;P4,P5,P6&#x7EA7;&#x522B;(&#x4E00;&#x4E9B;&#x95EE;&#x9898;&#x9700;&#x8981;&#x6839;&#x636E;&#x56DE;&#x7B54;&#x7684;&#x6DF1;&#x5EA6;&#x533A;&#x5206;p5/p6&#xFF09;</p>
-<h3 id="&#x57FA;&#x7840;&#x53CA;&#x7406;&#x8BBA;&#x90E8;&#x5206;"><a href="#&#x57FA;&#x7840;&#x53CA;&#x7406;&#x8BBA;&#x90E8;&#x5206;" class="headerlink" title="&#x57FA;&#x7840;&#x53CA;&#x7406;&#x8BBA;&#x90E8;&#x5206;"></a>&#x57FA;&#x7840;&#x53CA;&#x7406;&#x8BBA;&#x90E8;&#x5206;</h3><ul>
-<li>&#x8BED;&#x8A00;&#x57FA;&#x7840;(python/java/c)<ul>
-<li>python:<ul>
-<li>&#x5143;&#x7C7B;&#x7684;&#x6982;&#x5FF5;&#x53CA;&#x4F7F;&#x7528;(p5) </li>
-<li>&#x751F;&#x6210;&#x5668;&#xFF0C;&#x8FED;&#x4EE3;&#x5668;(p4)</li>
-<li>&#x73AF;&#x5883;&#x7BA1;&#x7406;(virtualenv,pip)(p4)</li>
-<li>GIL&#x4EA7;&#x751F;&#x7684;&#x539F;&#x56E0;&#xFF0C;&#x5BF9;python&#x5E76;&#x53D1;&#x7684;&#x9650;&#x5236;&#x7B49;(p5)</li>
-<li>&#x88C5;&#x9970;&#x5668;&#x6982;&#x5FF5;&#xFF0C;&#x4F7F;&#x7528;&#x573A;&#x666F;&#xFF0C;&#x4EE3;&#x7801;&#x7F16;&#x5199;(p4)</li>
-<li>monkey patch&#x7684;&#x4F7F;&#x7528;(p5) </li>
-<li>&#x63CF;&#x8FF0;Python&#x7684;&#x5783;&#x573E;&#x56DE;&#x6536;&#x673A;&#x5236;(p5)<ul>
-<li>&#x5F15;&#x7528;&#x8BA1;&#x6570;</li>
-<li>&#x6807;&#x8BB0;-&#x6E05;&#x9664;&#x673A;&#x5236;</li>
-<li>&#x5206;&#x4EE3;&#x6280;&#x672F;</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>java: collection, reflection, IOC, AOP, GC, classloader&#xFF0C;Concurrency, generics, spring<ul>
-<li>&#x89E3;&#x91CA;IoC&#x548C;DI(p4),&#x5B9E;&#x73B0;(p5) </li>
-<li>&#x5185;&#x5B58;&#x5206;&#x914D;: &#x6808;&#xFF0C;&#x5806;&#xFF0C;&#x9759;&#x6001;&#x533A;(p4) <ul>
-<li>&#x5185;&#x5B58;&#x5206;&#x914D;&#x7684;&#x539F;&#x5219;</li>
-<li>&#x5806;&#x5185;&#x5B58;&#x5206;&#x5757;(p5)<ul>
-<li>&#x65B0;&#x751F;&#x4EE3;</li>
-<li>&#x8001;&#x5E74;&#x4EE3;</li>
-<li>&#x6C38;&#x4E45;&#x4EE3;  </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Vector/ArrayList/LinkedList&#x7684;&#x533A;&#x522B;(p4)</li>
-<li>SpringBean&#x7684;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;</li>
-<li>AOP&#x7684;&#x5B9E;&#x73B0;(p5)</li>
-<li>GC&#x673A;&#x5236;, MinorGC &amp; Full GC&#x533A;&#x522B;(p5), java&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#x573A;&#x666F;(p5)</li>
-<li>&#x7C7B;&#x52A0;&#x8F7D;&#x673A;&#x5236;(p5) </li>
-<li>&#x53CD;&#x5C04;&#x7684;&#x4F7F;&#x7528;(p5)</li>
-<li>Thread Dump(p5)</li>
-</ul>
-</li>
-<li>C: &#x6307;&#x9488;&#xFF0C;&#x5185;&#x5B58;&#x7BA1;&#x7406;(p5)</li>
-<li>&#x7F16;&#x7801;&#x80FD;&#x529B;<ul>
-<li>Error&#x548C;Exception&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x4F7F;&#x7528;&#x59FF;&#x52BF;(p5) </li>
-<li>&#x5E8F;&#x5217;&#x5316;(p4)</li>
-<li>wordcount&#x7A0B;&#x5E8F;</li>
-<li>&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x76F8;&#x5173;(p4)</li>
-<li>JIT&#x6982;&#x5FF5;&#xFF0C;&#x4F18;&#x70B9;(p5)</li>
-<li>&#x7F16;&#x7801;&#x89E3;&#x51B3;&#x751F;&#x4EA7;&#x8005;/&#x6D88;&#x8D39;&#x8005;&#x95EE;&#x9898;&#xFF08;p5&#xFF09;<ul>
-<li>&#x5B9E;&#x73B0;&#x963B;&#x585E;&#x961F;&#x5217;(p6) </li>
-</ul>
-</li>
-<li>&#x5E8F;&#x5217;&#x5316;&#x548C;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x4F5C;&#x7528;&#xFF0C;&#x5B9E;&#x73B0;(p5)</li>
-<li>&#x6B7B;&#x9501;&#x4EE3;&#x7801;&#x7F16;&#x5199;(p5)</li>
-</ul>
-</li>
-<li>&#x5E76;&#x53D1;<ul>
-<li>pid,ppid,pgid,sessionid&#x542B;&#x4E49;(p5) </li>
-<li>Thread&#x7684;sleep&#x548C;object&#x7684;wait&#x65B9;&#x6CD5;&#x7684;&#x533A;&#x522B;(java)(p5) </li>
-<li>&#x7EBF;&#x7A0B;&#x5B89;&#x5168;(&#x540C;&#x6B65;/&#x9501;&#x673A;&#x5236;)(p5)</li>
-<li>ThreadLocal&#x6982;&#x5FF5;(p4)&#xFF0C;&#x4F7F;&#x7528;(p5)&#xFF0C;&#x5B9E;&#x73B0;(p6) </li>
-<li>&#x534F;&#x7A0B;(p5)</li>
-<li>&#x7EBF;&#x7A0B;&#x72B6;&#x6001;&#x53CA;&#x8F6C;&#x53D8;(p4),&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x4F7F;&#x7528;(p5),&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x8BBE;&#x8BA1;(p6)</li>
-<li>&#x4E09;&#x4E2A;&#x7EBF;&#x7A0B;T1,T2,T3,&#x600E;&#x6837;&#x786E;&#x4FDD;&#x987A;&#x5E8F;&#x6267;&#x884C;(p5)<ul>
-<li>join </li>
-</ul>
-</li>
-<li>&#x5B88;&#x62A4;&#x8FDB;/&#x7EBF;&#x7A0B;&#x7684;&#x542B;&#x4E49;&#xFF0C;&#x4F5C;&#x7528;(p5)&#x53CA;&#x5B9E;&#x73B0;(p6)<ul>
-<li>&#x5B88;&#x62A4;&#x8FDB;&#x7A0B; fork;&#x7236;&#x8FDB;&#x7A0B;&#x9000;&#x51FA;;&#x5B50;&#x8FDB;&#x7A0B;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#xFF0C;&#x6210;&#x4E3A;init&#x8FDB;&#x7A0B;&#x7684;&#x5B50;&#x8FDB;&#x7A0B;(p6)</li>
-<li>&#x8FDB;&#x7A0B;/&#x7EBF;&#x7A0B;setDaemon&#x4F5C;&#x7528;&#xFF0C;&#x4F7F;&#x7528;&#x573A;&#x666F;(p5)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>&#x7F51;&#x7EDC;<ul>
-<li>OSI&#x7F51;&#x7EDC;&#x6A21;&#x578B;(p4)</li>
-<li>&#x4E09;&#x6B21;&#x63E1;&#x624B;/&#x56DB;&#x6B21;&#x6325;&#x624B;(p4)</li>
-<li>http<ul>
-<li>cookie/session(p4)</li>
-<li>post/get/put/delete(p4)</li>
-<li>restful(p5)</li>
-<li>http/https&#x533A;&#x522B;(p4)</li>
-</ul>
-</li>
-<li>cgi/fastcgi/wsgi/servlet&#x4F5C;&#x7528;&#xFF0C;&#x539F;&#x7406;&#xFF0C;&#x533A;&#x522B;(p5)</li>
-<li>socket&#x7F16;&#x7A0B;<ul>
-<li>tcp echo server(p4),&#x591A;&#x7EBF;&#x7A0B;/&#x8FDB;&#x7A0B;echo server(p5), &#x591A;&#x8DEF;&#x590D;&#x7528;echo server(p6)</li>
-</ul>
-</li>
-<li>&#x8FDB;&#x7A0B;&#x95F4;&#x901A;&#x4FE1;&#x65B9;&#x5F0F;(p5)<ul>
-<li>&#x7BA1;&#x9053;</li>
-<li>&#x4FE1;&#x53F7;</li>
-<li>&#x6D88;&#x606F;</li>
-<li>&#x5171;&#x4EAB;&#x5185;&#x5B58;</li>
-<li>&#x4FE1;&#x53F7;&#x91CF;</li>
-<li>socket  </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>&#x6570;&#x636E;&#x7ED3;&#x6784;<ul>
-<li>&#x6570;&#x7EC4;&#xFF0C;&#x94FE;&#x8868;&#xFF0C;&#x961F;&#x5217;&#xFF0C;&#x6808;&#xFF0C;&#x6811;&#xFF0C;&#x5806;&#xFF0C;&#x56FE;<ul>
-<li>&#x8F93;&#x51FA;Fibonacci&#x6570;&#x5217;(p4)</li>
-<li>&#x961F;&#x5217;/&#x6808;&#x533A;&#x522B;(p4) </li>
-<li>&#x5982;&#x4F55;&#x5224;&#x65AD;&#x94FE;&#x8868;&#x662F;&#x5426;&#x6709;&#x73AF;(p5)</li>
-<li>&#x94FE;&#x8868;&#x548C;&#x6570;&#x7EC4;&#x7684;&#x533A;&#x522B;(&#x5B58;&#x50A8;&#xFF0C;&#x67E5;&#x627E;&#xFF0C;&#x5220;&#x9664;&#x7B49;)(p4)</li>
-<li>&#x54C8;&#x5E0C;&#x51B2;&#x7A81;&#x7684;&#x5904;&#x7406;&#x65B9;&#x6CD5;&#xFF08;&#x7EBF;&#x6027;&#x63A2;&#x6D4B;&#xFF0C;&#x4E8C;&#x6B21;&#x54C8;&#x5E0C;&#x7B49;&#xFF0C;&#x54C8;&#x5E0C;&#x7B97;&#x6CD5;&#xFF09;(p5)</li>
-<li>&#x4EA4;&#x53C9;&#x94FE;&#x8868;&#x6C42;&#x4EA4;&#x70B9;(p5)</li>
-<li>&#x5E7F;&#x5EA6;/&#x6DF1;&#x5EA6;&#x4F18;&#x5148;&#x904D;&#x5386;&#x4E8C;&#x53C9;&#x6811;&#xFF0C;&#x524D;&#x4E2D;&#x540E;&#x5E8F;&#x904D;&#x5386;(p4) </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;<ul>
-<li>IO&#x6A21;&#x578B; <ul>
-<li>&#x540C;&#x6B65;/&#x5F02;&#x6B65;&#xFF0C;&#x963B;&#x585E;/&#x975E;&#x963B;&#x585E;(p4)</li>
-<li>select/poll/epoll&#x533A;&#x522B;,&#x8FC7;&#x7A0B;(p5) </li>
-</ul>
-</li>
-<li>&#x8FDB;&#x7A0B;&#x8C03;&#x5EA6;<ul>
-<li>&#x8FDB;&#x7A0B;&#x8C03;&#x5EA6;&#x7B97;&#x6CD5;(&#x5148;&#x6765;&#x5148;&#x670D;&#x52A1;&#xFF0C;&#x77ED;&#x4F5C;&#x4E1A;&#x4F18;&#x5148;&#xFF0C;&#x6700;&#x9AD8;&#x4F18;&#x5148;&#x6743;&#x8C03;&#x5EA6;&#x7B49;)(p4)</li>
-<li>&#x50F5;&#x5C38;&#x8FDB;&#x7A0B;/&#x5B64;&#x513F;&#x8FDB;&#x7A0B;&#x6982;&#x5FF5;(p5) </li>
-</ul>
-</li>
-<li>&#x6B7B;&#x9501;&#x7684;&#x4EA7;&#x751F;&#x53CA;&#x907F;&#x514D;(p5)</li>
-<li>&#x7A0B;&#x5E8F;&#x9884;&#x5904;&#x7406;&#xFF0C;&#x7F16;&#x8BD1;&#xFF0C;&#x6C47;&#x7F16;&#xFF0C;&#x94FE;&#x63A5;&#x8FC7;&#x7A0B;/&#x5185;&#x5BB9;(p4)</li>
-<li>&#x9759;&#x6001;&#x94FE;&#x63A5;/&#x52A8;&#x6001;&#x94FE;&#x63A5;(p4)</li>
-<li>&#x5185;&#x5B58;&#x7684;&#x5206;&#x9875;/&#x5206;&#x6BB5;(p4)</li>
-<li>shell<ul>
-<li>&#x4F7F;&#x7528;shell&#x6C42;uv/pv(p4) </li>
-<li>&#x67E5;&#x627E;&#x6240;&#x6709;&#x5305;&#x542B;&#x2019;python&#x2019;&#x7684;&#x8FDB;&#x7A0B;&#x5E76;kill(p4)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;<ul>
-<li>&#x4EE3;&#x7801;&#x5B9E;&#x73B0;&#x5355;&#x4F8B;&#x6A21;&#x5F0F; </li>
-<li>MVC&#x6A21;&#x5F0F;</li>
-</ul>
-</li>
-<li>&#x6570;&#x636E;&#x5E93;<ul>
-<li>ACID(p4)</li>
-<li>&#x810F;&#x8BFB;/&#x4E0D;&#x53EF;&#x91CD;&#x590D;&#x8BFB;/&#x5E7B;&#x8BFB;&#x6982;&#x5FF5;(p4)&#xFF0C;&#x573A;&#x666F;(p5)</li>
-<li>undo/redo log&#x6982;&#x5FF5;(p5), &#x4F5C;&#x7528;&#x539F;&#x7406;(P6) </li>
-<li>&#x4E8B;&#x52A1;(p4)</li>
-<li>&#x4E50;&#x89C2;&#x9501;/&#x60B2;&#x89C2;&#x9501;&#x6982;&#x5FF5;&#xFF0C;&#x4F7F;&#x7528;(p5)&#xFF0C;&#x8BFB;/&#x5199;&#x9501;&#xFF0C;&#x8868;/&#x884C;&#x9501; </li>
-<li>sql&#x6CE8;&#x5165;(p4)</li>
-<li>&#x7D22;&#x5F15;&#x4EE5;&#x53CA;&#x7D22;&#x5F15;&#x7684;&#x5B9E;&#x73B0;(p5)</li>
-<li>&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;&#x7684;&#x74F6;&#x9888;&#x53CA;&#x4F18;&#x5316;(p5) </li>
-</ul>
-</li>
-<li>&#x7248;&#x672C;&#x7BA1;&#x7406;<ul>
-<li>svn/git&#x5E38;&#x7528;&#x547D;&#x4EE4;(p4)</li>
-<li>git flow&#x5DE5;&#x4F5C;&#x6D41;(p4) </li>
-</ul>
-</li>
-<li>&#x7B97;&#x6CD5;<ul>
-<li>&#x5404;&#x79CD;&#x6392;&#x5E8F;&#x7B97;&#x6CD5;&#x63CF;&#x8FF0;/&#x7F16;&#x7801;/&#x65F6;(&#x7A7A;)&#x95F4;&#x590D;&#x6742;&#x5EA6; <ul>
-<li>&#x63D2;&#x5165;&#xFF0C;&#x9009;&#x62E9;&#xFF0C;&#x5F52;&#x5E76;&#xFF0C;&#x5FEB;&#x901F;&#xFF0C;&#x5806;&#xFF0C;&#x5192;&#x6CE1;&#x6392;&#x5E8F;&#x7B49;(p5)</li>
-</ul>
-</li>
-<li>&#x67E5;&#x627E;&#x7B97;&#x6CD5;<ul>
-<li>&#x4E8C;&#x5206;&#x67E5;&#x627E;&#xFF0C;&#x4E8C;&#x53C9;&#x6811;&#x67E5;&#x627E;&#x7B49;(p4)  </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="&#x9879;&#x76EE;&#x53CA;&#x5B9E;&#x8DF5;&#x90E8;&#x5206;"><a href="#&#x9879;&#x76EE;&#x53CA;&#x5B9E;&#x8DF5;&#x90E8;&#x5206;" class="headerlink" title="&#x9879;&#x76EE;&#x53CA;&#x5B9E;&#x8DF5;&#x90E8;&#x5206;"></a>&#x9879;&#x76EE;&#x53CA;&#x5B9E;&#x8DF5;&#x90E8;&#x5206;</h3><ul>
-<li>&#x9879;&#x76EE;&#x7ECF;&#x9A8C;<ul>
-<li>&#x62C5;&#x4EFB;&#x89D2;&#x8272;&#xFF0C;&#x9879;&#x76EE;&#x5185;&#x5BB9;&#xFF0C;&#x9879;&#x76EE;&#x96BE;&#x70B9;&#xFF0C;&#x9879;&#x76EE;&#x4F18;&#x5316;&#x7B49; </li>
-<li>&#x5BF9;&#x4E8E;&#x6D4B;&#x8BD5;&#x9A71;&#x52A8;&#x5F00;&#x53D1;&#x7684;&#x7406;&#x89E3;</li>
-</ul>
-</li>
-<li>&#x6280;&#x80FD;&#x5E7F;&#x5EA6;<ul>
-<li>&#x6846;&#x67B6;&#xFF0C;&#x4E2D;&#x95F4;&#x4EF6;(db,cache,mq)&#xFF0C;&#x5B58;&#x50A8;(&#x5173;&#x7CFB;&#x578B;/NoSQL)</li>
-<li>&#x6D88;&#x606F;&#x961F;&#x5217;&#x7684;&#x4F7F;&#x7528;&#x573A;&#x666F;</li>
-</ul>
-</li>
-<li>&#x6280;&#x80FD;&#x6DF1;&#x5EA6;<ul>
-<li>&#x6E90;&#x7801;&#xFF0C;bug&#xFF0C;&#x5751;</li>
-<li>&#x6027;&#x80FD;&#x4F18;&#x5316;&#x7684;&#x7ECF;&#x9A8C;&#x63CF;&#x8FF0;</li>
-</ul>
-</li>
-<li>Devops<ul>
-<li>ci, docker</li>
-<li>&#x6545;&#x969C;&#x5B9A;&#x4F4D;&#x7684;&#x7ECF;&#x9A8C;: &#x8FC7;&#x7A0B;&#x53CA;&#x6539;&#x8FDB;&#x63AA;&#x65BD;(p5)</li>
-</ul>
-</li>
-<li>&#x5FAE;&#x670D;&#x52A1; &amp; &#x67B6;&#x6784;<ul>
-<li>&#x5E42;&#x7B49;&#x6982;&#x5FF5;(p5)&#xFF0C;&#x5B9E;&#x73B0;(p6)</li>
-<li>&#x65E0;&#x72B6;&#x6001;&#x542B;&#x4E49;</li>
-<li>RPC&#x6846;&#x67B6;&#x8BBE;&#x8BA1;(p6)</li>
-<li>&#x670D;&#x52A1;&#x6CE8;&#x518C;/&#x914D;&#x7F6E;(p5)</li>
-<li>&#x76D1;&#x63A7;/trace/&#x62A5;&#x8B66;<ul>
-<li>&#x76D1;&#x63A7;&#x7684;&#x8BBE;&#x7F6E;(p5)</li>
-<li>trace&#x7CFB;&#x7EDF;&#x539F;&#x7406;(p6) </li>
-</ul>
-</li>
-<li>&#x964D;&#x7EA7;&#xFF0C;&#x9650;&#x6D41;&#xFF0C;&#x7194;&#x65AD;&#xFF0C;&#x8865;&#x507F;&#xFF0C;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#xFF0C;&#x5BB9;&#x91CF;&#x8BC4;&#x4F30;</li>
-<li>&#x5FAE;&#x670D;&#x52A1;&#x67B6;&#x6784;&#x7684;&#x5206;&#x5E03;&#x5F0F;&#x4E8B;&#x52A1;&#x89E3;&#x51B3;&#x65B9;&#x6848;(p6)<ul>
-<li>&#x8865;&#x507F;&#x578B;&#xFF08;TCC&#xFF09;</li>
-<li>&#x5F02;&#x6B65;&#x786E;&#x4FDD;&#x578B;&#xFF08;&#x53EF;&#x9760;&#x6D88;&#x606F;&#x6700;&#x7EC8;&#x4E00;&#x81F4;&#xFF09;</li>
-<li>&#x6700;&#x5927;&#x52AA;&#x529B;&#x901A;&#x77E5;&#x578B; </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>&#x8BBE;&#x8BA1; <ul>
-<li>&#x5F00;&#x95ED;&#x539F;&#x5219;&#xFF0C;MVP, KISS, Design For Failure&#xFF0C;CAP(BASE)&#xFF0C;DDD</li>
-<li>&#x4EC0;&#x4E48;&#x662F;&#x9886;&#x57DF;&#x6A21;&#x578B;&#xFF0C;&#x4EC0;&#x4E48;&#x662F;&#x4E8B;&#x52A1;&#x811A;&#x672C;&#xFF1F;&#x8D2B;&#x8840;&#x6A21;&#x578B;/&#x5145;&#x8840;&#x6A21;&#x578B;&#x7684;&#x533A;&#x522B;(p6)</li>
-<li>&#x5927;&#x578B;&#x7F51;&#x7AD9;&#x67B6;&#x6784;&#x5E94;&#x8BE5;&#x8003;&#x8651;&#x7684;&#x95EE;&#x9898;(p5)<ul>
-<li>&#x5206;&#x5C42;</li>
-<li>&#x5206;&#x5272;</li>
-<li>&#x5206;&#x5E03;&#x5F0F;</li>
-<li>&#x96C6;&#x7FA4;</li>
-<li>&#x7F13;&#x5B58;</li>
-<li>&#x5F02;&#x6B65;</li>
-<li>&#x5197;&#x4F59;  </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="&#x7EFC;&#x5408;&#x90E8;&#x5206;"><a href="#&#x7EFC;&#x5408;&#x90E8;&#x5206;" class="headerlink" title="&#x7EFC;&#x5408;&#x90E8;&#x5206;"></a>&#x7EFC;&#x5408;&#x90E8;&#x5206;</h3><p>&#x4E3B;&#x8981;&#x8003;&#x67E5;&#x5E94;&#x8058;&#x8005;&#x7684;&#x53CD;&#x5E94;&#x80FD;&#x529B;&#xFF0C;&#x5B66;&#x4E60;&#x80FD;&#x529B;&#xFF0C;&#x4E2A;&#x4EBA;&#x6001;&#x5EA6;&#x7B49;</p>
-<h2 id="&#x9762;&#x8BD5;&#x8BC4;&#x5B9A;"><a href="#&#x9762;&#x8BD5;&#x8BC4;&#x5B9A;" class="headerlink" title="&#x9762;&#x8BD5;&#x8BC4;&#x5B9A;"></a>&#x9762;&#x8BD5;&#x8BC4;&#x5B9A;</h2><p>&#x9762;&#x8BD5;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x9762;&#x8BD5;&#x5B98;&#x9700;&#x8981;&#x5BF9;&#x5E94;&#x8058;&#x8005;&#x7ED9;&#x51FA;&#x8BC4;&#x4EF7;&#xFF0C;&#x591A;&#x4E2A;&#x9762;&#x8BD5;&#x5B98;&#x6C9F;&#x901A;&#x540E;&#x9700;&#x8981;&#x7ED9;&#x51FA;&#x7ED3;&#x8BBA;&#x662F;&#x5426;&#x901A;&#x8FC7;&#xFF0C;&#x5E76;&#x7ED9;&#x51FA;&#x5BF9;&#x5E94;&#x7684;&#x6280;&#x672F;&#x8BC4;&#x7EA7;&#xFF08;&#x53C2;&#x8003;<code>&#x6253;&#x602A;&#x5347;&#x7EA7;&#x6307;&#x5357;</code>&#xFF09;&#x3002;</p>
-<h2 id="&#x53C2;&#x8003;"><a href="#&#x53C2;&#x8003;" class="headerlink" title="&#x53C2;&#x8003;"></a>&#x53C2;&#x8003;</h2><ul>
-<li><a href="http://coolshell.cn/articles/1870.html" target="_blank" rel="external">&#x6211;&#x662F;&#x600E;&#x4E48;&#x62DB;&#x8058;&#x7A0B;&#x5E8F;&#x5458;&#x7684;</a></li>
-<li><a href="http://coolshell.cn/articles/4506.html" target="_blank" rel="external">&#x518D;&#x8C08;&#x201C;&#x6211;&#x662F;&#x600E;&#x4E48;&#x62DB;&#x8058;&#x7A0B;&#x5E8F;&#x5458;&#x7684;&#x201D;&#xFF08;&#x4E0A;&#xFF09;</a></li>
-<li><a href="http://coolshell.cn/articles/4490.html" target="_blank" rel="external">&#x518D;&#x8C08;&#x201C;&#x6211;&#x662F;&#x600E;&#x4E48;&#x62DB;&#x8058;&#x7A0B;&#x5E8F;&#x5458;&#x7684;&#x201D;&#xFF08;&#x4E0B;&#xFF09;</a></li>
-<li><a href="ref/&#x8F6F;&#x4EF6;&#x4EBA;&#x5458;&#x62DB;&#x8058;.pdf">&#x8F6F;&#x4EF6;&#x4EBA;&#x5458;&#x62DB;&#x8058;</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2659,7 +2577,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2668,7 +2586,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2677,7 +2595,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

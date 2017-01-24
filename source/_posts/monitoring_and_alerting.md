@@ -51,7 +51,7 @@ categories: devops
 -----
 监控报警系统的系统架构可以参考: [统一监控报警平台的架构设计思路分享](http://os.51cto.com/art/201603/507858.htm)
 
-![arch.jpg](monitoring_and_alerting.md/arch.jpg)
+![arch.jpg](monitoring_and_alerting/arch.jpg)
 
 ## 技术方案
 

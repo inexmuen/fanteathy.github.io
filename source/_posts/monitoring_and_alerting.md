@@ -66,8 +66,8 @@ categories: devops
 
 可以对技术方案进行以下组合:
 
-- TICK(telegraf + influxdb + chronograf + kapacitor)
-- statsd + graphite + grafana + banshee(ele.me使用)
+- `TICK(telegraf + influxdb + chronograf + kapacitor)`
+- `statsd + graphite + grafana + banshee`(ele.me使用)
 
 ## 监控设置
 

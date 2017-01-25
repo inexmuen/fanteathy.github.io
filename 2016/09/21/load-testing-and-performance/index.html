@@ -1,0 +1,952 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="arch," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Best Ref: 性能调优攻略
+基本知识性能测试性能测试，是通过自动化的测试工具模拟多种正常、峰值以及异常负载条件来对系统的各项性能指标进行测试。区别于压力测试,在于压力测试要求进行超过规定性能指标的测试。
+性能测试的目标为公司交易的主链路，包括外卖平台,商户平台,开放平台,大物流,EOS订单业务,新支付,ERS餐厅业务等。
+测试基本过程框架测试团队创建测试用户，测试餐厅，使用测试框架(jmet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="全链路性能测试 & 性能分析">
+<meta property="og:url" content="http://fanteathy.github.io/2016/09/21/load-testing-and-performance/index.html">
+<meta property="og:site_name" content="Fanteathy">
+<meta property="og:description" content="Best Ref: 性能调优攻略
+基本知识性能测试性能测试，是通过自动化的测试工具模拟多种正常、峰值以及异常负载条件来对系统的各项性能指标进行测试。区别于压力测试,在于压力测试要求进行超过规定性能指标的测试。
+性能测试的目标为公司交易的主链路，包括外卖平台,商户平台,开放平台,大物流,EOS订单业务,新支付,ERS餐厅业务等。
+测试基本过程框架测试团队创建测试用户，测试餐厅，使用测试框架(jmet">
+<meta property="og:image" content="http://fanteathy.github.io/2016/09/21/load-testing-and-performance/linux_observability_tools.png">
+<meta property="og:updated_time" content="2017-01-25T06:03:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="全链路性能测试 & 性能分析">
+<meta name="twitter:description" content="Best Ref: 性能调优攻略
+基本知识性能测试性能测试，是通过自动化的测试工具模拟多种正常、峰值以及异常负载条件来对系统的各项性能指标进行测试。区别于压力测试,在于压力测试要求进行超过规定性能指标的测试。
+性能测试的目标为公司交易的主链路，包括外卖平台,商户平台,开放平台,大物流,EOS订单业务,新支付,ERS餐厅业务等。
+测试基本过程框架测试团队创建测试用户，测试餐厅，使用测试框架(jmet">
+<meta name="twitter:image" content="http://fanteathy.github.io/2016/09/21/load-testing-and-performance/linux_observability_tools.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://fanteathy.github.io/2016/09/21/load-testing-and-performance/"/>
+
+
+
+
+
+  <title> 全链路性能测试 & 性能分析 | Fanteathy </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4a5f97b0ff5f7149cd40cf481a7f9ae4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Fanteathy</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://fanteathy.github.io/2016/09/21/load-testing-and-performance/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="fanteathy">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2180875?v=3&u=669f9a2b4e195cb7d1336a0dc4fa4efccaeba38c&s=400">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Fanteathy">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Fanteathy" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                全链路性能测试 & 性能分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-21T17:00:00+08:00">
+                2016-09-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arch/" itemprop="url" rel="index">
+                    <span itemprop="name">arch</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/09/21/load-testing-and-performance/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/21/load-testing-and-performance/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/21/load-testing-and-performance/" class="leancloud_visitors" data-flag-title="全链路性能测试 & 性能分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Best Ref: <strong><em><a href="http://coolshell.cn/articles/7490.html" target="_blank" rel="external">性能调优攻略</a></em></strong></p>
+<h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><h3 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h3><p><code>性能测试</code>，是通过自动化的测试工具模拟多种正常、峰值以及异常负载条件来对系统的各项性能指标进行测试。区别于<code>压力测试</code>,在于压力测试要求进行超过规定性能指标的测试。</p>
+<p>性能测试的目标为公司交易的主链路，包括<code>外卖平台</code>,<code>商户平台</code>,<code>开放平台</code>,<code>大物流</code>,<code>EOS订单业务</code>,<code>新支付</code>,<code>ERS餐厅业务</code>等。</p>
+<h3 id="测试基本过程"><a href="#测试基本过程" class="headerlink" title="测试基本过程"></a>测试基本过程</h3><p>框架测试团队创建测试用户，测试餐厅，使用测试框架(jmeter)脚本模拟<code>用户下单</code>，<code>餐厅接单</code>，并且对中间<code>支付</code>，<code>物流</code>环节mock。从而对下单到配送的全链路进行性能测试。</p>
+<p>性能测试和生产流程的差异如下:</p>
+<ul>
+<li>支付mock: 在调用支付的接口时，调用方使用特殊的merchant_id=101。测试团队mock支付调用的第三方服务，返回支付成功或者失败的结果。请求流程为 soa =&gt; payment =&gt; mock service(mock第三方支付服务)</li>
+<li>物流特殊处理: 正常情况下，在订单确认之后，只要餐厅购买了配送服务，就会进入物流，不过物流加了一层控制，可以把这些订单过滤掉。目前平台有20k的餐厅，专门用来压测，这些压测订单的物流会忽略</li>
+</ul>
+<p>测试接口的调用，调用比率均通过分析对应服务集群的日志来确定。</p>
+<h3 id="测试团队相关知识"><a href="#测试团队相关知识" class="headerlink" title="测试团队相关知识"></a>测试团队相关知识</h3><p><a href="http://wiki.ele.to:8090/pages/viewpage.action?pageId=20324754" target="_blank" rel="external">业务部门性能测试</a></p>
+<h2 id="测试准备"><a href="#测试准备" class="headerlink" title="测试准备"></a>测试准备</h2><p>测试前，noc会进行以下操作: 开店</p>
+<p>首页banner，皮肤，自动关店，hermes，base.hermes降级，支付mock开关打开</p>
+<h2 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h2><p>测试过程中需要对业务相关指标进行监控，PTS主要包括以下业务</p>
+<h3 id="zeus-eos"><a href="#zeus-eos" class="headerlink" title="zeus.eos"></a>zeus.eos</h3><p>需要注意以下指标:</p>
+<ul>
+<li><a href="https://t.elenet.me/dashboard/dashboard/db/eos-guan-jian-diao-yong-zhi-biao" target="_blank" rel="external">eos关键调用指标</a>, 主要用于监控主流程相关接口指标</li>
+<li><a href="https://t.elenet.me/dashboard/dashboard/db/eos-xiang-guan-guan-jian-zhong-yao-zhi-biao" target="_blank" rel="external">eos相关关键指标</a>，主要用于监控cache，async task,txdaemon执行情况</li>
+<li><a href="https://t.elenet.me/dashboard/dashboard/db/eos-jie-kou-zong-ti-zhi-biao" target="_blank" rel="external">eos接口总体指标</a>，主要用于对接口总体情况有一个大致的了解</li>
+</ul>
+<p>监控需要结合eos主流程来分析问题，EOS主流程如下:</p>
+<p><strong><em>涉密不予提供</em></strong></p>
+<p>同时需要了解EOS状态机各节点的含义和流转逻辑。</p>
+<h3 id="osc-bacchus"><a href="#osc-bacchus" class="headerlink" title="osc.bacchus"></a>osc.bacchus</h3><p>订单催单/取消订单服务，对应监控面板: <a href="https://t.elenet.me/dashboard/dashboard/db/osc-bacchus" target="_blank" rel="external">osc.bacchus</a></p>
+<p>主要关注自动取消订单(<code>hitcount(stats.apps.osc.bacchus.real_cancel_order, &#39;60s&#39;)</code>) 和 自动关店(<code>hitcount(stats.apps.osc.bacchus.real_close_restaurant, &#39;60s&#39;)</code>) 的指标</p>
+<h3 id="osc-chronos"><a href="#osc-chronos" class="headerlink" title="osc.chronos"></a>osc.chronos</h3><p>准时达服务，对应监控面板: <a href="https://t.elenet.me/dashboard/dashboard/db/osc-chronos-zhun-shi-da-jian-kong-kan-ban" target="_blank" rel="external">osc.chronos</a></p>
+<p>主要的关注目标chronos的队列消息情况，osc.chronos会有最大700k的unack量，其他两个队列是监听blink和eos的消息，可以查看是否有堆积。<br>另外可以关注chronos的机器负载情况，是否有负载过高的情形</p>
+<h3 id="osc-blink"><a href="#osc-blink" class="headerlink" title="osc.blink"></a>osc.blink</h3><p>物流对接服务，对应监控面板: <a href="https://t.elenet.me/dashboard/dashboard/db/blink" target="_blank" rel="external">osc.blink</a></p>
+<h2 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h2><h3 id="业务问题分析"><a href="#业务问题分析" class="headerlink" title="业务问题分析"></a>业务问题分析</h3><p>前提在于<strong>要对订单主流程熟悉</strong>。由于订单连接了<code>外卖平台</code>,<code>商户平台</code>,<code>大物流</code>,<code>支付</code>，所以当主流程(包括EOS和其他方)出现问题时，一般会反映在<a href="https://t.elenet.me/dashboard/dashboard/db/eos-guan-jian-diao-yong-zhi-biao?from=now-30m&amp;to=now&amp;panelId=43&amp;fullscreen" target="_blank" rel="external">订单实际状态扭转</a>上，可以据此并结合EOS自身的关键流程接口相关指标确认出问题的业务方。</p>
+<h3 id="技术问题分析"><a href="#技术问题分析" class="headerlink" title="技术问题分析"></a>技术问题分析</h3><p>可以借助用来分析的工具包括<a href="https://t.elenet.me/dashboard/" target="_blank" rel="external">grafana</a>,<a href="http://etrace.elenet.me/" target="_blank" rel="external">etrace</a>,<a href="http://elk.elenet.me/" target="_blank" rel="external">elk</a>，特殊情况也可以直接登陆服务器通过log,分析工具htop,perf,tcpdump等进行分析</p>
+<p>进行性能分析前，需要了解EOS的架构: <a href="http://wiki.ele.to:8090/pages/viewpage.action?pageId=26612648" target="_blank" rel="external">eos架构</a></p>
+<p>基础服务指标监控如下:</p>
+<ul>
+<li>corvus &amp; redis</li>
+</ul>
+<p>redis监控地址: <a href="https://t.elenet.me/dashboard/dashboard/db/system-monitor-redis-cluster" target="_blank" rel="external">system-monitor-redis-cluster</a>，需要关注的指标包括<code>input</code>,<code>ops</code>,<code>slow commands</code>,<code>hit</code>,<code>miss</code>等</p>
+<p>eos使用的redis包括:</p>
+<pre><code>- zeus_eos_redis_cache:
+    - 端口: 8604 
+    - 作用: db_cache, patch_cache
+- eos_zeus_redis_cache:
+    - 端口: 8125 
+    - 作用: api_cache
+- eos_zeus_other_redis_cache:
+    - 端口: 8147 
+    - 作用: lock_param, rst_number_cache
+</code></pre><p>由于redis的网络流程为: <code>client =&gt; goproxy =&gt; corvus</code>，redis的性能排查应该是从上往下逐级进行, corvus对应的监控地址为: <a href="https://t.elenet.me/dashboard/dashboard/db/esm-corvus-cluster?var-cluster=eos_zeus_other_redis_cache&amp;var-machine=xg-zeus-eos-redis-1&amp;from=now-30m&amp;to=now" target="_blank" rel="external">esm.corvus.cluster</a></p>
+<ul>
+<li>rmq</li>
+</ul>
+<p>rabbitmq监控地址: <a href="https://t.elenet.me/dashboard/dashboard/db/system-monitor-rabbitmq-queue" target="_blank" rel="external">system-monitor-rabbitmq-queue</a>，需要关注的指标包括ready, publish, ack情况等</p>
+<ul>
+<li>dal &amp; db</li>
+</ul>
+<p>dal和db的监控可以使用etrace，对应地址如下: <a href="http://etrace.elenet.me/main2.html#/dal/sql" target="_blank" rel="external">etrace dal</a> eos对应的group包括:</p>
+<pre><code>- eos_mobile_eleme-zeus_eos_group
+- eos_items_eleme-zeus_eos_group
+- eos_eleme-zeus_eos_group
+- eos_record_eleme-zeus_eos_group
+</code></pre><p>同时DAL会关注dal相关指标:</p>
+<p><a href="https://t.elenet.me/dashboard/dashboard/db/dalxing-neng-zhi-biao-xg?var-group=eos_eleme-zeus_eos_group&amp;var-group=login_eleme-biz_member_group" target="_blank" rel="external">dal性能指标</a></p>
+<p>grafana切换到dal，对应的<a href="https://t.elenet.me/dashboard/dashboard/db/system-monitor" target="_blank" rel="external">dal-proxy服务器性能指标</a></p>
+<p>DBA会关注对应的DB服务器性能指标，慢SQL，lock等</p>
+<ul>
+<li>应用服务器</li>
+</ul>
+<p>应用服务器的监控在: <a href="https://t.elenet.me/dashboard/dashboard/db/system-monitor-all" target="_blank" rel="external">system.monitor.all</a>，主要关注服务器的<code>CPU Util</code>,<code>Memory</code>,<code>Network</code>和<code>IO</code>等</p>
+<p>EOS对应的集群分布为:</p>
+<pre><code>- 外卖平台: sync-01, sync-02
+- 新支付: sync-01
+- 商户端: sync-03
+- misc: sync-04
+- 异步task: async
+- script,txdaemon: cron
+</code></pre><p>更详细的TCP监控在<a href="https://t.elenet.me/dashboard/dashboard/db/system-monitor-net-tcp?var-machine=qcr-zeus-eos-async-19&amp;var-machine=qcr-zeus-eos-async-20&amp;var-machine=qcr-zeus-eos-sync1-11&amp;var-machine=xg-dtcase-master-01&amp;from=now-12h&amp;to=now" target="_blank" rel="external">system.monitor.net.tcp</a>，可以在这里看tcp的连接情况</p>
+<h4 id="性能分析的推荐步骤"><a href="#性能分析的推荐步骤" class="headerlink" title="性能分析的推荐步骤"></a>性能分析的推荐步骤</h4><p>性能分析的一般步骤为根据调用链路逐级住下，流程为: 接口 =&gt; 中间件 =&gt; 基础服务 =&gt; 操作系统</p>
+<ul>
+<li>接口性能分析时需要关注代码逻辑和接口依赖<ul>
+<li>代码的性能分析可以参考: <strong><em><a href="http://coolshell.cn/articles/7490.html" target="_blank" rel="external">性能调优攻略</a></em></strong>，以下为Python的代码性能优化参考<ul>
+<li>Python profile<ul>
+<li><a href="https://segmentfault.com/a/1190000000616798" target="_blank" rel="external">Python 性能分析入门指南</a></li>
+<li><a href="http://chenxiaoyu.org/2013/08/28/python-profile.html" target="_blank" rel="external">Python Profile 工具性能分析</a></li>
+</ul>
+</li>
+<li>Python 火焰图<ul>
+<li><a href="http://huoding.com/2016/08/18/531" target="_blank" rel="external">白话火焰图</a> </li>
+<li><a href="http://xiaorui.cc/2015/10/22/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E4%B9%8B%E8%B0%83%E8%AF%95python%E5%BA%94%E7%94%A8%E7%94%9F%E6%88%90%E6%80%A7%E8%83%BDcpu%E7%81%AB%E7%84%B0%E5%9B%BE/" target="_blank" rel="external">开源项目之调试python应用生成性能cpu火焰图</a>    </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>接口依赖包括其他SOA服务依赖，基础服务依赖等，可以通过etrace观察调用链路分析瓶颈点</li>
+</ul>
+</li>
+<li>中间件 和 基础服务 的性能主要通过对应的指标监控，观察对应的<code>cpu</code>,<code>memory</code>,<code>Network</code>,<code>IO</code>,<code>TCP</code>等</li>
+<li>操作系统级别的性能分析可以参考<a href="http://www.brendangregg.com/linuxperf.html" target="_blank" rel="external">Linux Performance</a></li>
+</ul>
+<p><img src="/2016/09/21/load-testing-and-performance/linux_observability_tools.png" alt="linux_observability_tools"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/arch/" rel="tag"># arch</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/05/ab-testing/" rel="next" title="AB Test">
+                <i class="fa fa-chevron-left"></i> AB Test
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/29/mq_back_up/" rel="prev" title="消息补偿">
+                消息补偿 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/21/load-testing-and-performance/"
+           data-title="全链路性能测试 & 性能分析" data-url="http://fanteathy.github.io/2016/09/21/load-testing-and-performance/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars1.githubusercontent.com/u/2180875?v=3&u=669f9a2b4e195cb7d1336a0dc4fa4efccaeba38c&s=400"
+               alt="fanteathy" />
+          <p class="site-author-name" itemprop="name">fanteathy</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本知识"><span class="nav-number">1.</span> <span class="nav-text">基本知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#性能测试"><span class="nav-number">1.1.</span> <span class="nav-text">性能测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试基本过程"><span class="nav-number">1.2.</span> <span class="nav-text">测试基本过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试团队相关知识"><span class="nav-number">1.3.</span> <span class="nav-text">测试团队相关知识</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试准备"><span class="nav-number">2.</span> <span class="nav-text">测试准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监控"><span class="nav-number">3.</span> <span class="nav-text">监控</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#zeus-eos"><span class="nav-number">3.1.</span> <span class="nav-text">zeus.eos</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#osc-bacchus"><span class="nav-number">3.2.</span> <span class="nav-text">osc.bacchus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#osc-chronos"><span class="nav-number">3.3.</span> <span class="nav-text">osc.chronos</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#osc-blink"><span class="nav-number">3.4.</span> <span class="nav-text">osc.blink</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题分析"><span class="nav-number">4.</span> <span class="nav-text">问题分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#业务问题分析"><span class="nav-number">4.1.</span> <span class="nav-text">业务问题分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#技术问题分析"><span class="nav-number">4.2.</span> <span class="nav-text">技术问题分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#性能分析的推荐步骤"><span class="nav-number">4.2.1.</span> <span class="nav-text">性能分析的推荐步骤</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fanteathy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fanteathy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("L2fSPX0G7sSoyGKMiciQhWbr-gzGzoHsz", "XmgeDpUPlFvHnYfzFKA5Btli");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

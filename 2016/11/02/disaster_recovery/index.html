@@ -1,0 +1,879 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="arch," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="形式为了保证业务的高可用，需要保证关键业务做好灾备。
+网站灾备方案不但承担容灾的任务，很多时候也承担着负载均衡，优化性能的任务。网站灾备有以下几种方式。
+主备镜像(冷备)两个数据中心服务器部署完全一样，每次网站发布都要在两个数据中心同时发布，保证运行系统版本一致。两个数据中心有主备之分，数据通过准实时的同步系统从主站不断同步到备站。主站发生灾害性故障导致完全不可用，则将域名解析切换到备站。这种方案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于灾备">
+<meta property="og:url" content="http://fanteathy.github.io/2016/11/02/disaster_recovery/index.html">
+<meta property="og:site_name" content="Fanteathy">
+<meta property="og:description" content="形式为了保证业务的高可用，需要保证关键业务做好灾备。
+网站灾备方案不但承担容灾的任务，很多时候也承担着负载均衡，优化性能的任务。网站灾备有以下几种方式。
+主备镜像(冷备)两个数据中心服务器部署完全一样，每次网站发布都要在两个数据中心同时发布，保证运行系统版本一致。两个数据中心有主备之分，数据通过准实时的同步系统从主站不断同步到备站。主站发生灾害性故障导致完全不可用，则将域名解析切换到备站。这种方案">
+<meta property="og:image" content="http://fanteathy.github.io/2016/11/02/disaster_recovery/disaster_recovery.png">
+<meta property="og:updated_time" content="2017-01-25T06:03:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于灾备">
+<meta name="twitter:description" content="形式为了保证业务的高可用，需要保证关键业务做好灾备。
+网站灾备方案不但承担容灾的任务，很多时候也承担着负载均衡，优化性能的任务。网站灾备有以下几种方式。
+主备镜像(冷备)两个数据中心服务器部署完全一样，每次网站发布都要在两个数据中心同时发布，保证运行系统版本一致。两个数据中心有主备之分，数据通过准实时的同步系统从主站不断同步到备站。主站发生灾害性故障导致完全不可用，则将域名解析切换到备站。这种方案">
+<meta name="twitter:image" content="http://fanteathy.github.io/2016/11/02/disaster_recovery/disaster_recovery.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://fanteathy.github.io/2016/11/02/disaster_recovery/"/>
+
+
+
+
+
+  <title> 关于灾备 | Fanteathy </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4a5f97b0ff5f7149cd40cf481a7f9ae4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Fanteathy</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://fanteathy.github.io/2016/11/02/disaster_recovery/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="fanteathy">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2180875?v=3&u=669f9a2b4e195cb7d1336a0dc4fa4efccaeba38c&s=400">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Fanteathy">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Fanteathy" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                关于灾备
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-02T20:00:00+08:00">
+                2016-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arch/" itemprop="url" rel="index">
+                    <span itemprop="name">arch</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/11/02/disaster_recovery/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/02/disaster_recovery/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/11/02/disaster_recovery/" class="leancloud_visitors" data-flag-title="关于灾备">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="形式"><a href="#形式" class="headerlink" title="形式"></a>形式</h2><p>为了保证业务的高可用，需要保证关键业务做好灾备。</p>
+<p>网站灾备方案不但承担容灾的任务，很多时候也承担着负载均衡，优化性能的任务。网站灾备有以下几种方式。</p>
+<h3 id="主备镜像-冷备"><a href="#主备镜像-冷备" class="headerlink" title="主备镜像(冷备)"></a>主备镜像(冷备)</h3><p>两个数据中心服务器部署完全一样，每次网站发布都要在两个数据中心同时发布，保证运行系统版本一致。两个数据中心有主备之分，数据通过准实时的同步系统从主站不断同步到备站。主站发生灾害性故障导致完全不可用，则将域名解析切换到备站。这种方案纯粹是为了容灾。</p>
+<h3 id="业务互补，数据同步"><a href="#业务互补，数据同步" class="headerlink" title="业务互补，数据同步"></a>业务互补，数据同步</h3><p>如某网站美国机房和国内机房部署的服务在业务上互补，美国机房部署买家服务，国内机房部署卖家服务，海外用户（主要是买家）访问美国机房，国内用户（主要是卖家）访问国内机房。主要业务数据互相实时同步，因为数据在两个机房同时写入，可能会发生冲突。</p>
+<h3 id="主主镜像-多活"><a href="#主主镜像-多活" class="headerlink" title="主主镜像(多活)"></a>主主镜像(多活)</h3><p>部署和发布模式与主备一样，但是多个数据中心是同时启用的，根据用户地域将域名解析到不同的机房，数据实时同步。如新浪微博。</p>
+<p>如北方用户访问北京机房，南方用户访问上海机房。主要业务数据互相实时同步。</p>
+<h3 id="一写多读-类似于DB单master多slave"><a href="#一写多读-类似于DB单master多slave" class="headerlink" title="一写多读(类似于DB单master多slave)"></a>一写多读(类似于DB<code>单master多slave</code>)</h3><p>数据写入只发生在一个数据中心，但是为了加快地区用户访问，会将数据同步到其他数据中心供只读访问。这种方案适用于读多写少的网站。比如wikipedia。</p>
+<hr>
+<p>本文讨论<code>主备镜像</code>形式的灾备。</p>
+<h2 id="流程-主备镜像"><a href="#流程-主备镜像" class="headerlink" title="流程(主备镜像)"></a>流程(主备镜像)</h2><p>灾备对应的流程如下:</p>
+<p><img src="/2016/11/02/disaster_recovery/disaster_recovery.png" alt="disaster_recovery.png"></p>
+<h2 id="关键点"><a href="#关键点" class="headerlink" title="关键点"></a>关键点</h2><h3 id="数据灾备"><a href="#数据灾备" class="headerlink" title="数据灾备"></a>数据灾备</h3><p>灾备的重点在于数据，即灾难发生后可以确保用户原有的数据不会丢失或者遭到破坏。解决方案是依赖基于网络的数据复制工具，实现生产中心和灾备中心之间的异步/同步的数据传输</p>
+<p>数据灾备包括DB, rmq, cache的灾备</p>
+<ul>
+<li>DB的灾备依赖DB的主从复制实现</li>
+<li>由于架构设计时rmq不建议使用在关键链路，并且应该提供对应的业务补偿，所以不考虑同步rmq的数据</li>
+<li>关键链路中cache只允许使用作缓存，所以不需要考虑同步数据</li>
+</ul>
+<h3 id="应用灾备"><a href="#应用灾备" class="headerlink" title="应用灾备"></a>应用灾备</h3><p><code>应用灾备</code>是把应用处理能力再复制一份，也就是在异地灾备中心再构建一套支撑系统。<code>应用灾备</code>能提供应用接管能力，即在生产中心发生故障的情况下，能够在灾备中心接管应用，从而尽量减少系统停机时间，提高业务连续性。</p>
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><ul>
+<li>由于应用灾备可能并未覆盖全路径，所以灾备环境调用未部署服务时需要做容错/降级处理</li>
+<li>数据同步的技术多种多样，即可以基于存储阵列的复制软件实现，比如EMC MirrorView、H3C Replication等，也可以基于服务器或者应用软件实现，比如Veritas VVR、Oracle DataGuard等。但不管采用何种技术，都只是在不同的层面实现了数据的同步，要具备应用接管，还需要其他组件的配合，比如DNS域名切换解析、备用网络启用、应用服务切换等等。</li>
+<li>cache未做数据同步时，在生产流量切换到灾备时，为了防止灾备所有流量打到DB，可能需要在流量切换前做cache预热</li>
+<li>数据表冲突的防止。在做DB切换时，需要防止主键冲突，因此auto_increment的字段需要调整自增因子等</li>
+<li>应用服务集群切换可以在服务注册中心处理</li>
+<li>切换至冷备机器时，对于有状态的数据，需要在切换前修复数据状态；对于需要事件驱动状态向前的数据，需要复现事件或者手动推动状态向前。总而言之，要保证切换到灾备后，<strong><em>状态机(业务流程)在任何点中断时，系统能够推进状态机走到终态(important)</em></strong></li>
+<li>需要考虑跨机房数据延时问题（以及由此造成的一系列数据问题），需要容忍数据丢失，并为数据延时考虑相应的对策</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/arch/" rel="tag"># arch</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/25/distributed-transaction-in-soa/" rel="next" title="微服务架构的分布式事务解决方案">
+                <i class="fa fa-chevron-left"></i> 微服务架构的分布式事务解决方案
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/12/how_to_design_a_language/" rel="prev" title="如何设计一门语言">
+                如何设计一门语言 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/02/disaster_recovery/"
+           data-title="关于灾备" data-url="http://fanteathy.github.io/2016/11/02/disaster_recovery/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars1.githubusercontent.com/u/2180875?v=3&u=669f9a2b4e195cb7d1336a0dc4fa4efccaeba38c&s=400"
+               alt="fanteathy" />
+          <p class="site-author-name" itemprop="name">fanteathy</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#形式"><span class="nav-number">1.</span> <span class="nav-text">形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主备镜像-冷备"><span class="nav-number">1.1.</span> <span class="nav-text">主备镜像(冷备)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#业务互补，数据同步"><span class="nav-number">1.2.</span> <span class="nav-text">业务互补，数据同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主主镜像-多活"><span class="nav-number">1.3.</span> <span class="nav-text">主主镜像(多活)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一写多读-类似于DB单master多slave"><span class="nav-number">1.4.</span> <span class="nav-text">一写多读(类似于DB单master多slave)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程-主备镜像"><span class="nav-number">2.</span> <span class="nav-text">流程(主备镜像)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键点"><span class="nav-number">3.</span> <span class="nav-text">关键点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据灾备"><span class="nav-number">3.1.</span> <span class="nav-text">数据灾备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用灾备"><span class="nav-number">3.2.</span> <span class="nav-text">应用灾备</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意点"><span class="nav-number">4.</span> <span class="nav-text">注意点</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fanteathy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fanteathy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("L2fSPX0G7sSoyGKMiciQhWbr-gzGzoHsz", "XmgeDpUPlFvHnYfzFKA5Btli");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

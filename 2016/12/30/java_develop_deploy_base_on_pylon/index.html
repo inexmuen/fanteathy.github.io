@@ -1,0 +1,1048 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="基于pylon的服务,包括代码结构及开发流程。
+sample可以参考sample-project, repo地址https://git.elenet.me/pts/sample-project
+也可以参考settle项目
+最好的参考项目compensation-service
+代码结构
+api: 接口定义相关
+api: 接口定义
+OrderApiService: 提供的eleme_order相关的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Pylon的Demo开发及发布相关">
+<meta property="og:url" content="http://fanteathy.github.io/2016/12/30/java_develop_deploy_base_on_pylon/index.html">
+<meta property="og:site_name" content="Fanteathy">
+<meta property="og:description" content="基于pylon的服务,包括代码结构及开发流程。
+sample可以参考sample-project, repo地址https://git.elenet.me/pts/sample-project
+也可以参考settle项目
+最好的参考项目compensation-service
+代码结构
+api: 接口定义相关
+api: 接口定义
+OrderApiService: 提供的eleme_order相关的">
+<meta property="og:updated_time" content="2017-01-25T06:03:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于Pylon的Demo开发及发布相关">
+<meta name="twitter:description" content="基于pylon的服务,包括代码结构及开发流程。
+sample可以参考sample-project, repo地址https://git.elenet.me/pts/sample-project
+也可以参考settle项目
+最好的参考项目compensation-service
+代码结构
+api: 接口定义相关
+api: 接口定义
+OrderApiService: 提供的eleme_order相关的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://fanteathy.github.io/2016/12/30/java_develop_deploy_base_on_pylon/"/>
+
+
+
+
+
+  <title> 基于Pylon的Demo开发及发布相关 | Fanteathy </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4a5f97b0ff5f7149cd40cf481a7f9ae4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Fanteathy</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://fanteathy.github.io/2016/12/30/java_develop_deploy_base_on_pylon/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="fanteathy">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2180875?v=3&u=669f9a2b4e195cb7d1336a0dc4fa4efccaeba38c&s=400">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Fanteathy">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Fanteathy" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                基于Pylon的Demo开发及发布相关
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-30T15:00:00+08:00">
+                2016-12-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/12/30/java_develop_deploy_base_on_pylon/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/30/java_develop_deploy_base_on_pylon/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/30/java_develop_deploy_base_on_pylon/" class="leancloud_visitors" data-flag-title="基于Pylon的Demo开发及发布相关">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>基于pylon的服务,包括代码结构及开发流程。</p>
+<p>sample可以参考<a href="docs/sample-project.zip">sample-project</a>, repo地址<a href="https://git.elenet.me/pts/sample-project" target="_blank" rel="external">https://git.elenet.me/pts/sample-project</a></p>
+<p>也可以参考<a href="https://git.elenet.me/fin/settle" target="_blank" rel="external">settle项目</a></p>
+<p><strong><em>最好的</em></strong>参考项目<a href="https://git.elenet.me/pts/compensation-service" target="_blank" rel="external">compensation-service</a></p>
+<h2 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h2><ul>
+<li>api: 接口定义相关<ul>
+<li>api: 接口定义<ul>
+<li>OrderApiService: 提供的eleme_order相关的api </li>
+</ul>
+</li>
+<li>dto: 定义请求的数据结构和返回的数据结构(对应javabean)<ul>
+<li>ElemeOrder: <code>OrderApiService</code>中接口需要的请求和返回数据结构</li>
+</ul>
+</li>
+<li>form: 也可以使用dto定义返回的数据结构，form定义请求的数据结构 <strong><em>注意(important): 最好不要定义form的constructor</em></strong><ul>
+<li>enum: 对于其中请求参数常量的使用。<strong><em>可以将常量定义在enum中</em></strong>，传递的时候使用enum实例即可，使用enum表达的信息更为丰富 </li>
+</ul>
+</li>
+<li>exception: 接口exception定义<ul>
+<li>ServiceException: 表示业务相关的异常(如用户不存在，红包已过期等)</li>
+<li>SystemException: 表示服务内部的异常(如数据库连接超时，redis服务不可用等)</li>
+<li>java.lang.RuntimeException: 非受检异常, 计入熔断统计</li>
+<li>其余异常参考: <a href="http://wiki.ele.to:8090/pages/viewpage.action?pageId=20328819" target="_blank" rel="external">Pylon内置Rpc异常</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>dao: model定义,和DB table crud一一对应，供<code>service</code>中接口实现使用<ul>
+<li>ElemeOrderDao: eleme_order表对应的数据模型，和eleme_order表字段对应</li>
+<li>resources: DB连接，DB事务等</li>
+</ul>
+</li>
+<li>deploy:<ul>
+<li>发布相关定义(发布相关变量等), 最终发布文件存储位置</li>
+</ul>
+</li>
+<li>docs: 文档</li>
+<li>service: 接口实现,业务逻辑定义。可以加一层BIZ层, service抽象成webapi, biz写详细业务逻辑。依赖<code>api</code>和<code>dao</code><ul>
+<li>conf: 主要的配置文件<ul>
+<li>Configure.json: 最重要的配置文件。<ul>
+<li>serverConf: 服务端配置<ul>
+<li>initializer: IServiceInitializer实现类类名</li>
+<li>interfaces: 提供服务的接口名列表</li>
+</ul>
+</li>
+<li>clientConfs: 客户端配置, 有依赖服务则需要声明<ul>
+<li>interfaces: 调用的接口名列表</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>OrderApiServiceImpl: <code>OrderApiService</code>中各种接口的实现</li>
+<li>soa: 实现Pylon接口<ul>
+<li>ServiceInitializer: 服务初始化接口, 服务启动的时候调用对应init方法<ul>
+<li>getImpl: 返回指定接口对应的实现实例(所以能够通过提供的interface名找到对应的方法实现类)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>MainApplication: <code>程序启动入口</code>, 启动基于Pylon的服务(其实是调用<code>ServiceInitializer.init()</code>) 。也可以通过me.ele.core.container.Container作为MainClass启动。(start.sh中配置启动入口)</li>
+</ul>
+</li>
+<li>common: 定义公共组件</li>
+<li>pom.xml: 父级pom定义  </li>
+</ul>
+<h2 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程:"></a>开发流程:</h2><ul>
+<li>定义接口: api定义, interface定义，写对应的dto</li>
+<li>DAO层: db table crud实现</li>
+<li>service: 业务逻辑</li>
+<li>test: optional</li>
+<li>发布: <ul>
+<li>eless配置替换代码中配置</li>
+<li>ci</li>
+<li>start.sh</li>
+<li>accept request</li>
+</ul>
+</li>
+</ul>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>测试方法有以下几种:</p>
+<ul>
+<li>在单元测试代码中测试<ul>
+<li>测试其他服务接口，需要构造<code>client</code>从huskar获取服务列表，发起RPC请求<ul>
+<li>参考<code>me.ele.pts.sample.test.base.TestBase</code>的定义<ul>
+<li><code>ClientUtil.getContext().initClients(&quot;deploy/conf/configure.json&quot;);</code>初始化Configure.json中定义的客户端，所以可以在<code>SampleServiceTest</code>中直接调用<code>TimeLineSearchService timeLineSearchService =
+  (TimeLineSearchService) ClientUtil.getContext().getClients(TimeLineSearchService.class);</code>构造<code>TimelineSearchService</code>的客户端（从alpha环境中获取配置），并调用对应接口</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>测试本服务接口，直接测试Service层对应接口实现代码即可。不需要通过接口调用，方便debug<ul>
+<li>参考<code>me.ele.pts.sample.test.base.TestBase</code>的定义<ul>
+<li><code>new AnnotationConfigApplicationContext(MainApplication.class);</code>注入<code>MainApplication</code>中定义的Bean，所以可以在<code>SampleServiceTest</code>中调用<code>SampleApi sampleService = ApplicationContextUtil.context.getBean(SampleApi.class);</code>获取对应的Bean,直接调用对应的方法即可 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>RPC测试，不能很好地debug，因为是RPC请求<ul>
+<li><code>自己构造client测试</code>，需要另外写代码构造client</li>
+<li><code>通过postman测试</code>, 本地需要启动服务，或者通过<code>json-rpc</code>协议使用postman测试alpha环境</li>
+</ul>
+</li>
+</ul>
+<h3 id="从IDE启动服务"><a href="#从IDE启动服务" class="headerlink" title="从IDE启动服务"></a>从IDE启动服务</h3><p>按照<code>fin.settle_job_build.yml</code>定义的顺序部署好文件后。</p>
+<p>配置[Run/Debug Configurations]:</p>
+<p>设置[Application] <code>fin.settle_job</code>的:</p>
+<ul>
+<li><code>Main class</code>: <code>me.ele.fin.job.MainApplication</code></li>
+<li><code>Working directory</code>: <code>/Users/joshua/finance/settle/settle-job/settle-job-service/deploy</code>。定位到<code>deploy</code>目录下，因为经过<code>ci_success.sh</code>后，所有的<code>conf</code>和<code>lib</code>都位于此目录下</li>
+<li><code>Use classpath of module</code>: <code>settle-job-service</code></li>
+</ul>
+<p>直接启动，启动过程中观察对应的日志</p>
+<p><strong><em>启动后可以使用<code>postman</code>发送请求,在IDE中设置断点，直接进行Debug</em></strong></p>
+<h3 id="POSTMAN使用方法如下"><a href="#POSTMAN使用方法如下" class="headerlink" title="POSTMAN使用方法如下"></a>POSTMAN使用方法如下</h3><h4 id="method"><a href="#method" class="headerlink" title="method"></a>method</h4><p>post: <code>http://vpca-fin-settle-query-1.vm.elenet.me:8092/rpc</code></p>
+<h4 id="body"><a href="#body" class="headerlink" title="body"></a>body</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;ver&quot;: &quot;1.0&quot;,</div><div class="line">  &quot;soa&quot;: &#123;&quot;req&quot;:&quot;12345&quot;,&quot;rpc&quot;:&quot;clientAppId|1.4.5.2&quot;&#125;,</div><div class="line">  &quot;context&quot;: &#123;&quot;type&quot;:&quot;lpt&quot;&#125;,</div><div class="line">  &quot;iface&quot;: &quot;me.ele.fin.settlement.api.soa.ISettlementSampleApi&quot;,</div><div class="line">  &quot;method&quot;: &quot;helloWorld&quot;,</div><div class="line">  &quot;args&quot;: &#123;&quot;form&quot;:&quot;&#123;\&quot;name\&quot;:\&quot;test\&quot;&#125;&quot;&#125;,</div><div class="line">  &quot;metas&quot;: &#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="response"><a href="#response" class="headerlink" title="response"></a>response</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;ver&quot;: &quot;1.0&quot;,</div><div class="line">  &quot;soa&quot;: &#123;</div><div class="line">    &quot;req&quot;: &quot;12345&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;result&quot;: &quot;&#123;\&quot;message\&quot;:\&quot;hello world test\&quot;&#125;&quot;,</div><div class="line">  &quot;ex&quot;: null</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>也可以在本地启动服务，进行测试，参考<code>App_id_build.yml</code>中的步骤:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cd settle</div><div class="line">mvn clean package -U -f settle-settlement/pom.xml -DskipTests=true</div><div class="line">chmod +x settle-settlement/settle-settlement-service/deploy/ci_success.sh</div><div class="line">settle-settlement/settle-settlement-service/deploy/ci_success.sh</div><div class="line">cd settle/settle-settlement/settle-settlement-service/deploy</div><div class="line">sh start.sh</div></pre></td></tr></table></figure>
+<p>post: <code>http://localhost:8092/rpc</code></p>
+<p>body</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;ver&quot;: &quot;1.0&quot;,</div><div class="line">  &quot;soa&quot;: &#123;&quot;req&quot;:&quot;12345&quot;,&quot;rpc&quot;:&quot;clientAppId|1.4.5.2&quot;&#125;,</div><div class="line">  &quot;context&quot;: &#123;&quot;type&quot;:&quot;lpt&quot;&#125;,</div><div class="line">  &quot;iface&quot;: &quot;me.ele.fin.settlement.api.soa.ISettlementService&quot;,</div><div class="line">  &quot;method&quot;: &quot;processBizSettle&quot;,</div><div class="line">  &quot;args&quot;: &#123;&quot;form&quot;:&quot;&#123;\&quot;restaurantId\&quot;:123, \&quot;OrderId\&quot;: 123, \&quot;transNo\&quot;: \&quot;2016\&quot;, \&quot;businessType\&quot;: 1, \&quot;operateType\&quot;:1, \&quot;comment\&quot;: \&quot;hello\&quot;, \&quot;amount\&quot;: 1.23, \&quot;compensationRate\&quot;: 1.23&#125;&quot;&#125;,</div><div class="line">  &quot;metas&quot;: &#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>response:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;ver&quot;: &quot;1.0&quot;,</div><div class="line">  &quot;soa&quot;: &#123;</div><div class="line">    &quot;req&quot;: &quot;12345&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;result&quot;: &quot;null&quot;,</div><div class="line">  &quot;ex&quot;: null</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="SOA调用"><a href="#SOA调用" class="headerlink" title="SOA调用"></a>SOA调用</h2><p>因为pylon初始化时已经<code>initClients</code>了，所以直接构造client即可: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">TimeLineSearchService timeLineSearchService =</div><div class="line">                (TimeLineSearchService) ClientUtil.getContext().getClients(TimeLineSearchService.class);</div></pre></td></tr></table></figure>
+<p>直接调用对应接口即可。</p>
+<h2 id="发布相关"><a href="#发布相关" class="headerlink" title="发布相关"></a>发布相关</h2><p>发布最主要的脚本为位于根目录下的<code>$appid_build.yml</code>文件</p>
+<p>具体过程参考<a href="docs/kuangjiagongju-39677747-071216-1111-18.pdf">$appid_build.yml文件说明</a></p>
+<p><strong><em>可以在本地运行文件中相关命令以验证</em></strong></p>
+<p>以<code>fin.settle_clearing_build.yml</code>为例:</p>
+<ul>
+<li><p><code>mvn clean package -U -f pom.xml -DskipTests=true</code> 构建所有jar包，并跳过测试(使用<code>settle/pom.xml</code>) </p>
+<p>  <code>build</code>节点意义如下:</p>
+<pre><code>1. `maven-compiler-plugin`: 生成java包
+2. `maven-source-plugin`: 生成sources源码包
+</code></pre></li>
+</ul>
+<p>此时会生成<code>module</code>下定义的所有包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;modules&gt;</div><div class="line">    &lt;module&gt;bill-query&lt;/module&gt;</div><div class="line">    &lt;module&gt;settle-clearing&lt;/module&gt;</div><div class="line">    &lt;module&gt;settle-dataretry&lt;/module&gt;</div><div class="line">    &lt;module&gt;settle-datasync&lt;/module&gt;</div><div class="line">    &lt;module&gt;settle-job&lt;/module&gt;</div><div class="line">    &lt;module&gt;settle-query&lt;/module&gt;</div><div class="line">    &lt;module&gt;settle-settlement&lt;/module&gt;</div><div class="line">&lt;/modules&gt;</div></pre></td></tr></table></figure>
+<p>生成日志如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[INFO] settle ............................................. SUCCESS [  0.685 s]</div><div class="line">[INFO] bill-query ......................................... SUCCESS [  2.565 s]</div><div class="line">[INFO] settle-clearing .................................... SUCCESS [  0.009 s]</div><div class="line">[INFO] settle-clearing-api ................................ SUCCESS [  0.342 s]</div><div class="line">[INFO] settle-clearing-service ............................ SUCCESS [  2.688 s]</div><div class="line">[INFO] settle-dataretry ................................... SUCCESS [  0.151 s]</div><div class="line">[INFO] settle-datasync .................................... SUCCESS [  0.144 s]</div><div class="line">[INFO] settle-job ......................................... SUCCESS [  0.141 s]</div><div class="line">[INFO] settle-query ....................................... SUCCESS [  0.173 s]</div><div class="line">[INFO] settle-settlement .................................. SUCCESS [  0.158 s]</div></pre></td></tr></table></figure>
+<p>对应的目录如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── README.md</div><div class="line">├── bill-query</div><div class="line">│   ├── bill-query.iml</div><div class="line">│   ├── pom.xml</div><div class="line">│   ├── src</div><div class="line">│   └── target</div><div class="line">├── fin.settle_clearing_build.yml</div><div class="line">├── pom.xml</div><div class="line">├── settle-clearing</div><div class="line">│   ├── pom.xml</div><div class="line">│   ├── settle-clearing-api</div><div class="line">│   ├── settle-clearing-service</div><div class="line">│   └── settle-clearing.iml</div><div class="line">├── settle-dataretry</div><div class="line">│   ├── pom.xml</div><div class="line">│   ├── settle-dataretry.iml</div><div class="line">│   ├── src</div><div class="line">│   └── target</div><div class="line">├── settle-datasync</div><div class="line">│   ├── pom.xml</div><div class="line">│   ├── settle-datasync.iml</div><div class="line">│   ├── src</div><div class="line">│   └── target</div><div class="line">├── settle-job</div><div class="line">│   ├── pom.xml</div><div class="line">│   ├── settle-job.iml</div><div class="line">│   ├── src</div><div class="line">│   └── target</div><div class="line">├── settle-query</div><div class="line">│   ├── pom.xml</div><div class="line">│   ├── settle-query.iml</div><div class="line">│   ├── src</div><div class="line">│   └── target</div><div class="line">├── settle-settlement</div><div class="line">│   ├── pom.xml</div><div class="line">│   ├── settle-settlement.iml</div><div class="line">│   ├── src</div><div class="line">│   └── target</div><div class="line">└── settle.iml</div></pre></td></tr></table></figure>
+<p>注意<code>settle-clearing</code>划分为了<code>settle-clearing-api</code>,<code>settle-clearing-service</code>两个Module</p>
+<p>对应的jar包如下: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">.//bill-query/target/bill-query-1.0-SNAPSHOT-sources.jar</div><div class="line">.//bill-query/target/bill-query-1.0-SNAPSHOT.jar</div><div class="line">.//settle-clearing/settle-clearing-api/target/settle-clearing-api-1.0-SNAPSHOT-sources.jar</div><div class="line">.//settle-clearing/settle-clearing-api/target/settle-clearing-api-1.0-SNAPSHOT.jar</div><div class="line">.//settle-clearing/settle-clearing-service/target/settle-clearing-service-1.0-SNAPSHOT-sources.jar</div><div class="line">.//settle-clearing/settle-clearing-service/target/settle-clearing-service-1.0-SNAPSHOT.jar</div><div class="line">.//settle-dataretry/target/settle-dataretry-1.0-SNAPSHOT-sources.jar</div><div class="line">.//settle-dataretry/target/settle-dataretry-1.0-SNAPSHOT.jar</div><div class="line">.//settle-datasync/target/settle-datasync-1.0-SNAPSHOT-sources.jar</div><div class="line">.//settle-datasync/target/settle-datasync-1.0-SNAPSHOT.jar</div><div class="line">.//settle-job/target/settle-job-1.0-SNAPSHOT-sources.jar</div><div class="line">.//settle-job/target/settle-job-1.0-SNAPSHOT.jar</div><div class="line">.//settle-query/target/settle-query-1.0-SNAPSHOT-sources.jar</div><div class="line">.//settle-query/target/settle-query-1.0-SNAPSHOT.jar</div><div class="line">.//settle-settlement/target/settle-settlement-1.0-SNAPSHOT-sources.jar</div><div class="line">.//settle-settlement/target/settle-settlement-1.0-SNAPSHOT.jar</div></pre></td></tr></table></figure>
+<ul>
+<li>after_success</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">after_success:</div><div class="line">   - chmod +x settle-clearing/settle-clearing-service/deploy/ci_success.sh</div><div class="line">   - settle-clearing/settle-clearing-service/deploy/ci_success.sh</div></pre></td></tr></table></figure>
+<p>运行<code>ci_success.sh</code>，将<code>settle-clearing/settle-clearing-service</code>下面的zip文件(<code>settle-clearing-service.zip</code>)放在<code>deploy</code>目录下</p>
+<p><code>settle-clearing-service.zip</code>的生成依赖于<code>settle-clearing/settle-clearing-service/pom.xml</code>的定义， 其中的<code>build</code>节点定义了<code>编译打包配置</code></p>
+<p><code>settle-clearing-service.zip</code>结构为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">lib/</div><div class="line">	...</div><div class="line">	pylon-rpc-2.0.16.jar</div><div class="line">	pylon-spring-2.0.16.jar</div><div class="line">	settle-clearing-api-1.0-SNAPSHOT.jar</div><div class="line">	settle-clearing-service-1.0-SNAPSHOT.jar</div><div class="line">	sigar-1.6.4.jar</div><div class="line">	slf4j-api-1.7.6.jar</div><div class="line">	...</div><div class="line">``` </div><div class="line"></div><div class="line">此时所有的待发布文件存储在deploy目录下，对应的结构为</div></pre></td></tr></table></figure>
+<p>deploy/<br>    lib/<br>        <em>.jar<br>    conf/
+        </em>.json<br>        *.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">所有的配置文件也可以放在deploy目录下，使用基于classpath的目录获取文件路径`&quot;classpath:/application.properties&quot;`</div><div class="line"></div><div class="line">也可以使用基于根目录(deploy)的方式获取路径(/conf),因为此时根目录即为deploy</div><div class="line"></div><div class="line">- 最终部署</div></pre></td></tr></table></figure></p>
+<p>outfile:</p>
+<ul>
+<li><p>settle-clearing/settle-clearing-service/deploy</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">发布系统将`deploy`下的所有目录抽取部署至`/data/appid`,并运行`start.sh`启动服务</div><div class="line"></div><div class="line">其中`CLASS_PATH=&quot;$PROJECT_DIR/conf:$PROJECT_DIR/lib/*:$CLASS_PATH&quot;`将`conf`,`lib`目录放入classpath中</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">## Pylon相关</div><div class="line"></div><div class="line">### 原理</div><div class="line"></div><div class="line">pylon原理: 提供对应的接口(interface)定义给pylon，服务方实现对应的接口。有对应的请求时，pylon会生成代理对象，调用service对这个接口的具体实现。</div><div class="line"></div><div class="line"></div><div class="line">### 接口定义</div><div class="line"> </div><div class="line"> 参照`transaction_scoring_system`</div><div class="line"> </div><div class="line"> 由`Configure.json`中的`serverConf`提供对应SOA服务的接口定义</div></pre></td></tr></table></figure>
+<p>“serverConf”: {<br>“name”: “pts.score”,<br>“protocol”: “json”,<br>“group”: “local”,<br>“port”: 8088,<br>“threadPoolSize”: 24,<br>“bufferQueueSize”: 30,<br>“initializer”: “me.ele.pts.score.impl.soa.TransactionScoringServiceInitializer”,<br>“interfaces”: [<br> “me.ele.pts.score.service.IRestaurantTransactionScore”,<br> “me.ele.pts.score.service.IUserTransactionScore”<br>]<br>},<br>```</p>
+</li>
+</ul>
+<p>其中的<code>interfaces</code>定义好了对外提供的接口，同时注册在<code>huskar</code>的service中</p>
+<p>此处接口定义在<code>me.ele.pts.api.OrderApiService</code>中</p>
+<h2 id="Bean注入"><a href="#Bean注入" class="headerlink" title="Bean注入"></a>Bean注入</h2><p><code>ServiceInitializer.init()</code>初始化资源。</p>
+<p><code>appContext = new AnnotationConfigApplicationContext(MainApplication.class);</code>会将<code>MainApplication.class</code>作为配置文件注入所有bean（因为<code>MainApplication</code>使用了<code>@Configuration</code>注解）</p>
+<p>同时因为在<code>MainApplication</code>中定义了bean组件扫描的package: <code>@ComponentScan(basePackages = &quot;me.ele.fin.settlement.impl&quot;)</code>,所以定义在<code>me.ele.fin.settlement.impl</code>下所有的bean会在初始化时注入IOC容器。</p>
+<h2 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h2><ul>
+<li>crontab sh对应的java程序main函数（不推荐）</li>
+<li>ScheduledThreadPoolExecutor</li>
+<li>jobplus</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://wiki.ele.to:8090/pages/viewpage.action?pageId=20333808" target="_blank" rel="external">Pylon 2.0接入文档</a>或者参考<a href="docs/kuangjiagongju-20333808-141116-1409-4.pdf">pdf版本</a></li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>打包: 使用maven-assembly-plugin插件，配合dist.xml，conf目录存放配置文件，bin目录存放可执行脚本，lib目录存放所有依赖jar包。</li>
+<li>profile: 环境参数相关（和开发无关，略）</li>
+<li>多module/多package的结构都可以</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/15/my_vim/" rel="next" title="我的vim">
+                <i class="fa fa-chevron-left"></i> 我的vim
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/05/python-is-not-java/" rel="prev" title="Python Is Not Java">
+                Python Is Not Java <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/30/java_develop_deploy_base_on_pylon/"
+           data-title="基于Pylon的Demo开发及发布相关" data-url="http://fanteathy.github.io/2016/12/30/java_develop_deploy_base_on_pylon/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars1.githubusercontent.com/u/2180875?v=3&u=669f9a2b4e195cb7d1336a0dc4fa4efccaeba38c&s=400"
+               alt="fanteathy" />
+          <p class="site-author-name" itemprop="name">fanteathy</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码结构"><span class="nav-number">1.</span> <span class="nav-text">代码结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发流程"><span class="nav-number">2.</span> <span class="nav-text">开发流程:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">3.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从IDE启动服务"><span class="nav-number">3.1.</span> <span class="nav-text">从IDE启动服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POSTMAN使用方法如下"><span class="nav-number">3.2.</span> <span class="nav-text">POSTMAN使用方法如下</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#method"><span class="nav-number">3.2.1.</span> <span class="nav-text">method</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#body"><span class="nav-number">3.2.2.</span> <span class="nav-text">body</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#response"><span class="nav-number">3.2.3.</span> <span class="nav-text">response</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SOA调用"><span class="nav-number">4.</span> <span class="nav-text">SOA调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布相关"><span class="nav-number">5.</span> <span class="nav-text">发布相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bean注入"><span class="nav-number">6.</span> <span class="nav-text">Bean注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本"><span class="nav-number">7.</span> <span class="nav-text">脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">9.</span> <span class="nav-text">其他</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fanteathy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fanteathy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("L2fSPX0G7sSoyGKMiciQhWbr-gzGzoHsz", "XmgeDpUPlFvHnYfzFKA5Btli");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

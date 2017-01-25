@@ -1,0 +1,1064 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="tool," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="关于vim常言道: 工欲善其事，必先利其器。作为一个程序员，一个常用的工具就是编辑器。相比IDE，vim具有以下几种特性:
+
+跨平台及统一环境
+无论是在windows还是在*nix，vim是一个很完美的跨平台文本编辑器。
+
+
+定制化及可扩展
+vim提供一个vimrc的配置文件来配置vim，并且自己可以定制一些插件来实现各种功能 
+
+
+高效命令行
+使用vim编辑文本，只需在键盘上操作就可以，根本无需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的vim">
+<meta property="og:url" content="http://fanteathy.github.io/2016/12/15/my_vim/index.html">
+<meta property="og:site_name" content="Fanteathy">
+<meta property="og:description" content="关于vim常言道: 工欲善其事，必先利其器。作为一个程序员，一个常用的工具就是编辑器。相比IDE，vim具有以下几种特性:
+
+跨平台及统一环境
+无论是在windows还是在*nix，vim是一个很完美的跨平台文本编辑器。
+
+
+定制化及可扩展
+vim提供一个vimrc的配置文件来配置vim，并且自己可以定制一些插件来实现各种功能 
+
+
+高效命令行
+使用vim编辑文本，只需在键盘上操作就可以，根本无需">
+<meta property="og:image" content="http://fanteathy.github.io/2016/12/15/my_vim/screenshot.png">
+<meta property="og:updated_time" content="2017-01-25T06:37:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="我的vim">
+<meta name="twitter:description" content="关于vim常言道: 工欲善其事，必先利其器。作为一个程序员，一个常用的工具就是编辑器。相比IDE，vim具有以下几种特性:
+
+跨平台及统一环境
+无论是在windows还是在*nix，vim是一个很完美的跨平台文本编辑器。
+
+
+定制化及可扩展
+vim提供一个vimrc的配置文件来配置vim，并且自己可以定制一些插件来实现各种功能 
+
+
+高效命令行
+使用vim编辑文本，只需在键盘上操作就可以，根本无需">
+<meta name="twitter:image" content="http://fanteathy.github.io/2016/12/15/my_vim/screenshot.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://fanteathy.github.io/2016/12/15/my_vim/"/>
+
+
+
+
+
+  <title> 我的vim | Fanteathy </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4a5f97b0ff5f7149cd40cf481a7f9ae4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Fanteathy</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://fanteathy.github.io/2016/12/15/my_vim/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="fanteathy">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2180875?v=3&u=669f9a2b4e195cb7d1336a0dc4fa4efccaeba38c&s=400">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Fanteathy">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Fanteathy" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                我的vim
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-15T22:00:00+08:00">
+                2016-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tool/" itemprop="url" rel="index">
+                    <span itemprop="name">tool</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/12/15/my_vim/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/15/my_vim/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/15/my_vim/" class="leancloud_visitors" data-flag-title="我的vim">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="关于vim"><a href="#关于vim" class="headerlink" title="关于vim"></a>关于vim</h2><p>常言道: 工欲善其事，必先利其器。作为一个程序员，一个常用的工具就是<code>编辑器</code>。相比IDE，vim具有以下几种特性:</p>
+<ul>
+<li>跨平台及统一环境<ul>
+<li>无论是在windows还是在*nix，vim是一个很完美的跨平台文本编辑器。</li>
+</ul>
+</li>
+<li>定制化及可扩展<ul>
+<li>vim提供一个vimrc的配置文件来配置vim，并且自己可以定制一些插件来实现各种功能 </li>
+</ul>
+</li>
+<li>高效命令行<ul>
+<li>使用vim编辑文本，只需在键盘上操作就可以，根本无需用到鼠标。</li>
+</ul>
+</li>
+</ul>
+<p>笔者最终配置的vim如下图所示:</p>
+<p><img src="/2016/12/15/my_vim/screenshot.png" alt="screenshot.png"></p>
+<p>对应的repo为: <a href="https://github.com/fanteathy/my_vim" target="_blank" rel="external">https://github.com/fanteathy/my_vim</a></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>如果你需要配置vim，只需在Home目录创建一个<code>~/.vimrc</code>文件即可以配置vim了。以下是笔者的<code>.vimrc</code>文件内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&quot;自己定义vimrc常见设置和一些键位的设置</div><div class="line"></div><div class="line">&quot;---------------- 加载插件管理文件 --------------------</div><div class="line">if filereadable(expand(&quot;~/.vimrc.bundles&quot;))</div><div class="line">    source ~/.vimrc.bundles</div><div class="line">endif</div><div class="line"></div><div class="line">&quot; 在插入模式下MAC下的delete不能删除问题</div><div class="line">set backspace=2</div><div class="line">set colorcolumn=80</div><div class="line"></div><div class="line">&quot;--------------- leader设定 -------------</div><div class="line">let mapleader = &apos;,&apos;</div><div class="line">let g:mapleader = &apos;,&apos;</div><div class="line"></div><div class="line">&quot;------------------------------- 基本设置 -----------------------------------</div><div class="line"></div><div class="line">&quot;开启语法高亮</div><div class="line">&quot;syntax enable 该命令只在当前文件有效</div><div class="line">syntax on &quot; 所有缓冲区文件都有效</div><div class="line"></div><div class="line">&quot;-------------- 文件检测 ----------------------</div><div class="line">filetype on</div><div class="line">filetype indent on</div><div class="line">filetype plugin on</div><div class="line">filetype plugin indent on</div><div class="line"></div><div class="line">colorscheme blackbeauty         &quot; 配色主题</div><div class="line"></div><div class="line">set autoread                 &quot; 文件修改之后自动载入。</div><div class="line">set shortmess=atI            &quot; 启动的时候不显示那个援助索马里儿童的提示</div><div class="line"></div><div class="line">set laststatus=2</div><div class="line">&quot;set confirm                  &quot; 取消光标闪烁</div><div class="line">set noswapfile               &quot; 关闭交换文件</div><div class="line"></div><div class="line">set wildignore=*.swp,*.bak,*.pyc,*.class,.svn</div><div class="line"></div><div class="line">set cursorcolumn             &quot; 突出显示当前列</div><div class="line">set cursorline               &quot; 突出显示当前行</div><div class="line"></div><div class="line">set title </div><div class="line">set novisualbell</div><div class="line">set noerrorbells</div><div class="line"></div><div class="line">set magic</div><div class="line"></div><div class="line">set ruler                    &quot; 显示当前行号和列号</div><div class="line">set number                   &quot; 显示行号</div><div class="line">set nowrap                   &quot; 取消换行</div><div class="line"></div><div class="line">set showcmd                  &quot; 在状态栏显示正在输入的命令</div><div class="line">set showmode                 &quot; 显示vim模式</div><div class="line"></div><div class="line">set showmatch                &quot; 括号匹配，高亮</div><div class="line">set matchtime=1         </div><div class="line"></div><div class="line">set hlsearch                 &quot; 高亮搜索的文本</div><div class="line">set incsearch                &quot; 即时搜索</div><div class="line">set ignorecase               &quot; 搜索忽略大小写</div><div class="line">set smartcase                &quot; 有一个或以上大写字母时仍大小敏感</div><div class="line"></div><div class="line">set foldenable               &quot; 代码折叠</div><div class="line">set foldmethod=indent</div><div class="line">set foldlevel=99             </div><div class="line"></div><div class="line">&quot; autosave</div><div class="line">&quot;let g:auto_save = 1  &quot; enable AutoSave on Vim startup</div><div class="line">&quot;let g:auto_save_no_updatetime = 1  &quot; do not change the &apos;updatetime&apos; option</div><div class="line">&quot;let g:auto_save_in_insert_mode = 0  &quot; do not save while in insert mode</div><div class="line">&quot;let g:auto_save_silent = 1  &quot; do not display the auto-save notification</div><div class="line">&quot;let g:auto_save_events = [&quot;InsertLeave&quot;, &quot;TextChanged&quot;]</div><div class="line">&quot;let g:auto_save_keep_marks = 0</div><div class="line"></div><div class="line">&quot; 代码折叠自定义快捷键</div><div class="line">let g:FoldMethod = 0</div><div class="line">map &lt;leader&gt;zz :call ToggleFold()&lt;cr&gt;</div><div class="line">fun! ToggleFold()</div><div class="line">    if g:FoldMethod == 0</div><div class="line">        exe &quot;normal! zM&quot;</div><div class="line">        let g:FoldMethod = 1</div><div class="line">    else</div><div class="line">        exe &quot;normal! zR&quot;</div><div class="line">        let g:FoldMethod = 0</div><div class="line">    endif</div><div class="line">endfun</div><div class="line"></div><div class="line">set smartindent              &quot; 智能缩进</div><div class="line">set autoindent               &quot; 自动缩进</div><div class="line"></div><div class="line">&quot;------------------------------- tab 相关设置 ---------------------</div><div class="line">set tabstop=4                &quot; 设置tab的宽度</div><div class="line">set shiftwidth=4             &quot; 每一次缩进对应的空格数</div><div class="line">set softtabstop=4            &quot; 按退格键是可以一次删除4个空格</div><div class="line">set smarttab                 </div><div class="line">set expandtab                &quot; 将tab自动转化为空格</div><div class="line">set shiftround               &quot; 缩进时，取整</div><div class="line"></div><div class="line">&quot;------------------------------- 文件编码 -------------------------</div><div class="line">set encoding=utf-8</div><div class="line">set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbkgb2312,cp936 &quot; 自动判断编码</div><div class="line">set helplang=cn</div><div class="line">set ffs=unix,mac,dos</div><div class="line"></div><div class="line">set formatoptions+=B          &quot; 合并两行中文时，不在中间加空格</div><div class="line">set termencoding=utf-8        &quot; 终端编码</div><div class="line"></div><div class="line">&quot;------------------------------- 其他设置 -------------------------</div><div class="line">set completeopt=longest,menu  &quot; 让vim的补全菜单和ide一致</div><div class="line">set wildmenu</div><div class="line">set wildignore=*.0,*~,*.pyc,*.class</div><div class="line"></div><div class="line">autocmd! bufwritepost .vimrc source % &quot; vimrc 文件修改后自动加载</div><div class="line"></div><div class="line">&quot;------------------------------- 自定义快捷键设置 -----------------</div><div class="line"></div><div class="line">&quot; 关闭方向键，使用hjkl</div><div class="line">map &lt;Left&gt; &lt;Nop&gt;             </div><div class="line">map &lt;Right&gt; &lt;Nop&gt;</div><div class="line">map &lt;Up&gt; &lt;Nop&gt;</div><div class="line">map &lt;Down&gt; &lt;Nop&gt; </div><div class="line"></div><div class="line">&quot; 行首 和 行尾 map</div><div class="line">noremap H ^</div><div class="line">noremap L $</div><div class="line"></div><div class="line">&quot; 切换到命令模式map </div><div class="line">noremap ; :</div><div class="line"></div><div class="line">&quot; 插入模式下 kj 映射到 Esc</div><div class="line">inoremap kj &lt;Esc&gt;       </div><div class="line"></div><div class="line">nnoremap &lt;leader&gt;q :q!&lt;CR&gt;</div><div class="line">nnoremap &lt;leader&gt;w :wq&lt;CR&gt;</div><div class="line"></div><div class="line">&quot; 分屏切换</div><div class="line">noremap w&lt;up&gt; &lt;c-w&gt;&lt;up&gt;</div><div class="line">noremap wk &lt;c-w&gt;&lt;up&gt;</div><div class="line">noremap w&lt;left&gt; &lt;c-w&gt;&lt;left&gt;</div><div class="line">noremap wh &lt;c-w&gt;&lt;left&gt;</div><div class="line">noremap w&lt;right&gt; &lt;c-w&gt;&lt;right&gt;</div><div class="line">noremap wl &lt;c-w&gt;&lt;right&gt;</div><div class="line">noremap w&lt;down&gt; &lt;c-w&gt;&lt;down&gt;</div><div class="line">noremap wj &lt;c-w&gt;&lt;down&gt;</div><div class="line"></div><div class="line">&quot; python 文件的一般设置</div><div class="line">autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai</div><div class="line"></div><div class="line">&quot; php自动完成</div><div class="line">autocmd FileType php set omnifunc=phpcomplete#CompletePHP</div><div class="line">&quot; 当文件类型为php时，将系统自动补全的快捷键更改为 ,a</div><div class="line">autocmd FileType php inoremap &lt;leader&gt;a &lt;C-x&gt;&lt;C-o&gt;</div><div class="line"></div><div class="line">&quot; 只有在是PHP文件时，才启用PHP补全</div><div class="line">au FileType php call AddPHPFuncList()</div><div class="line">function! AddPHPFuncList()</div><div class="line">    set dictionary-=~/.vim/funclist.txt dictionary+=~/.vim/funclist.txt</div><div class="line">    set complete-=k complete+=k</div><div class="line">endfunction</div><div class="line"></div><div class="line">&quot; phpqa</div><div class="line">let g:phpqa_php_cmd=&apos;php&apos;</div><div class="line">let g:phpqa_codesniffer_args = &quot;--standard=PSR2&quot; &quot; Set the codesniffer args</div><div class="line">let g:phpqa_codesniffer_cmd=&apos;phpcs&apos; &quot; PHP Code Sniffer binary (default = \&quot;phpcs\&quot;)</div><div class="line">let g:phpqa_messdetector_cmd=&apos;phpmd&apos; &quot; PHP Mess Detector binary (default = \&quot;phpmd\&quot;)</div><div class="line">let g:phpqa_messdetector_autorun = 0 &quot; Don&apos;t run messdetector on save (default = 1)</div><div class="line">let g:phpqa_codesniffer_autorun = 0 &quot; Don&apos;t run codesniffer on save (default = 1)</div><div class="line">let g:phpqa_codecoverage_autorun = 1 &quot; Show code coverage on load (default = 0)</div><div class="line">&quot; Clover code coverage XML file</div><div class="line">&quot; let g:phpqa_codecoverage_file = \&quot;/path/to/clover.xml\&quot;</div><div class="line">&quot; &quot; Show markers for lines that ARE covered by tests (default = 1)</div><div class="line">let g:phpqa_codecoverage_showcovered = 0</div><div class="line"> </div><div class="line">&quot; Stop the location list opening automatically</div><div class="line">let g:phpqa_open_loc = 0</div><div class="line"></div><div class="line"></div><div class="line">&quot; 定义函数AutoSetFileHead，自动插入文件头</div><div class="line">autocmd BufNewFile *.sh,*.py exec &quot;:call AutoSetFileHead()&quot;</div><div class="line">function! AutoSetFileHead()</div><div class="line">&quot;如果文件类型为.sh文件</div><div class="line">if &amp;filetype == &apos;sh&apos;</div><div class="line">    call setline(1, &quot;\#!/bin/bash&quot;)</div><div class="line">endif</div><div class="line"></div><div class="line">&quot;如果文件类型为python</div><div class="line">if &amp;filetype == &apos;python&apos;</div><div class="line">    call setline(1, &quot;\#!/usr/bin/env python&quot;)</div><div class="line">    call append(1, &quot;\# -*- coding: utf-8 -*- &quot;)</div><div class="line">endif</div><div class="line">    normal G</div><div class="line">    normal o</div><div class="line">    normal o</div><div class="line">endfunc</div><div class="line"></div><div class="line">&quot;set some keyword to highlight</div><div class="line">if has(&quot;autocmd&quot;)</div><div class="line">    &quot;Highlight TODO, FIXME, NOTE, etc.</div><div class="line">    if v:version &gt; 701</div><div class="line">        autocmd Syntax * call matchadd(&apos;Todo&apos;, &apos;\W\zs\(TODO\|FIXME\|CHANGED\|DONE\|XXX\|BUG\|HACK\)&apos;)</div><div class="line">        autocmd Syntax * call matchadd(&apos;Debug&apos;, &apos;\W\zs\(NOTE\|INFO\|IDEA\|NOTICE\)&apos;)</div><div class="line">    endif</div><div class="line">endif</div><div class="line"></div><div class="line">&quot; ----------------------- 插件设置 ------------------------------</div><div class="line"></div><div class="line">&quot; *********************** NERDTree 插件设置 *********************</div><div class="line">&quot; vim启动时触发</div><div class="line">&quot; autocmd vimenter * NERDTree</div><div class="line">map &lt;leader&gt;n :NERDTreeToggle&lt;CR&gt;</div><div class="line">autocmd bufenter * if (winnr(&quot;$&quot;) == 1 &amp;&amp; exists(&quot;b:NERDTreeType&quot;) &amp;&amp; b:NERDTreeType == &quot;primary&quot;) | q | endif</div><div class="line">let NERDTreeShowLineNumbers=1</div><div class="line">let NERDTreeIgnore=[&apos;\.pyc$&apos;, &apos;\~$&apos;]</div><div class="line">&quot; 分屏打开文件</div><div class="line">let g:NERDTreeMapOpenVSplit = &apos;v&apos; </div><div class="line">let g:NERDTreeMapOpenSplit = &apos;s&apos;   </div><div class="line"></div><div class="line">&quot; *********************** tagbar 插件设置 ***********************</div><div class="line">map &lt;leader&gt;g :TagbarToggle&lt;CR&gt;</div><div class="line">let g:tagbar_auto_focus=1</div><div class="line"></div><div class="line">&quot; *********************** taglist 插件设置 **********************</div><div class="line">let Tlist_Ctags_Cmd=&quot;/usr/local/bin/ctags&quot;</div><div class="line">let Tlist_Show_One_File=1</div><div class="line">let Tlist_Exit_OnlyWindow=1</div><div class="line">let Tlist_Auto_Open=0</div><div class="line">let Tlist_Auto_Highlight_Tag=1</div><div class="line">let Tlist_Use_Right_Window=1</div><div class="line">let Tlist_WinWidth=35</div><div class="line"></div><div class="line">&quot; *********************** 快速跳转 ******************************</div><div class="line">let g:EasyMotion_smartcase=1</div><div class="line">map &lt;leader&gt;&lt;leader&gt;h &lt;Plug&gt;(easymotion-linebackward)</div><div class="line">map &lt;leader&gt;&lt;leader&gt;j &lt;Plug&gt;(easymotion-j)</div><div class="line">map &lt;leader&gt;&lt;leader&gt;k &lt;Plug&gt;(easymotion-k)</div><div class="line">map &lt;leader&gt;&lt;leader&gt;l &lt;Plug&gt;(easymotion-lineforward)</div><div class="line">map &lt;leader&gt;&lt;leader&gt;. &lt;Plug&gt;(easymotion-repeat)</div><div class="line"></div><div class="line">&quot; *********************** 语法检查 ******************************</div><div class="line">let g:syntastic_error_symbol=&apos;&gt;&gt;&apos;</div><div class="line">let g:syntastic_warning_symbol=&apos;&gt;&apos;</div><div class="line">let g:syntastic_check_on_open=1</div><div class="line">let g:syntastic_check_on_wq=0</div><div class="line">let g:syntastic_enable_highlighting=1</div><div class="line">let g:syntastic_python_checkers=[&apos;pyflakes&apos;, &apos;pep8&apos;]</div><div class="line">let g:syntastic_python_pep8_args=&apos;--ignore=E501,E225&apos;</div><div class="line"></div><div class="line">let g:syntastic_always_populate_loc_list=0</div><div class="line">let g:syntastic_auto_loc_list=0</div><div class="line">let g:syntastic_loc_list_height=3</div><div class="line"></div><div class="line">function! ToggleErrors()</div><div class="line">    let old_last_winnr = winnr(&apos;$&apos;)</div><div class="line">    lclose</div><div class="line">    if old_last_winnr == winnr(&apos;$&apos;)</div><div class="line">        &quot;Nothing was closed, open syntastic error location panel</div><div class="line">        Errors</div><div class="line">    endif</div><div class="line">endfunction</div><div class="line"></div><div class="line">nnoremap &lt;leader&gt;s :call ToggleErrors()&lt;cr&gt;</div><div class="line"></div><div class="line">&quot; *********************** autopep8语法检查 ******************************</div><div class="line">let g:autopep8_max_line_length=79</div><div class="line"></div><div class="line"></div><div class="line">&quot; *********************** 自动补全引号等插件设置 ****************</div><div class="line">au FileType python let b:delimitMate_nesting_quotes = [&apos;&quot;&apos;]</div><div class="line"></div><div class="line">&quot; ********************** 全局搜索 ***********************</div><div class="line">let g:ag_prg = &quot;ag --nogroup --nocolor --column&quot;</div><div class="line"></div><div class="line"></div><div class="line">&quot; python 相关语法检查</div><div class="line">let g:pyflakes_use_quickfix = 0</div><div class="line">let python_highlight_all = 1</div><div class="line"></div><div class="line">&quot; *********************** markdown 插件设置 *********************</div><div class="line">let g:vim_markdown_folding_disable = 1</div><div class="line"></div><div class="line">&quot; 多光标选中编辑设置</div><div class="line">&quot; let g:multi_cursor_use_default_mapping = 0</div><div class="line">&quot; let g:multi_cursor_next_key=&apos;&lt;C-m&gt;&apos;</div><div class="line">&quot; let g:multi_cursor_prev_key=&apos;&lt;C-p&gt;&apos;</div><div class="line">&quot; let g:multi_cursor_skip_key=&apos;&lt;C-x&gt;&apos;</div><div class="line">&quot; let g:multi_cursor_quit_key=&apos;&lt;Esc&gt;&apos;</div><div class="line"></div><div class="line">&quot; *********************** 快速注释 ******************************</div><div class="line">let g:NERDSpaceDelims = 1</div><div class="line"></div><div class="line">&quot; *********************** 文件搜索插件 **************************</div><div class="line">let g:ctrlp_map = &apos;&lt;leader&gt;p&apos;</div><div class="line">let g:ctrlp_cmd = &apos;CtrlP&apos;</div><div class="line">map &lt;leader&gt;f : CtrlPMRU&lt;CR&gt;</div><div class="line">let g:ctrlp_custom_ignore = &#123;</div><div class="line">    \ &apos;dir&apos;: &apos;\v[\/]\.(git|hg|svn|rvm)$&apos;,</div><div class="line">    \ &apos;file&apos;: &apos;\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$&apos;,</div><div class="line">    \&#125;</div><div class="line"></div><div class="line">let g:ctrlp_working_path_mode=0</div><div class="line">let g:ctrlp_match_window_bottom=1</div><div class="line">let g:ctrlp_max_height=15</div><div class="line">let g:ctrlp_match_window_reversed=0</div><div class="line">let g:ctrlp_mruf_max=500</div><div class="line">let g:ctrlp_follow_symlinks=1</div><div class="line"></div><div class="line">&quot; ctrlp相关插件 函数搜索</div><div class="line">nnoremap &lt;Leader&gt;fu: CtrlPFunky&lt;Cr&gt;</div><div class="line">nnoremap &lt;Leader&gt;fU:execute &apos;CtrlpFunky &apos; . expand(&apos;&lt;cword&gt;&apos;)&lt;Cr&gt;</div><div class="line">let g:ctrlp_funky_syntax_highlight = 1</div><div class="line">let g:ctrlp_extensions = [&apos;funky&apos;]</div><div class="line"></div><div class="line">&quot; *********************** pyflakes_vim 插件设置 *****************</div><div class="line">let g:pyflakes_user_quickfix=0</div><div class="line"></div><div class="line">&quot; *********************** python-syntax *************************</div><div class="line">let python_highlight_all=1</div><div class="line"></div><div class="line">&quot; *********************** vim-markdown **************************</div><div class="line">let g:vim_mardown_folding_disabled=1</div><div class="line"></div><div class="line">&quot; *********************** 自动补全插件 **************************</div><div class="line">let g:ycm_key_list_select_completion=[&apos;&lt;Down&gt;&apos;]</div><div class="line">let g:ycm_key_lsit_previous_completion=[&apos;&lt;Up&gt;&apos;]</div><div class="line">let g:ycm_complete_in_comments = 1  &quot;在注释输入中也能补全</div><div class="line">let g:ycm_complete_in_strings = 1   &quot;在字符串输入中也能补全</div><div class="line">let g:ycm_use_ultisnips_completer = 1 &quot;提示UltiSnips</div><div class="line">let g:ycm_collect_identifiers_from_comments_and_strings = 1   &quot;注释和字符串中的文字也会被收入补全</div><div class="line">let g:ycm_collect_identifiers_from_tags_files = 1</div><div class="line"></div><div class="line">&quot; ********************** 对齐线设置 ****************************</div><div class="line">let g:indent_guides_enable_on_vim_startup = 0</div><div class="line">let g:indent_guides_auto_colors = 0</div><div class="line">let g:indent_guides_guide_size = 1 </div><div class="line">set ts=4 sw=4 et</div><div class="line">let g:indent_guides_start_level = 2</div><div class="line">autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3</div><div class="line">autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4</div><div class="line">hi IndentGuidesOdd guibg=red ctermbg=3</div><div class="line"></div><div class="line">hi IndentGuidesEven guibg=green ctermbg=4</div><div class="line"></div><div class="line">&quot; 跳转到定义处, 分屏打开</div><div class="line">let g:ycm_goto_buffer_command = &apos;vertical-split&apos;</div><div class="line">nnoremap &lt;leader&gt;jd :YcmCompleter GoToDefinitionElseDeclaration&lt;CR&gt;</div><div class="line">nnoremap &lt;leader&gt;gd :YcmCompleter GoToDeclaration&lt;CR&gt;</div><div class="line">&quot; 引入，可以补全系统，以及python的第三方包 针对新老版本YCM做了兼容</div><div class="line">&quot; old version</div><div class="line">if !empty(glob(&quot;~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py&quot;))</div><div class="line">    let g:ycm_global_ycm_extra_conf =&quot;~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py&quot;</div><div class="line">endif</div><div class="line">&quot; new version</div><div class="line">if !empty(glob(&quot;~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py&quot;))</div><div class="line">    let g:ycm_global_ycm_extra_conf = &quot;~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py&quot;</div><div class="line">endif</div><div class="line"></div><div class="line">&quot; 直接触发自动补全 insert模式下</div><div class="line">&quot; let g:ycm_key_invoke_completion = &apos;&lt;C-Space&gt;&apos;</div><div class="line">let g:ycm_key_list_select_completion=[&apos;&lt;tab&gt;&apos;, &apos;&lt;Down&gt;&apos;]</div><div class="line">&quot; 黑名单,不启用</div><div class="line">let g:ycm_filetype_blacklist = &#123;</div><div class="line">            \ &apos;tagbar&apos; : 1,</div><div class="line">            \ &apos;gitcommit&apos; : 1,</div><div class="line">            \&#125;</div><div class="line"></div><div class="line">&quot; last_edit_marker.vim设置</div><div class="line">nmap &lt;C-y&gt; g&apos;Z</div><div class="line"></div><div class="line">augroup LastEditMarker</div><div class="line">    autocmd!</div><div class="line">    autocmd InsertLeave * normal mZ</div><div class="line">augroup END</div><div class="line"></div><div class="line">&quot; vim，主机复制共享</div><div class="line">vmap &lt;C-c&gt; &quot;+y</div><div class="line">vmap &lt;C-x&gt; &quot;+c    </div><div class="line">vmap &lt;C-v&gt; c&lt;ESC&gt;&quot;+p    </div><div class="line">imap &lt;C-v&gt; &lt;C-r&gt;&lt;C-o&gt;+    </div><div class="line">nmap &lt;C-v&gt; &quot;+p</div><div class="line"></div><div class="line">&quot; powerline设置</div><div class="line">set guifont=PowerlineSymbols\ for\ Powerline</div><div class="line">set nocompatible</div><div class="line">set laststatus=2</div><div class="line">set t_Co=256</div><div class="line">let g:Powerline_symbols = &apos;fancy&apos;</div><div class="line">let Powerline_symbols=&apos;compatible&apos;    </div><div class="line"></div><div class="line">&quot; gitgutter设置</div><div class="line">let g:gitgutter_map_keys = 0</div><div class="line">let g:gitgutter_enabled = 0</div><div class="line">let g:gitgutter_highlight_lines = 1</div><div class="line">nnoremap &lt;leader&gt;gs :GitGutterToggle&lt;CR&gt;</div></pre></td></tr></table></figure>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>使用<code>vumdle</code>管理vim的插件，使用过程如下:</p>
+<ul>
+<li>在Home目录创建<code>~/.vim</code>目录和<code>.vimrc</code>文件，可使用上面的<code>.vimrc</code>文件</li>
+</ul>
+<ul>
+<li>安装vundle</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle</div></pre></td></tr></table></figure>
+<ul>
+<li>添加一个<code>~/.vimrc.bundles</code>文件来保存所有插件的配置，在<code>~/.vimrc</code>文件加入以下代码片段</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if filereadable(expand(&quot;~/.vimrc.bundles&quot;))</div><div class="line">source ~/.vimrc.bundles</div><div class="line">endif</div></pre></td></tr></table></figure>
+<p>以下是笔者的<code>.vimrc.bundles</code>文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line">set nocompatible</div><div class="line">filetype off</div><div class="line"></div><div class="line">set rtp+=~/.vim/bundle/Vundle.vim</div><div class="line">call vundle#begin()</div><div class="line"></div><div class="line">&quot;------------- 插件列表 ---------------------------</div><div class="line">&quot;插件设置和vim基本设置单独放置</div><div class="line"></div><div class="line">Plugin &apos;gmarik/Vundle.vim&apos;</div><div class="line">Plugin &apos;itchyny/lightline.vim&apos;</div><div class="line">Plugin &apos;scrooloose/nerdtree&apos;</div><div class="line">Plugin &apos;ctrlpvim/ctrlp.vim&apos;</div><div class="line">Plugin &apos;tacahiroy/ctrlp-funky&apos;</div><div class="line">Plugin &apos;majutsushi/tagbar&apos;</div><div class="line">Plugin &apos;taglist.vim&apos;</div><div class="line">Plugin &apos;basepi/vim-conque&apos;</div><div class="line"></div><div class="line">Plugin &apos;Valloric/YouCompleteMe&apos;</div><div class="line">Plugin &apos;Raimondi/delimitMate&apos;</div><div class="line">Plugin &apos;scrooloose/syntastic&apos;</div><div class="line">Plugin &apos;jiangmiao/auto-pairs&apos;</div><div class="line">Plugin &apos;tpope/vim-commentary&apos;</div><div class="line">Plugin &apos;sjl/gundo.vim&apos;</div><div class="line">Plugin &apos;Lokaltog/vim-easymotion&apos;</div><div class="line">Plugin &apos;tpope/vim-fugitive&apos;</div><div class="line"></div><div class="line">&quot; python</div><div class="line">Plugin &apos;kevinw/pyflakes-vim&apos;</div><div class="line">Plugin &apos;hdima/python-syntax&apos;</div><div class="line">Plugin &apos;pep8&apos;</div><div class="line">Plugin &apos;tell-k/vim-autopep8&apos;</div><div class="line">Plugin &apos;python.vim--Vasiliev&apos;</div><div class="line">Plugin &apos;hynek/vim-python-pep8-indent&apos;</div><div class="line"></div><div class="line">&quot; php</div><div class="line">Plugin &apos;shawncplus/phpcomplete.vim&apos;</div><div class="line">Plugin &apos;joonty/vim-phpqa&apos;</div><div class="line"></div><div class="line">&quot; golang</div><div class="line">Plugin &apos;fatih/vim-go&apos;</div><div class="line">Plugin &apos;dgryski/vim-godef&apos;</div><div class="line">Plugin &apos;nsf/gocode&apos;, &#123;&apos;rtp&apos;: &apos;vim/&apos;&#125;</div><div class="line"></div><div class="line">&quot; markdown</div><div class="line">Plugin &apos;plasticboy/vim-markdown&apos;</div><div class="line"></div><div class="line">&quot; 多光标</div><div class="line">Plugin &apos;terryma/vim-multiple-cursors&apos;</div><div class="line"></div><div class="line">&quot; 快速注释</div><div class="line">Plugin &apos;scrooloose/nerdcommenter&apos;</div><div class="line"></div><div class="line">&quot; 对齐线</div><div class="line">Plugin &apos;nathanaelkane/vim-indent-guides&apos;</div><div class="line"></div><div class="line">&quot; 全局搜索</div><div class="line">Plugin &apos;rking/ag.vim&apos;</div><div class="line"></div><div class="line">&quot; 跳转到上次修改的地方</div><div class="line">Plugin &apos;vim-scripts/last_edit_marker.vim&apos;</div><div class="line"></div><div class="line">&quot; powerline</div><div class="line">Plugin &apos;powerline/powerline&apos;</div><div class="line"></div><div class="line">&quot; gitgutter</div><div class="line">Plugin &apos;airblade/vim-gitgutter&apos;</div><div class="line"></div><div class="line">&quot; gitv</div><div class="line">Plugin &apos;vim-scripts/gitv&apos;</div><div class="line"></div><div class="line">call vundle#end()</div><div class="line">filetype plugin indent on</div></pre></td></tr></table></figure>
+<p>打开vim，运行<code>:PluginInstall</code>或在shell中直接运行<code>vim +PluginInstall +qall</code>即可安装插件</p>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><p>笔者设置的vim快捷键如下:</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>,g</td>
+<td>tagbar</td>
+</tr>
+<tr>
+<td>,n</td>
+<td>nerdtree</td>
+</tr>
+<tr>
+<td>w[hjkl]</td>
+<td>分屏切换</td>
+</tr>
+<tr>
+<td>gt</td>
+<td>切换tab</td>
+</tr>
+<tr>
+<td>(文件名上面)(v/Enter)</td>
+<td>在(新的/当前)分屏中打开文件</td>
+</tr>
+<tr>
+<td>,q</td>
+<td>关闭对应分屏，退出不保存</td>
+</tr>
+<tr>
+<td>,w</td>
+<td>关闭并保存</td>
+</tr>
+<tr>
+<td>kj</td>
+<td>insert to normal</td>
+</tr>
+<tr>
+<td>,cc</td>
+<td>注释</td>
+</tr>
+<tr>
+<td>,cu</td>
+<td>取消注释</td>
+</tr>
+<tr>
+<td>:vs</td>
+<td>纵向切屏</td>
+</tr>
+<tr>
+<td>:sp</td>
+<td>横向切屏</td>
+</tr>
+<tr>
+<td>,s</td>
+<td>语法错误信息</td>
+</tr>
+<tr>
+<td>;/SHIFT+;</td>
+<td>nornal切换到命令行模式</td>
+</tr>
+<tr>
+<td>H/SHIFT+右箭头</td>
+<td>行首</td>
+</tr>
+<tr>
+<td>L/SHIFT+左箭头</td>
+<td>行尾    </td>
+</tr>
+<tr>
+<td>,p</td>
+<td>打开文件搜索栏</td>
+</tr>
+<tr>
+<td>,jd</td>
+<td>跳转到变量定义处</td>
+</tr>
+<tr>
+<td>F8</td>
+<td>按PEP8标准格式化文件</td>
+</tr>
+<tr>
+<td>:Ag create_order –python</td>
+<td>全局搜索”create_order”</td>
+</tr>
+<tr>
+<td>‘.</td>
+<td>移动光标到上一次的修改行</td>
+</tr>
+<tr>
+<td>`.</td>
+<td>移动光标到上一次的修改点</td>
+</tr>
+<tr>
+<td>``</td>
+<td>last jump</td>
+</tr>
+<tr>
+<td>CTRL+O</td>
+<td>go back</td>
+</tr>
+<tr>
+<td>CTRL+I</td>
+<td>go forwards</td>
+</tr>
+<tr>
+<td>control+y/g’Z</td>
+<td>可跨文件跳转到上次修改位置(last_edit_maker提供功能)</td>
+</tr>
+<tr>
+<td>:new/e/vs/sp/tabe filename</td>
+<td>新建/当前tab/纵向/横向/新tab 打开 filename</td>
+</tr>
+<tr>
+<td>CTRL+c &amp; COMMAND+v</td>
+<td>vim复制，主机粘贴</td>
+</tr>
+<tr>
+<td>COMMAND+c &amp; CTRL+v</td>
+<td>主机复制，vim粘贴</td>
+</tr>
+<tr>
+<td>,a</td>
+<td>insert模式下php文件autocomplete，由phpcomplete的<c-x><c-o> inoremap而来</c-o></c-x></td>
+</tr>
+<tr>
+<td>,gs</td>
+<td>显示文件的git更改,类似于git diff命令的显示效果</td>
+</tr>
+<tr>
+<td>:Gitv</td>
+<td>显示项目版本库的更改，类似于tig的效果</td>
+</tr>
+<tr>
+<td>:Gblame</td>
+<td>在git项目中查看每行最后的更改情况</td>
+</tr>
+<tr>
+<td>:Phpcs</td>
+<td>run code sniffer(代码规范检查, 要求太严格，推荐不用)</td>
+</tr>
+<tr>
+<td>:Phpmd</td>
+<td>run mess detector (will ask for a rule XML file if not set，推荐不用)</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tool/" rel="tag"># tool</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/01/about_deploy/" rel="next" title="服务发布经验">
+                <i class="fa fa-chevron-left"></i> 服务发布经验
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/30/java_develop_deploy_base_on_pylon/" rel="prev" title="基于Pylon的Demo开发及发布相关">
+                基于Pylon的Demo开发及发布相关 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/15/my_vim/"
+           data-title="我的vim" data-url="http://fanteathy.github.io/2016/12/15/my_vim/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars1.githubusercontent.com/u/2180875?v=3&u=669f9a2b4e195cb7d1336a0dc4fa4efccaeba38c&s=400"
+               alt="fanteathy" />
+          <p class="site-author-name" itemprop="name">fanteathy</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于vim"><span class="nav-number">1.</span> <span class="nav-text">关于vim</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件"><span class="nav-number">3.</span> <span class="nav-text">插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快捷键"><span class="nav-number">4.</span> <span class="nav-text">快捷键</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fanteathy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fanteathy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("L2fSPX0G7sSoyGKMiciQhWbr-gzGzoHsz", "XmgeDpUPlFvHnYfzFKA5Btli");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

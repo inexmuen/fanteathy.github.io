@@ -1,0 +1,895 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="arch," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="幂等方案可以保证幂等的操作1. 查询操作查询一次和查询多次，在数据不变的情况下，查询结果是一样的。在隔离级别为可重复读(mysql默认隔离级别)时，select是天然的幂等操作
+2. 删除操作删除操作也是幂等的，删除一次和多次删除结果相同，都是把数据删除。(注意可能返回结果不一样，删除的数据不存在，返回0；删除的数据多条，返回结果多个)
+3. 唯一索引唯一索引或唯一组合索引来防止提交重复数据，不过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于幂等">
+<meta property="og:url" content="http://fanteathy.github.io/2017/01/10/about_idempotency/index.html">
+<meta property="og:site_name" content="Fanteathy">
+<meta property="og:description" content="幂等方案可以保证幂等的操作1. 查询操作查询一次和查询多次，在数据不变的情况下，查询结果是一样的。在隔离级别为可重复读(mysql默认隔离级别)时，select是天然的幂等操作
+2. 删除操作删除操作也是幂等的，删除一次和多次删除结果相同，都是把数据删除。(注意可能返回结果不一样，删除的数据不存在，返回0；删除的数据多条，返回结果多个)
+3. 唯一索引唯一索引或唯一组合索引来防止提交重复数据，不过">
+<meta property="og:updated_time" content="2017-01-25T06:37:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于幂等">
+<meta name="twitter:description" content="幂等方案可以保证幂等的操作1. 查询操作查询一次和查询多次，在数据不变的情况下，查询结果是一样的。在隔离级别为可重复读(mysql默认隔离级别)时，select是天然的幂等操作
+2. 删除操作删除操作也是幂等的，删除一次和多次删除结果相同，都是把数据删除。(注意可能返回结果不一样，删除的数据不存在，返回0；删除的数据多条，返回结果多个)
+3. 唯一索引唯一索引或唯一组合索引来防止提交重复数据，不过">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://fanteathy.github.io/2017/01/10/about_idempotency/"/>
+
+
+
+
+
+  <title> 关于幂等 | Fanteathy </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4a5f97b0ff5f7149cd40cf481a7f9ae4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Fanteathy</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://fanteathy.github.io/2017/01/10/about_idempotency/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="fanteathy">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2180875?v=3&u=669f9a2b4e195cb7d1336a0dc4fa4efccaeba38c&s=400">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Fanteathy">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Fanteathy" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                关于幂等
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-10T15:00:00+08:00">
+                2017-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arch/" itemprop="url" rel="index">
+                    <span itemprop="name">arch</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/01/10/about_idempotency/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/10/about_idempotency/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/01/10/about_idempotency/" class="leancloud_visitors" data-flag-title="关于幂等">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="幂等方案"><a href="#幂等方案" class="headerlink" title="幂等方案"></a>幂等方案</h2><h3 id="可以保证幂等的操作"><a href="#可以保证幂等的操作" class="headerlink" title="可以保证幂等的操作"></a>可以保证幂等的操作</h3><h4 id="1-查询操作"><a href="#1-查询操作" class="headerlink" title="1. 查询操作"></a>1. 查询操作</h4><p>查询一次和查询多次，在数据不变的情况下，查询结果是一样的。在隔离级别为可重复读(mysql默认隔离级别)时，select是天然的幂等操作</p>
+<h4 id="2-删除操作"><a href="#2-删除操作" class="headerlink" title="2. 删除操作"></a>2. 删除操作</h4><p>删除操作也是幂等的，删除一次和多次删除结果相同，都是把数据删除。(注意可能返回结果不一样，删除的数据不存在，返回0；删除的数据多条，返回结果多个)</p>
+<h4 id="3-唯一索引"><a href="#3-唯一索引" class="headerlink" title="3. 唯一索引"></a>3. 唯一索引</h4><p>唯一索引或唯一组合索引来防止提交重复数据，不过对DB性能有影响</p>
+<h4 id="4-悲观锁"><a href="#4-悲观锁" class="headerlink" title="4. 悲观锁"></a>4. 悲观锁</h4><p>获取数据的时候加锁获取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from table_xxx where id=&apos;xxx&apos; for update;</div></pre></td></tr></table></figure>
+<h4 id="5-乐观锁"><a href="#5-乐观锁" class="headerlink" title="5. 乐观锁"></a>5. 乐观锁</h4><p>乐观锁只是在更新数据那一刻锁表，其他时间不锁表，所以相对于悲观锁，效率更高。</p>
+<p>乐观锁的实现方式多种多样，可以通过version或者其他状态条件：</p>
+<ul>
+<li>通过版本号实现</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">update table_xxx set name=#name#,version=version+1 where id=#id# and version=#version#</div></pre></td></tr></table></figure>
+<ul>
+<li>通过条件限制</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">update table_xxx set total=total-#hongbao# where id=#id# and total-#hongbao# &gt; 0</div></pre></td></tr></table></figure>
+<h4 id="6-分布式锁"><a href="#6-分布式锁" class="headerlink" title="6. 分布式锁"></a>6. 分布式锁</h4><p>如果是分布式系统，构建全局唯一索引比较困难，例如唯一性的字段没法确定，这时候可以引入分布式锁，通过第三方的系统(redis或zookeeper)，在业务系统插入数据或者更新数据，获取分布式锁，然后做操作，之后释放锁。</p>
+<p>或者在执行接口的逻辑前，先在mysql表中插入接口的特征值(此字段设置unique)，用mysql保证对应的业务逻辑只执行一次。</p>
+<p>分布式锁的java实现及使用: </p>
+<p><a href="https://github.com/redisson/redisson" target="_blank" rel="external">https://github.com/redisson/redisson</a></p>
+<p><a href="https://my.oschina.net/wangnian/blog/668830" target="_blank" rel="external">https://my.oschina.net/wangnian/blog/668830</a></p>
+<h4 id="7-状态机幂等"><a href="#7-状态机幂等" class="headerlink" title="7. 状态机幂等"></a>7. 状态机幂等</h4><p>状态在不同的情况下会发生变更，一般情况下存在有限状态机(fsm)，这时候，如果状态机已经处于下一个状态，这时候来了一个上一个状态的变更，理论上是不能够变更的，这样的话，保证了有限状态机的幂等。</p>
+<p>伪代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// 如果状态已经发生变更，直接return</div><div class="line">if fsm.status = expected_status:</div><div class="line">	return</div></pre></td></tr></table></figure>
+<h3 id="不推荐的方案"><a href="#不推荐的方案" class="headerlink" title="不推荐的方案"></a><strong><em>不推荐的方案</em></strong></h3><h4 id="1-select-insert"><a href="#1-select-insert" class="headerlink" title="1. select + insert"></a>1. select + insert</h4><p>并发不高的后台系统，或者一些任务JOB，为了支持幂等，支持重复执行，简单的处理方法是，先查询下一些关键数据，判断是否已经执行过，再进行业务处理。<strong><em>这种方法在高并发时会出现问题</em></strong></p>
+<h2 id="几条基本原则"><a href="#几条基本原则" class="headerlink" title="几条基本原则"></a>几条基本原则</h2><ul>
+<li><strong><em>DB不能DOWN，DB不能DOWN，DB不能DOWN</em></strong></li>
+</ul>
+<p><strong><em>这是最重要的前提</em></strong>。不管是使用连接池，使用缓存，使用搜索，还是DAL的限流。所有这些措施的最重要作用首先都是为了保证数据库的正常运行，防止数据库DOWN，然后才是为了提高性能</p>
+<ul>
+<li>业务要保证正确</li>
+</ul>
+<p>业务的正确保证不需要多言。所以为了避免插入重复数据时，DB需要设置唯一键（尽管这会降低DB性能）</p>
+<ul>
+<li>性能优化是最后考虑的事</li>
+</ul>
+<p>只有DB服务器正常运行，业务正确的前提下，再开始考虑优化性能</p>
+<h2 id="推荐方案"><a href="#推荐方案" class="headerlink" title="推荐方案"></a>推荐方案</h2><p>所以在<strong><em>防止插入重复数据</em></strong>时，推荐的方案是:</p>
+<ol>
+<li>使用redis作为接口锁，防止重复请求到达数据库，对数据库性能造成冲击（初步的幂等保证及数据库保护）</li>
+<li>使用唯一键保证不插入重复数据（最后的兜底及最终保证）</li>
+</ol>
+<h2 id="处理措施"><a href="#处理措施" class="headerlink" title="处理措施"></a>处理措施</h2><ol>
+<li>列出关键服务（交易，支付，清结算）的关键路径（接口）</li>
+<li>确认接口是否需要保证幂等，注明现在的幂等方案，考虑是否存在隐患</li>
+<li>第一步需要保证所有路径的<code>业务正确</code>，第二步使用推荐方案同时保证<code>业务正确</code>和<code>高性能</code></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/arch/" rel="tag"># arch</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/05/python-is-not-java/" rel="next" title="Python Is Not Java">
+                <i class="fa fa-chevron-left"></i> Python Is Not Java
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/16/about_timeout/" rel="prev" title="关于timeout">
+                关于timeout <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/10/about_idempotency/"
+           data-title="关于幂等" data-url="http://fanteathy.github.io/2017/01/10/about_idempotency/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars1.githubusercontent.com/u/2180875?v=3&u=669f9a2b4e195cb7d1336a0dc4fa4efccaeba38c&s=400"
+               alt="fanteathy" />
+          <p class="site-author-name" itemprop="name">fanteathy</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#幂等方案"><span class="nav-number">1.</span> <span class="nav-text">幂等方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可以保证幂等的操作"><span class="nav-number">1.1.</span> <span class="nav-text">可以保证幂等的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-查询操作"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 查询操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-删除操作"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 删除操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-唯一索引"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 唯一索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-悲观锁"><span class="nav-number">1.1.4.</span> <span class="nav-text">4. 悲观锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-乐观锁"><span class="nav-number">1.1.5.</span> <span class="nav-text">5. 乐观锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-分布式锁"><span class="nav-number">1.1.6.</span> <span class="nav-text">6. 分布式锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-状态机幂等"><span class="nav-number">1.1.7.</span> <span class="nav-text">7. 状态机幂等</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不推荐的方案"><span class="nav-number">1.2.</span> <span class="nav-text">不推荐的方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-select-insert"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. select + insert</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几条基本原则"><span class="nav-number">2.</span> <span class="nav-text">几条基本原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐方案"><span class="nav-number">3.</span> <span class="nav-text">推荐方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理措施"><span class="nav-number">4.</span> <span class="nav-text">处理措施</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fanteathy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fanteathy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("L2fSPX0G7sSoyGKMiciQhWbr-gzGzoHsz", "XmgeDpUPlFvHnYfzFKA5Btli");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

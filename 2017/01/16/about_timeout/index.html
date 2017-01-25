@@ -1,0 +1,906 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="arch," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="使用Timeout，是一种常见的容错模式。常见的有设置网络连接超时时间，一次RPC的响应超时时间等。在分布式服务调用的场景中，它主要解决了当依赖服务出现建立网络连接或响应延迟，不用无限等待的问题，调用方可以根据事先设计的超时时间中断调用，及时释放关键资源，如Web容器的连接数，数据库连接数等，避免整个系统资源耗尽出现拒绝对外提供服务这种情况。
+意义: 
+
+当网络出现短暂的抖动，或者下游服务调用超时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于timeout">
+<meta property="og:url" content="http://fanteathy.github.io/2017/01/16/about_timeout/index.html">
+<meta property="og:site_name" content="Fanteathy">
+<meta property="og:description" content="使用Timeout，是一种常见的容错模式。常见的有设置网络连接超时时间，一次RPC的响应超时时间等。在分布式服务调用的场景中，它主要解决了当依赖服务出现建立网络连接或响应延迟，不用无限等待的问题，调用方可以根据事先设计的超时时间中断调用，及时释放关键资源，如Web容器的连接数，数据库连接数等，避免整个系统资源耗尽出现拒绝对外提供服务这种情况。
+意义: 
+
+当网络出现短暂的抖动，或者下游服务调用超时">
+<meta property="og:updated_time" content="2017-01-25T06:37:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于timeout">
+<meta name="twitter:description" content="使用Timeout，是一种常见的容错模式。常见的有设置网络连接超时时间，一次RPC的响应超时时间等。在分布式服务调用的场景中，它主要解决了当依赖服务出现建立网络连接或响应延迟，不用无限等待的问题，调用方可以根据事先设计的超时时间中断调用，及时释放关键资源，如Web容器的连接数，数据库连接数等，避免整个系统资源耗尽出现拒绝对外提供服务这种情况。
+意义: 
+
+当网络出现短暂的抖动，或者下游服务调用超时">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://fanteathy.github.io/2017/01/16/about_timeout/"/>
+
+
+
+
+
+  <title> 关于timeout | Fanteathy </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4a5f97b0ff5f7149cd40cf481a7f9ae4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Fanteathy</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://fanteathy.github.io/2017/01/16/about_timeout/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="fanteathy">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/2180875?v=3&u=669f9a2b4e195cb7d1336a0dc4fa4efccaeba38c&s=400">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Fanteathy">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Fanteathy" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                关于timeout
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-16T15:00:00+08:00">
+                2017-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/arch/" itemprop="url" rel="index">
+                    <span itemprop="name">arch</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/01/16/about_timeout/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/16/about_timeout/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/01/16/about_timeout/" class="leancloud_visitors" data-flag-title="关于timeout">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><code>Timeout</code>，是一种常见的容错模式。常见的有设置网络连接超时时间，一次RPC的响应超时时间等。在分布式服务调用的场景中，它主要解决了当依赖服务出现建立网络连接或响应延迟，不用无限等待的问题，调用方可以根据事先设计的超时时间中断调用，及时释放关键资源，如Web容器的连接数，数据库连接数等，避免整个系统资源耗尽出现拒绝对外提供服务这种情况。</p>
+<p>意义: </p>
+<ul>
+<li>当网络出现短暂的抖动，或者下游服务调用超时时，合理的超时时间可以避免连接池快速被占满，可有效延长服务的可用时长</li>
+<li>可以结合降级，熔断等SOA治理的手段使用</li>
+</ul>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="阻塞IO的timeout"><a href="#阻塞IO的timeout" class="headerlink" title="阻塞IO的timeout"></a>阻塞IO的timeout</h3><p>由于我们常用的socket都是阻塞的，那么超时是很好设置的，直接设置socket的超时就可以了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// send timeout</div><div class="line">setsockopt(socket，SOL_S0CKET,SO_SNDTIMEO，(char *)&amp;nNetTimeout,sizeof(int));</div><div class="line">// receive timeout</div><div class="line">setsockopt(socket，SOL_S0CKET,SO_RCVTIMEO，(char *)&amp;nNetTimeout,sizeof(int));</div></pre></td></tr></table></figure>
+<h3 id="非阻塞IO的timeout"><a href="#非阻塞IO的timeout" class="headerlink" title="非阻塞IO的timeout"></a>非阻塞IO的timeout</h3><p>但是，用过Linux下非阻塞I/O的都知道，非阻塞情况下，设置连接超时神马都是浮云的，因为人家是非阻塞的。典型的譬如Python的gevent，在用monkey.patch_all()之后，所有的socket都会被转化为非阻塞的，这时候的timeout设置就失效了。这种情况下gevent提供了Timeout类，当你的类似sleep（由于I/O、sleep等原因挂起）超时超过了Timeout的时间限制后，会自动终止block，跳出。使用方法如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">import gevent</div><div class="line">import gevent.monkey</div><div class="line">import time</div><div class="line"></div><div class="line">gevent.monkey.patch_all()</div><div class="line"></div><div class="line">def test():</div><div class="line">    with gevent.Timeout(5) as timeout:</div><div class="line">        time.sleep(10)</div><div class="line">        print &quot;time out&quot;</div><div class="line"></div><div class="line">if __name__ == &quot;__main__&quot;:</div><div class="line">    g = gevent.spawn(test)</div><div class="line">    g.join()</div></pre></td></tr></table></figure>
+<h3 id="zeus-core中的超时"><a href="#zeus-core中的超时" class="headerlink" title="zeus_core中的超时"></a>zeus_core中的超时</h3><h4 id="1-api-hard-timeout为接口的真实超时设置，为server的超时设置。是gevent执行对应协程时的Timeout，为server应用逻辑的timeout"><a href="#1-api-hard-timeout为接口的真实超时设置，为server的超时设置。是gevent执行对应协程时的Timeout，为server应用逻辑的timeout" class="headerlink" title="1. api_hard_timeout为接口的真实超时设置，为server的超时设置。是gevent执行对应协程时的Timeout，为server应用逻辑的timeout"></a>1. api_hard_timeout为接口的真实超时设置，为server的超时设置。是gevent执行对应协程时的Timeout，为server应用逻辑的timeout</h4><p><strong><em>设置</em></strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">service = Service(</div><div class="line">    name=NAME,</div><div class="line">    slug=NAME[NAME.find(&apos;.&apos;)+1:],</div><div class="line">    timeout=3 * 1000,</div><div class="line">    api_hard_timeout=SERVICE_API_HARD_TIMEOUT,</div><div class="line">    ...</div></pre></td></tr></table></figure>
+<p><strong><em>实现</em></strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">with gevent.Timeout(hard_timeout):</div><div class="line">    try:</div><div class="line">        result = func(dispatcher, *args)</div><div class="line">        ...</div></pre></td></tr></table></figure>
+<h4 id="2-timeout为软超时，目前只是打个warning-发个signal-无实际价值"><a href="#2-timeout为软超时，目前只是打个warning-发个signal-无实际价值" class="headerlink" title="2. timeout为软超时，目前只是打个warning,发个signal(无实际价值)"></a>2. timeout为软超时，目前只是打个warning,发个signal(无实际价值)</h4><h4 id="3-调用其他服务时候的超时，为client的超时设置。是网络请求时的timeout"><a href="#3-调用其他服务时候的超时，为client的超时设置。是网络请求时的timeout" class="headerlink" title="3. 调用其他服务时候的超时，为client的超时设置。是网络请求时的timeout"></a>3. 调用其他服务时候的超时，为client的超时设置。是网络请求时的timeout</h4><p><strong><em>设置</em></strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&apos;payment&apos;: &#123;</div><div class="line">            &apos;pool&apos;: &apos;huskar&apos;,</div><div class="line">            &apos;name&apos;: &apos;me.ele.payment.service&apos;,</div><div class="line">            &apos;client&apos;: &apos;http&apos;,</div><div class="line">            &apos;timeout&apos;: config.get(&apos;config:soa_client_timeout:payment&apos;, 1),</div><div class="line">            &apos;cluster&apos;: config.get(&apos;config:cluster:payment&apos;, &quot;stable&quot;),</div><div class="line">            &apos;iface&apos;: &apos;me.ele.payment.api.service.PaymentService&apos;,</div><div class="line">            &apos;thrift_file&apos;: path.join(</div><div class="line">                current_path, &apos;thrift_files/payment/PaymentService.thrift&apos;),</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p>表示<code>EOS</code>调用<code>payment</code>服务时的eos超时时间</p>
+<p><strong><em>实现</em></strong>:(参考zeus_client使用http client中的代码实现)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">from thriftpy.transport import TSocket, TBufferedTransport</div><div class="line">from . import Client, THTTPJsonProtocol</div><div class="line"></div><div class="line">socket = TSocket(host, port)</div><div class="line">socket.set_timeout(timeout)</div><div class="line">...</div></pre></td></tr></table></figure>
+<h3 id="Pylon对应的超时"><a href="#Pylon对应的超时" class="headerlink" title="Pylon对应的超时"></a>Pylon对应的超时</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">private Object callCommand(Task task, BreakerMetrics metric) throws Throwable &#123;</div><div class="line">        Future&lt;?&gt; result = null;</div><div class="line">        try &#123;</div><div class="line">            result = service.submit(task);</div><div class="line">            long timeout = task.getTimeoutInMillis();</div><div class="line">            Object ret = result.get(timeout &gt; 0 ? timeout : property.getTimeout(), TimeUnit.MILLISECONDS);</div><div class="line">            metric.increment(BreakerStatus.SUCCESS);</div><div class="line">            if (metric.inTestPhase()) &#123;</div><div class="line">                metric.singleTestPass(true);</div><div class="line">            &#125;</div><div class="line">            return ret;</div><div class="line">        &#125; catch (InterruptedException | TimeoutException e) &#123;</div><div class="line">            metric.increment(BreakerStatus.TIMEOUT);</div><div class="line">            if (result != null) &#123;</div><div class="line">                result.cancel(true);</div><div class="line">            &#125;</div><div class="line">            task.cancel();</div><div class="line">            task.setStatus(CallStatus.timeout);</div><div class="line">            throw new RequestTimeoutException(String.format(&quot;Service(%s) occurs a request execution timeout!&quot;, property.getService()));</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>Java的超时设置可以参考:</p>
+<p><a href="http://stackoverflow.com/questions/14236654/java-set-timeout-for-threads-in-a-threadpool" target="_blank" rel="external">Java: Set timeout for threads in a ThreadPool</a></p>
+<p>对应代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Future&lt;?&gt; future = null;</div><div class="line"></div><div class="line">for (List&lt;String&gt; l : partition) &#123;</div><div class="line">    Runnable worker = new WorkerThread(l);</div><div class="line">    future = executor.submit(worker);</div><div class="line">&#125;</div><div class="line"></div><div class="line">try &#123;</div><div class="line">    System.out.println(&quot;Started..&quot;);</div><div class="line">    System.out.println(future.get(3, TimeUnit.SECONDS));</div><div class="line">    System.out.println(&quot;Finished!&quot;);</div><div class="line">&#125; catch (TimeoutException e) &#123;</div><div class="line">    System.out.println(&quot;Terminated!&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><p>为了让client尽快得到响应，也为了尽量减少服务响应延迟时的服务资源消耗，需要设置<code>client timeout(客户端timeout)</code>, <code>server timeout(服务端timeout)</code>以及<code>service timeout(基础服务如mysql等timeout)</code>。同时需要根据实际情况设置一条请求链路上对应client,server和service的timeout。</p>
+<p>一般需要考虑以下情况:</p>
+<ul>
+<li>设置client timeout保证client尽快得到响应，同时方便重试</li>
+<li>设置server timeout保证及时释放服务器资源，保证不被client拖垮</li>
+<li>设置一些基础服务的timeout，可以有效保护对应资源，避免整个系统资源耗尽出现拒绝对外提供服务这种情况</li>
+<li>timeout值的考虑<ul>
+<li>一条链路上游至下游如果只是一次Request/Response的话，那么对应的timeout值应该逐渐减少，如RPC请求的Client和Server端（保证请求的时间范围覆盖了响应的时间范围）</li>
+<li>如果有多次交互的话，无需要考虑。如server请求DB，Server先发送commit到DB，若Server超时后再发rollback给DB。则DB的timeout无需要比Server短，只需要考虑DB自身的性能即可</li>
+</ul>
+</li>
+</ul>
+<h2 id="mysql-timeout实验"><a href="#mysql-timeout实验" class="headerlink" title="mysql timeout实验"></a>mysql timeout实验</h2><p>目的: 实验client通过RPC请求SERVER，同时操作MYSQL时相应timeout的最佳设置</p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>table结构如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;resultMap id=&quot;BaseResultMap&quot; type=&quot;me.ele.fin.job.dal.model.TestModel&quot;&gt;</div><div class="line">        &lt;id column=&quot;id&quot; property=&quot;id&quot; jdbcType=&quot;BIGINT&quot;/&gt;</div><div class="line">        &lt;result column=&quot;restaurant_id&quot; property=&quot;restaurantId&quot; jdbcType=&quot;BIGINT&quot;/&gt;</div><div class="line">        &lt;result column=&quot;order_id&quot; property=&quot;orderId&quot; jdbcType=&quot;BIGINT&quot;/&gt;</div><div class="line">        &lt;result column=&quot;status&quot; property=&quot;status&quot; jdbcType=&quot;TINYINT&quot;/&gt;</div><div class="line">        &lt;result column=&quot;created_at&quot; property=&quot;createdAt&quot; jdbcType=&quot;TIMESTAMP&quot;/&gt;</div><div class="line">        &lt;result column=&quot;updated_at&quot; property=&quot;updatedAt&quot; jdbcType=&quot;TIMESTAMP&quot;/&gt;</div><div class="line">    &lt;/resultMap&gt;</div></pre></td></tr></table></figure>
+<p>对应RPC请求接口逻辑如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">@Transactional(timeout = 10)</div><div class="line">public int updateTestStatus(Long id) throws JobServiceException &#123;</div><div class="line">    Long startTime = System.currentTimeMillis();</div><div class="line">    int updateRes = 0;</div><div class="line">    try &#123;</div><div class="line">        updateRes = testMapper.updateById(id);</div><div class="line">    &#125; catch (Exception e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    Long endTime = System.currentTimeMillis();</div><div class="line">    String duration = DurationFormatUtils.formatPeriod(startTime,</div><div class="line">            endTime, &quot;S&quot;);</div><div class="line">    logger.info(&quot;update result: &quot; + updateRes);</div><div class="line">    logger.info(&quot;Duration milliseconds: &quot; + duration);</div><div class="line">    return 1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>mysql对应timeout设置如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">mysql&gt; show variables like &quot;%timeout%&quot;;</div><div class="line">+-----------------------------+----------+</div><div class="line">| Variable_name               | Value    |</div><div class="line">+-----------------------------+----------+</div><div class="line">| connect_timeout             | 10       |</div><div class="line">| delayed_insert_timeout      | 300      |</div><div class="line">| innodb_flush_log_at_timeout | 1        |</div><div class="line">| innodb_lock_wait_timeout    | 50       |</div><div class="line">| innodb_rollback_on_timeout  | OFF      |</div><div class="line">| interactive_timeout         | 28800    |</div><div class="line">| lock_wait_timeout           | 31536000 |</div><div class="line">| net_read_timeout            | 30       |</div><div class="line">| net_write_timeout           | 60       |</div><div class="line">| rpl_stop_slave_timeout      | 31536000 |</div><div class="line">| slave_net_timeout           | 3600     |</div><div class="line">| wait_timeout                | 28800    |</div><div class="line">+-----------------------------+----------+</div><div class="line">12 rows in set (0.00 sec)</div></pre></td></tr></table></figure>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><h4 id="1-设置autocommit为OFF"><a href="#1-设置autocommit为OFF" class="headerlink" title="1. 设置autocommit为OFF"></a>1. 设置<code>autocommit</code>为OFF</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set autocommit = 0;</div></pre></td></tr></table></figure>
+<h4 id="2-锁定某一条记录"><a href="#2-锁定某一条记录" class="headerlink" title="2. 锁定某一条记录"></a>2. 锁定某一条记录</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">begin;</div><div class="line">select * from test where id = 1 for update;</div></pre></td></tr></table></figure>
+<p>锁定id为1的记录</p>
+<h4 id="3-调用接口，update同一条记录"><a href="#3-调用接口，update同一条记录" class="headerlink" title="3. 调用接口，update同一条记录"></a>3. 调用接口，update同一条记录</h4><p>运行以下JUnit测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public class JobServiceTest extends TestBase &#123;</div><div class="line"></div><div class="line">    @Autowired</div><div class="line">    private IJobService ijs;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 测试本地服务</div><div class="line">     */</div><div class="line">    @Test</div><div class="line">    public void testServiceFromLocalContext() throws JobServiceException &#123;</div><div class="line">        try &#123;</div><div class="line">            int returnVal = ijs.updateTestStatus(1L);</div><div class="line">            Assert.assertTrue(returnVal == 1);</div><div class="line">        &#125; catch (JobServiceException ex) &#123;</div><div class="line">            ex.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="结果及结论"><a href="#结果及结论" class="headerlink" title="结果及结论"></a>结果及结论</h3><p>使用postman模拟client调用对应接口，设<code>select for update</code>为事务1，接口调用为事务2。</p>
+<ul>
+<li><code>0 - 10s</code> 内，提交事务1(运行<code>commit</code>手动提交), 则事务2可以获取innodb锁往下执行，最后事务2也正确提交</li>
+<li><code>10 - 50s</code> 内，提交事务1，则事务2<code>roll back</code>，同时立刻返回结果给client，表示<code>@Transactional(timeout = ?)</code>可以设置在多长时间后，应用逻辑中mysql事务失败，事务2会rollback，同时返回结果给client（快速失败）</li>
+<li><code>&gt;50s</code> 后，由于<code>innodb_lock_wait_timeout</code>的存在，事务1和事务2都会roll back，且打印以下log</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">2017-01-16 14:04:23.810 INFO me.ele.fin.job.service.JobService[main]: [unknown 1.1 unknown^^2337080905338436383|1484546598112] ## update result: 0 </div><div class="line">2017-01-16 14:04:23.810 INFO me.ele.fin.job.service.JobService[main]: [unknown 1.1 unknown^^2337080905338436383|1484546598112] ## Duration milliseconds: 51288</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/arch/" rel="tag"># arch</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/10/about_idempotency/" rel="next" title="关于幂等">
+                <i class="fa fa-chevron-left"></i> 关于幂等
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/20/global_id/" rel="prev" title="分布式系统中的全局唯一ID">
+                分布式系统中的全局唯一ID <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/16/about_timeout/"
+           data-title="关于timeout" data-url="http://fanteathy.github.io/2017/01/16/about_timeout/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars1.githubusercontent.com/u/2180875?v=3&u=669f9a2b4e195cb7d1336a0dc4fa4efccaeba38c&s=400"
+               alt="fanteathy" />
+          <p class="site-author-name" itemprop="name">fanteathy</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">1.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#阻塞IO的timeout"><span class="nav-number">2.1.</span> <span class="nav-text">阻塞IO的timeout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非阻塞IO的timeout"><span class="nav-number">2.2.</span> <span class="nav-text">非阻塞IO的timeout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zeus-core中的超时"><span class="nav-number">2.3.</span> <span class="nav-text">zeus_core中的超时</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-api-hard-timeout为接口的真实超时设置，为server的超时设置。是gevent执行对应协程时的Timeout，为server应用逻辑的timeout"><span class="nav-number">2.3.1.</span> <span class="nav-text">1. api_hard_timeout为接口的真实超时设置，为server的超时设置。是gevent执行对应协程时的Timeout，为server应用逻辑的timeout</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-timeout为软超时，目前只是打个warning-发个signal-无实际价值"><span class="nav-number">2.3.2.</span> <span class="nav-text">2. timeout为软超时，目前只是打个warning,发个signal(无实际价值)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-调用其他服务时候的超时，为client的超时设置。是网络请求时的timeout"><span class="nav-number">2.3.3.</span> <span class="nav-text">3. 调用其他服务时候的超时，为client的超时设置。是网络请求时的timeout</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pylon对应的超时"><span class="nav-number">2.4.</span> <span class="nav-text">Pylon对应的超时</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最佳实践"><span class="nav-number">3.</span> <span class="nav-text">最佳实践</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql-timeout实验"><span class="nav-number">4.</span> <span class="nav-text">mysql timeout实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">4.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤"><span class="nav-number">4.2.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-设置autocommit为OFF"><span class="nav-number">4.2.1.</span> <span class="nav-text">1. 设置autocommit为OFF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-锁定某一条记录"><span class="nav-number">4.2.2.</span> <span class="nav-text">2. 锁定某一条记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-调用接口，update同一条记录"><span class="nav-number">4.2.3.</span> <span class="nav-text">3. 调用接口，update同一条记录</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结果及结论"><span class="nav-number">4.3.</span> <span class="nav-text">结果及结论</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fanteathy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fanteathy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("L2fSPX0G7sSoyGKMiciQhWbr-gzGzoHsz", "XmgeDpUPlFvHnYfzFKA5Btli");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
